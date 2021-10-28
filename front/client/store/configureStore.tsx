@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, Middleware, StoreEnhancer, Store, compose } from "redux"
 import rootReducer from "../reducers"
 import { Context,MakeStore, createWrapper } from "next-redux-wrapper";
-import createSagaMiddleware,{Task} from "redux-saga";
+import createSaga, {Task} from "redux-saga";
 import rootSaga from '../saga'
 import {RootState} from '../reducers'
 import { composeWithDevTools } from 'redux-devtools-extension'
@@ -11,26 +11,37 @@ export interface SagaStore extends Store {
     __persistor?: any
 }
 
-const bindMiddleware = (middleware:Middleware[]):StoreEnhancer => {
-    if (process.env.NODE_ENV !== 'production') {
-        //composeWithDevTools(applyMiddleware(...middleware));
-        return composeWithDevTools(applyMiddleware(...middleware));
-    }else if(process.env.NODE_ENV === 'production'){
-        compose(applyMiddleware(...middleware));
-    }
-    // compose(applyMiddleware(...middleware));
-    // return compose(applyMiddleware(...middleware));
-}
+// const bindMiddleware = (middleware:Middleware[]):StoreEnhancer => {
+//     if (process.env.NODE_ENV !== 'production') {
+//         //composeWithDevTools(applyMiddleware(...middleware));
+//         return composeWithDevTools(applyMiddleware(...middleware));
+//     }else if(process.env.NODE_ENV === 'production'){
+//         return applyMiddleware(...middleware);
+//     }
+//     // compose(applyMiddleware(...middleware));
+//     // return compose(applyMiddleware(...middleware));
+// }
 
+
+
+const getEnhancer = () => {
+    const sagaMiddlewares = createSaga()
+    const Middlewares = [sagaMiddlewares]
+    const enhencer:StoreEnhancer = (
+      process.env.NODE_ENV === 'production'
+      ? compose(applyMiddleware(...Middlewares))
+      : composeWithDevTools(applyMiddleware(...Middlewares))
+    )
+    return {enhencer,sagaMiddlewares}
+  }
 
 const makeStore = (context:Context) => {
     const isServer = typeof window == 'undefined'
-    const sagaMiddleware = createSagaMiddleware();
-    const middlewares = [sagaMiddleware];
+    let {enhencer,sagaMiddlewares} = getEnhancer()
     
     if(isServer) {
-        const Store:SagaStore = createStore(rootReducer, {},bindMiddleware([...middlewares]))
-        Store.sagaTask = sagaMiddleware.run(rootSaga)
+        const Store:SagaStore = createStore(rootReducer,enhencer)
+        Store.sagaTask = sagaMiddlewares.run(rootSaga)
         return Store
     }else {
         const {persistStore, persistReducer} = require('redux-persist')
@@ -44,9 +55,9 @@ const makeStore = (context:Context) => {
           };
 
         const persistedReducer  = persistReducer(persistConfig,rootReducer)
-        const Store:SagaStore = createStore(persistedReducer,bindMiddleware)
+        const Store:SagaStore = createStore(persistedReducer,enhencer)
         Store.__persistor = persistStore(Store)
-        Store.sagaTask = sagaMiddleware.run(rootSaga)
+        Store.sagaTask = sagaMiddlewares.run(rootSaga)
 
         return Store
     }
