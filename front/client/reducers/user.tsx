@@ -3,7 +3,7 @@ import {HYDRATE} from 'next-redux-wrapper';
 
 
 
-export interface State {
+export interface UserState {
     loadding:boolean;
     data:Array<string | number | Object>;
     payload:{};
@@ -12,7 +12,7 @@ export interface State {
     verify:number;
 }
 
-export const initialState : State = {
+export const initialState : UserState = {
     loadding:false,
     data:[],
     payload:{},
@@ -84,7 +84,7 @@ type UserAction =
 | ReturnType<typeof SellerAdminAccess_REQUEST>
 | ReturnType<typeof SellerAdminDeny_REQUEST>
 
-const reducer = (state:State=initialState, action:UserAction) => {
+const reducer = (state:UserState=initialState, action:UserAction) => {
     switch (action.type){
         case USER_LOGIN_REQUEST:
             return{
