@@ -21,18 +21,21 @@ const SignUp = () => {
 
     const [emailErr, setEmailErr] = useState<boolean>(false); 
 
-    const [checked1,setChecked1] = useState(false);
-    const [checked2,setChecked2] = useState(false);
-    const [checked3,setChecked3] = useState(false);
-    const user = useSelector((state:RootState) => state.user);
+    const [checked1,setChecked1] = useState<boolean>(false);
+    const [checked1Err,setChecked1Err] = useState<boolean>(false);
+    const [checked2,setChecked2] = useState<boolean>(false);
+    const [checked2Err,setChecked2Err] = useState<boolean>(false);
+    const [checked3,setChecked3] = useState<boolean>(false);
+    const [checked3Err,setChecked3Err] = useState<boolean>(false);
 
-    console.log(nickName,"<-----", email );
+    const user = useSelector((state:RootState) => state.user);
 
     const nickChk1 = e => {
         const value = e.target.value;
         setNickName(value);
         setNickErr(value === "");
         setNickLength5Err(value.length < 5 && value.length >0);
+        
         
         const chkk = () => {
         let chk = [",","?","=","`","~","!","@","#","$","%","^","&","*","(",")","<",">","/","*"]
@@ -56,17 +59,22 @@ const SignUp = () => {
     }
 
     
-    const handleChecked1 = () => {
+    const handleChecked1 = e => {
+        const value = e.target.value;
+        console.log(value);
         setChecked1(!checked1);
-       
-    }
-    const handleChecked2 = () => {
-        setChecked2(!checked2)
+}
+    
+    const handleChecked2 = e => {
+        const value = e.target.value;
+        setChecked2(!checked2);
+        setChecked2Err(value)
         
     }
-    const handleChecked3 = () => {
-        setChecked3(!checked3)
-      
+    const handleChecked3 = e => {
+        const value = e.target.value;
+        setChecked3(!checked3);
+        setChecked3Err(value)
     }
 
     const submit = e => {
@@ -75,7 +83,12 @@ const SignUp = () => {
 
     const [joinState,setJoinState] = useState<boolean>(false)
     const sucJoin = () => {
-        setJoinState(prev=>!prev)        
+        if(nickErr === true
+            ){
+                setJoinState(prev=>!prev)        
+            }else{
+                alert("내용입력해주세요.")
+            }
     }
 
 
@@ -172,11 +185,12 @@ const SignUp = () => {
                                     <tr>
                                         <td className="height42"></td>
                                     </tr>
-                                    <tr>
+                                    <tr> 
                                         <td>
                                             <div>
                                                 <div className="mBottom">
                                                     <label className="chkFont"><input type="checkbox" checked={checked1} onChange={handleChecked1} id="agree1" /> 만 19세 이상입니다.</label>
+                                                    { checked1 ? <> </> : <div className="error">KrafterSpace는 만 19세 이상만 이용 가능합니다.</div>} 
                                                 </div>
                                             </div>
                                         </td>
@@ -186,6 +200,7 @@ const SignUp = () => {
                                             <div>
                                                 <div className="mBottom">
                                                     <label className="chkFont"><input type="checkbox" checked={checked2} onChange={handleChecked2} id="agree2" /> (필수) <a target="_blank" href="http://naver.com" rel="noreferrer" className="underLine"> 서비스 이용약관</a>에 동의합니다.</label>
+                                                    { checked2 ? <> </> : <div className="error">필수 항목에 동의해주세요.</div>} 
                                                 </div>
                                             </div>
                                         </td>
@@ -195,6 +210,7 @@ const SignUp = () => {
                                             <div>
                                                 <div className="mBottom">
                                                     <label className="chkFont"><input type="checkbox" checked={checked3} onChange={handleChecked3} id="agree3" /> (필수) <a target="_blank" href="http://naver.com" rel="noreferrer" className="underLine">개인정보 수집 및 이용</a>에 동의합니다.</label>
+                                                    { checked3 ? <> </> : <div className="error">필수 항목에 동의해주세요.</div>} 
                                                 </div>
                                             </div>
                                         </td>

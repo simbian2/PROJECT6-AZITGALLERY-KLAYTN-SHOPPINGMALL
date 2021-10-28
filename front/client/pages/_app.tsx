@@ -1,17 +1,23 @@
 // import App from "next/app";
 import type { AppProps /*, AppContext */ } from 'next/app'
 import './test.css'
+import {useStore} from 'react-redux'
+import {PersistGate} from 'redux-persist/integration/react';
 import WebLayout from '../components/layout/WebLayout'
 import { wrapper } from '../store/configureStore'
+import { SagaStore } from '../store/configureStore'
 
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const store:SagaStore = useStore()
+
   
   return (
-    
-      <WebLayout>
-        <Component {...pageProps} />
-      </WebLayout>
+      <PersistGate persistor={store.__persistor} loading={<div>Loading</div>}>
+        <WebLayout>
+          <Component {...pageProps} />
+        </WebLayout>
+      </PersistGate>
     
   )
 

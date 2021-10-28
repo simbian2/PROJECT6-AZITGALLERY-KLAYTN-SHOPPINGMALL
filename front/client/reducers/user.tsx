@@ -3,20 +3,22 @@ import {HYDRATE} from 'next-redux-wrapper';
 
 
 
-export interface State {
+export interface UserState {
     loadding:boolean;
     data:Array<string | number | Object>;
     payload:{};
     error:string;
     UserAddress:string;
+    verify:boolean;
 }
 
-export const initialState : State = {
+export const initialState : UserState = {
     loadding:false,
     data:[],
     payload:{},
     error:'',
-    UserAddress:'kaikasAddress'
+    UserAddress:'kaikasAddress',
+    verify:false,
 };
 
 
@@ -24,6 +26,8 @@ export const initialState : State = {
 export const USER_LOGIN_REQUEST  = "USER_LOGIN_REQUEST" as const;
 export const USER_LOGIN_SUCCESS = "USER_LOGIN_SUCCESS" as const;
 export const USER_LOGIN_ERROR = "USER_LOGIN_ERROR" as const;
+export const SELLER_ADMIN_SUCCESS = "SELLER_ADMIN_SUCCESS" as const;
+export const SELLER_ADMIN_BACK = "SELLER_ADMIN_BACK" as const;
 
 export const UserLogin_REQUEST = (UserAddress) => {
     return{
@@ -44,13 +48,26 @@ export const UserLogin_ERROR = (error) => {
     }
 }
 
+export const SellerAdmin_REQUEST = (error) => {
+    return{
+        type:SELLER_ADMIN_SUCCESS,
+        error:error
+    }
+}
+
+export const SellerAdmin_BACK = () => {
+    return{
+        type:SELLER_ADMIN_BACK,
+    }
+}
 type UserAction = 
 | ReturnType<typeof UserLogin_REQUEST>
 | ReturnType<typeof UserLogin_SUCCESS>
 | ReturnType<typeof UserLogin_ERROR>
+| ReturnType<typeof SellerAdmin_REQUEST>
+| ReturnType<typeof SellerAdmin_BACK>
 
-
-const reducer = (state:State=initialState, action:UserAction) => {
+const reducer = (state:UserState=initialState, action:UserAction) => {
     switch (action.type){
         case USER_LOGIN_REQUEST:
             return{
@@ -67,6 +84,16 @@ const reducer = (state:State=initialState, action:UserAction) => {
             return{
                 ...state,
                 data:action.error
+            }
+        case SELLER_ADMIN_SUCCESS:
+            return{
+                ...state,
+                error:'안뇽'
+            }
+        case SELLER_ADMIN_BACK:
+            return{
+                ...state,
+                verify:true
             }
         default:
             return state;

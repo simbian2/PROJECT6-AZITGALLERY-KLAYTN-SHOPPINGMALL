@@ -6,7 +6,7 @@ import {AnyAction} from 'redux';
 import {HYDRATE} from 'next-redux-wrapper';
 import {persistStore, persistReducer} from 'redux-persist'
 import storage from 'redux-persist/lib/storage';
-import {State} from '../reducers/user'
+import {UserState} from '../reducers/user'
 
 const persistConfig = {
     key: 'nextjs',
@@ -14,8 +14,12 @@ const persistConfig = {
     storage
 };
 
+export interface State {
+    user:UserState
+}
+
 const rootReducer = combineReducers({
-    index:(state:State = initialState,action:AnyAction)=>{
+    index:(state:State,action:AnyAction)=>{
         switch (action.type){
             case HYDRATE:
                 return {...state, ...action};

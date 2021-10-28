@@ -5,75 +5,63 @@ const ObjectId = Schema.ObjectId
 mongoose.connect('mongodb://localhost:27017/AzitGallery',{
     useNewUrlParser: true,
     useUnifiedTopology: true,
-//     useFindAndModify: false,
-//    useCreateIndex: true
 })
 
 const connection = mongoose.connection
-connection.on('error',console.error)
+connection.on('error',console.error)    
 connection.once('open',()=>{
     console.log('connected mongodb')
 })
 
 
-const test = mongoose.model('mihee',new Schema({
-    name:{type:String},
-    content:{type:String},
-    likeCount:{type:Number, default:0},
-    createdAt:{type:Date, default:Date.now}
-},{
-    versionKey:false
-}))
-
-const nameco = 'mihee'
-const contentco = 'content'
-// test.insert((err,{name:nameco,content:contentco})=>{
-//     console.log(content)
-// })
-
-test.create([{name:nameco,content:contentco}])
-//test.create({name:nameco,content:contentco},{test:test})
-
-
-test.find((err,data)=>{
-    console.log(data)
-})
-//===========================================================
-
 const User = mongoose.model('User',new Schema({
     userInfo:{
-        name:{type:string},
+        name:{type:String},
         contact:{
-            email:{type:string},
-            phone:{type:string},
+            email:{type:String},
+            phone:{type:String},
         },
-        walletAddress:{type:string},
-        address:{type:string},
-        joinDate:{type:string}
+        walletAddress:{type:String},
+        address:{type:String},
+        joinDate:{type:String}
     },
     type:{
-        true:{
-
-        },
-        false:{
-
+        true:[{
+            title:{type:String},
+        }],
+        false:{type:Boolean}
+    },
+    history:[{
+        buyInfo:{
+            itemId:{type:String},
+            buyDate:{type:Date},
+            OrderNumber:{type:Number}
         }
-    }
-
-}))
-//type -> 구매자 판매자 여부
-// true => 구매자 and 판매자
-// false => only 구매자
-
-const Ship = mongoose.model('Ship',new Schema({
+    }]
 
 }))
 
-const Item = mongoose.model('Item',new Schema({
+User.create([{
+    userInfo:{
+        name:'mihee',
+        contact:{
+            email:'asdf',
+            phone:'asdf',
+        },
+        walletAddress:'asdf',
+        address:'asdf',
+        joinDate:'asdf'        
+    },
+    type:{
+        true:[{}]
+    },
+    history:[{
+        buyInfo:{
+            buyDate:2021-05-07,
+            orderNumber:1541
+        }
+    }]
+}])
 
-}))
 
-
-
-
-module.exports = test
+//module.exports = test
