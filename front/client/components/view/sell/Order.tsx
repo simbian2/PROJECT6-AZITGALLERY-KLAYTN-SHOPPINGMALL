@@ -26,6 +26,7 @@ const Order = (props) => {
 
     const Purchase = () => {
 
+        //KLAY로 TRANSACTION
         window.caver.klay
         .sendTransaction({
           type: 'VALUE_TRANSFER',
@@ -46,6 +47,7 @@ const Order = (props) => {
 
         // dispatch(KipToken_SUCCESS())
     }
+    
     return (
         <>
             <ModalWrapper flag={props.open}>
