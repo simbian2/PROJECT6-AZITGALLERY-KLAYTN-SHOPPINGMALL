@@ -1,5 +1,6 @@
 import {combineReducers} from 'redux'
 import user from './user'
+import mint from './mint'
 import reducer from './user'
 import {initialState} from './user'
 import {AnyAction} from 'redux';
@@ -24,7 +25,7 @@ const rootReducer = combineReducers({
         }
 
     },
-    user 
+    user,mint
 })
 
 export default persistReducer(persistConfig, rootReducer);

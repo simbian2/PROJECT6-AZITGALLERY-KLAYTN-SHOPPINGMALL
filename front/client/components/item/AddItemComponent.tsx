@@ -5,6 +5,9 @@ import Agreement from './Agreement'
 import CreateNftCh from './CreateNftCh'
 import CancelNft from './CancelNft'
 import FileUpload from './FileUpload'
+import { useSelector, useDispatch } from 'react-redux'
+import { useEffect } from "react"
+import { MintNFT_REQUEST } from "../../reducers/mint";
 
 const AddItemComponent = ({
     n, ifSell, extension, 
@@ -14,11 +17,13 @@ const AddItemComponent = ({
     deleteFile, resetState
     }) => {
 
+    const dispatch = useDispatch()
     const [nftCreateState,setnftCreateState] = useState<boolean>(false);
     const createNftCh = () => {
         if(handleConfirm() === true){
             setnftCreateState(prev=>!prev)
-        } 
+        }
+        dispatch(MintNFT_REQUEST())
     }
     const [cancelNft,setcancelNft] = useState<boolean>(false);
     const cancelNftCh = () => {
