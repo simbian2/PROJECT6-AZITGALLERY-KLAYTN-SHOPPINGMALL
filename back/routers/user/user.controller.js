@@ -18,7 +18,7 @@ let SellerAdmin = async (req,res) => {
     let url = `http://localhost:3000/admin/approveBTN`;
     let options = {
         from: 'simbianartist@gmail.com',
-        to:'simbianartist@gmail.com',//임시로, 나중에는 body에서 가져오게끔
+        to:'simbianartist@gmail.com',//임시로, 나중에는 body에서 가져오게끔한다
         subject: '이메일 인증 완료를 위해 아래 url을 클릭해주세요.',
         html: `서영님, 안녕하세요. <br/>이메일 인증을 위해 아래 URL을 클릭해주세요. <br/> ${url}`
     }
