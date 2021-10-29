@@ -8,6 +8,7 @@ import {HYDRATE} from 'next-redux-wrapper';
 import {persistStore, persistReducer} from 'redux-persist'
 import storage from 'redux-persist/lib/storage';
 import {UserState} from '../reducers/user'
+import {MintState} from '../reducers/mint'
 import {Reducer} from 'redux'
 
 const persistConfig = {
@@ -17,7 +18,8 @@ const persistConfig = {
 };
 
 export interface State {
-    user:UserState
+    user:UserState,
+    mint:MintState
 }
 
 const combinedReducers = combineReducers({

@@ -3,7 +3,7 @@ import {HYDRATE} from 'next-redux-wrapper';
 
 
 
-export interface State {
+export interface MintState {
     loadding:boolean;
     data:Array<string | number | Object>;
     payload:{};
@@ -12,7 +12,7 @@ export interface State {
     verify:number;
 }
 
-export const initialState : State = {
+export const initialState : MintState = {
     loadding:false,
     data:[],
     payload:{},
@@ -39,11 +39,11 @@ export const MintNFT_RETURN = () => {
     }
 }
 
-type UserAction = 
+type MintAction = 
 | ReturnType<typeof MintNFT_REQUEST>
 | ReturnType<typeof MintNFT_RETURN>
 
-const reducer = (state:State=initialState, action:UserAction) => {
+const reducer = (state:MintState=initialState, action:MintAction) => {
     switch (action.type){
         case MINT_NFT_SUCCESS:
             return{
