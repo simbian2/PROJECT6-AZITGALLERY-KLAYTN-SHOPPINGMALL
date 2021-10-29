@@ -70,7 +70,7 @@ let mint_nft_post = async (req,res) => {
        // 자세한 내용은 https://ko.docs.klaytn.com/bapp/sdk/caver-js/api-references/caver.kct/KIP-17#KIP-17-mintwithtokenuri 를 참고하세요.
        mintResult = await kip_17.mintWithTokenURI(
         // https://baobab.wallet.klaytn.com/access/0xdfaf037869bb807239e8c46d3b3472ac72adbaef  account주소를 넣는다
-         "0xf2e88e4a35bbca55d5d47d2357defc3ed16ca830",
+         "0x99A0d73A2F8e4eb1941A360aDeBcD12Ffc9545fe",
          randomTokenID,
          tokenURI,
          { from: keyring.address }
