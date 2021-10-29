@@ -22,12 +22,14 @@ const AddItemComponent = ({
     const mint = useSelector((state:RootState) => state.mint);
     const [nftCreateState,setnftCreateState] = useState<boolean>(false);
     const createNftCh = () => {
+        dispatch(MintNFT_REQUEST())
         if(handleConfirm() === true){
             setnftCreateState(prev=>!prev)
         }
     }
     const [cancelNft,setcancelNft] = useState<boolean>(false);
     const cancelNftCh = () => {
+
         setcancelNft(prev=>!prev)
     }
     const closeBtn = () => {
