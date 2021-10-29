@@ -3,14 +3,15 @@ const axios = require('axios');
 const qs = require('qs');
 const nodemailer = require('nodemailer');
 const smtpTransporter = require('nodemailer-smtp-transport');
+require('dotenv').config()
 
 let SellerAdmin = async (req,res) => {
     console.log('왓다')
     let transporter = nodemailer.createTransport({
         service: 'Gmail',
         auth: {
-            user: 'simbianartist@gmail.com', //generated ethereal user
-            pass: 'Rlatjdud2019!', //generated ethereal password 
+            user: process.env.USER, //generated ethereal user
+            pass: process.env.PASS, //generated ethereal password 
         }
     });
 

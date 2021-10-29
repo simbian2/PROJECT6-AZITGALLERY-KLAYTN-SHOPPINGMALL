@@ -23,15 +23,15 @@ const LoginForm = (props) =>{
     const dispatch = useDispatch()
 
     const kaikasLogin = async () => {
+    // 카이카스 로그인 
       await window.klaytn.enable()
-  
       const klaytnAddress = window.klaytn.selectedAddress
       let AddressArr = []
       AddressArr.push(klaytnAddress)
       setKaikasAddress(AddressArr)
       //dispatch({type:USER_LOGIN_REQUEST,payload:klaytnAddress})
       dispatch(UserLogin_REQUEST(klaytnAddress))
-
+    // 카이카스 로그인 후 서명
       const account = window.klaytn.selectedAddress
       const message = 'Login User'
       const signedMessage = await window.caver.klay.sign(message, account)
