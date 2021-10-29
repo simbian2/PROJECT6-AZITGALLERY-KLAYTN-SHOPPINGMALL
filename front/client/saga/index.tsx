@@ -7,6 +7,6 @@ export default function* rootSaga(){
     yield all([
        fork(userSaga),
        fork(itemSaga),
-        fork(mintSage)
+       fork(mintSage)
     ])
 }

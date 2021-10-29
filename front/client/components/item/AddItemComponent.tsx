@@ -8,6 +8,7 @@ import FileUpload from './FileUpload'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from "react"
 import { MintNFT_REQUEST } from "../../reducers/mint";
+import { RootState } from "../../reducers"
 
 const AddItemComponent = ({
     n, ifSell, extension, 
@@ -18,12 +19,12 @@ const AddItemComponent = ({
     }) => {
 
     const dispatch = useDispatch()
+    const mint = useSelector((state:RootState) => state.mint);
     const [nftCreateState,setnftCreateState] = useState<boolean>(false);
     const createNftCh = () => {
         if(handleConfirm() === true){
             setnftCreateState(prev=>!prev)
         }
-        dispatch(MintNFT_REQUEST())
     }
     const [cancelNft,setcancelNft] = useState<boolean>(false);
     const cancelNftCh = () => {
@@ -32,6 +33,10 @@ const AddItemComponent = ({
     const closeBtn = () => {
         setcancelNft(false)
         setnftCreateState(false)
+    }
+
+    const test = () => {
+        dispatch(MintNFT_REQUEST())
     }
     
     return(
@@ -45,7 +50,7 @@ const AddItemComponent = ({
                 /> :<></> }
             {cancelNft ? < CancelNft flag={cancelNft} closeBtn={closeBtn}/> :<></>}
             <TopWrapper> 
-                <BigTitle>
+                <BigTitle onClick = {test}>
                     새로운 NFT 발행하기
                 </BigTitle>
                 <SectionWrapper>
