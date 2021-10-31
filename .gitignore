@@ -1,4 +1,5 @@
 */node_modules**
 ./front/.next**
 */package-lock.json
+./front/package-lock.json
 back/db_config.json
