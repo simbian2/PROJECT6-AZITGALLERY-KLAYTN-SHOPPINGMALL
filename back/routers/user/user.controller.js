@@ -7,7 +7,7 @@ require('dotenv').config()
 const User =  require('../../schemas/user')
 
 
-let SellerAdmin = async (req,res) => {
+let Seller_Admin = async (req,res) => {
     console.log('왓다')
     let transporter = nodemailer.createTransport({
         service: 'Gmail',
@@ -17,7 +17,7 @@ let SellerAdmin = async (req,res) => {
         }
     });
 
-    let url = `http://localhost:3000/admin/approveBTN`;
+    let url = `http://localhost:3000/admin/approvebtn`;
     let options = {
         from: 'simbianartist@gmail.com',
         to:'simbianartist@gmail.com',//임시로, 나중에는 body에서 가져오게끔한다
@@ -67,6 +67,6 @@ let AddUser = (req,res) => {
 }
 
 module.exports = {
-    SellerAdmin,
+    Seller_Admin,
     AddUser
 }

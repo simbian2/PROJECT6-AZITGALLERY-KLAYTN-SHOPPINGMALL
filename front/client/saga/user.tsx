@@ -29,7 +29,7 @@ function* login(action){
 }
 
 function* SellerAdminSaga(){
-    const result = yield call(axios.post,`http://localhost:4000/user/SellerAdmin`)
+    const result = yield call(axios.post,`http://localhost:4000/user/selleradmin`)
 
         yield put({
             type:'SELLER_ADMIN_BACK',

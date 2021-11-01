@@ -1,6 +1,6 @@
 import Styled from 'styled-components'
 import React, { useState } from 'react'
-import PopupDom from './PopupDom';
+import PopupDom from "./PopupDom";
 import PopupPostCode from './PopupPostCode';
 import Link from 'next/link';
 import useInput from '../../hooks/useInput';

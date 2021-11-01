@@ -39,8 +39,8 @@ let mint_nft_post = async (req,res) => {
   // 넘어온 데이터를 바탕으로 새로운 KIP-17을 배포(=새로운 명품 등록)합니다. 
   const kip17 = await caver.kct.kip17.deploy(
     {
-      name: 'EPITEOM',
-      symbol: 'EPI',
+      name: 'PUMKINBABY',
+      symbol: 'PUM',
     },
     keyring.address
   );
@@ -85,22 +85,22 @@ let KIP7Token_transfer = async () => {
 
 
   const keyring = caver.wallet.keyring.createFromPrivateKey(
-    "0xbadd3465137bd07ecc73fe38b398a6f922a09885d896afa926fac750eef8269f"
+    "0x74bb09746b82d398f26c0dfa11f05462f994ef9b57239bc5dd03ad772132ac0a"
   );
   // wallet에 keyring이 추가되지 않은 경우에만 keyring을 추가합니다.
   // 자기 것의 개인키를 keyring 시키고
   if (!caver.wallet.getKeyring(keyring.address)) {
     const singleKeyRing = caver.wallet.keyring.createFromPrivateKey(
-      "0xbadd3465137bd07ecc73fe38b398a6f922a09885d896afa926fac750eef8269f"
+      "0x74bb09746b82d398f26c0dfa11f05462f994ef9b57239bc5dd03ad772132ac0a"
     );
     caver.wallet.add(singleKeyRing);
   }
 
-  const kip7Instance = new caver.kct.kip7('0xf08d2e35c9cfcecb35224567a953809f81b006c0')
+  const kip7Instance = new caver.kct.kip7('0xbccdd3c3838f8ad0a87d840fe80c7d4cd29dac12')
   kip7Instance.name().then(console.log)
   const opts = { from: keyring.address }
   //보낼 account 주소를 입력 시키기
-  const recipientAddress = '0x6EE16198C57833ca659dEeb83B1e583AA8A74Ce6'
+  const recipientAddress = '0xFeA30a06828cfC5CE4Db8D90F2F4ac20C7937019'
   const value = 100000000000000000000
   const receipt = await kip7Instance.transfer(recipientAddress, value, opts)
   console.log(receipt)
