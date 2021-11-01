@@ -3,7 +3,7 @@ import {all,put,takeLatest,fork,call} from "redux-saga/effects";
 import {url} from './url'
 
 function shipAPI(data){
-    return axios.post (`${url}/ship`,data)
+    return axios.post (`${url}/ship/shipinfo`,data)
 }
 
 function* shipInfo(action){
