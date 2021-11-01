@@ -15,6 +15,7 @@ const User = () => {
         dispatch(SellerAdmin_REQUEST(undefined))
     }
     const user = useSelector((state:RootState) => state.user);
+    console.log(user);
     return(
         <UserWrapper>
             <div>

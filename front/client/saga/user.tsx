@@ -32,7 +32,7 @@ function* SellerAdminSaga(){
         yield put({
             type:'SELLER_ADMIN_BACK',
             verify:true
-        })        
+        })
 
     
 }
