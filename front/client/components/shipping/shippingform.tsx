@@ -77,7 +77,6 @@ const Shippingfrom = () => {
 
     const handelSubmit = ()=>{
         // 여기서 dispatch로 날리고
-        // console.log(shippingData);
         dispatch(shipInfo_REQUEST(shippingData))
     }
     
