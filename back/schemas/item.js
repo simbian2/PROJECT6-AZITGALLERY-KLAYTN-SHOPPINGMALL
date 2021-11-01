@@ -4,21 +4,21 @@ const { Types : { ObjectId } } = Schema
 
 
 // 스키마 생성 
-const ShippingSchema = new mongoose.Schema({
+const itemSchema = new mongoose.Schema({
     clientID:{
         type:ObjectId,
         required:true,
         ref:'User'
     },
     itemType:{
-        buyItem:{
+        buyItem:[{
             itemId:{
                 type:String,
                 unique:true,
             },
             buyDate:{type:Date},
             OrderNumber:{type:Number}
-        },
+        }],
         sellItem:{
             ItemId:{
                 type:String,
@@ -39,7 +39,7 @@ const ShippingSchema = new mongoose.Schema({
     }
 })
 
-const Shipping = mongoose.model("Shipping",ShippingSchema)
+const item = mongoose.model("Shipping",itemSchema)
 // 모델 생성
 // collection을 생성한다고 보면 됨.  --> 하나의 테이블 생성
-module.exports = Shipping
+module.exports = item
