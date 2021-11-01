@@ -1,5 +1,5 @@
 import Styled from 'styled-components'
-import ModalBackground from '../ModalBackground'
+import ModalBackground  from "../ModalBackground"
 import { connect } from 'react-redux'
 import React from 'react'
 import Link from 'next/link'
@@ -60,17 +60,19 @@ const LoginForm = (props) =>{
 
 
     return (
-        <ModalBackground>
-            <LoginFormWrapper closeLogin={props.closeLogin}>
-                <div onClick={props.closeLoginBtn}><CloseIcon /></div>
-                <ul>
-                    <li>로그인</li>
-                    <li>지갑을 이용하여 AzitGallery에 로그인합니다.<br />아래 지갑 중 사용할 지갑을 선택해주세요</li>
-                    <li><Link href="/signup"><button onClick={onClick} className="kaikasBtn">Kaikas로그인</button></Link></li>
-                    <li>사용중인 지갑이 없으신가요? <span><Astyle href="https://chrome.google.com/webstore/detail/kaikas/jblndlipeogpafnldhgmapagcccfchpi">kaikas다운로드</Astyle></span></li>
-                </ul>
-            </LoginFormWrapper>
-        </ModalBackground>
+        <>
+            <ModalBackground>
+                <LoginFormWrapper closeLogin={props.closeLogin}>
+                    <div onClick={props.closeLoginBtn}><CloseIcon /></div>
+                    <ul>
+                        <li>로그인</li>
+                        <li>지갑을 이용하여 AzitGallery에 로그인합니다.<br />아래 지갑 중 사용할 지갑을 선택해주세요</li>
+                        <li><Link href="/signup"><button onClick={onClick} className="kaikasBtn">Kaikas로그인</button></Link></li>
+                        <li>사용중인 지갑이 없으신가요? <span><Astyle href="https://chrome.google.com/webstore/detail/kaikas/jblndlipeogpafnldhgmapagcccfchpi">kaikas다운로드</Astyle></span></li>
+                    </ul>
+                </LoginFormWrapper>
+            </ModalBackground>
+        </>
     )
 }
 

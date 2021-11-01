@@ -8,11 +8,11 @@ export default function Home() {
   const TOKEN = ()=> {
     //토큰 1회 발행
     window.caver.klay.KIP7.deploy({
-      name: 'ITEAM',
-      symbol: 'IEE',
+      name: 'HALLOWEENPUMKIN',
+      symbol: 'HPM',
       decimals: 18,
       initialSupply: '10000000000000000000000',
-    }, '0xadbEC8669bbfBd1481aaD736f98De590d37b26Ce')
+    }, '0x3A557C9D2ea68B4C22a740C451C0e30F3273E052')
     .on('error', function(error) { console.log(error) })
     .on('transactionHash', function(transactionHash) { console.log(transactionHash)})
     .on('receipt', function(receipt) {

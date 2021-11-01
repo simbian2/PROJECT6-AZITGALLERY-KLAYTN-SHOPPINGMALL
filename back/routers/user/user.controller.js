@@ -8,17 +8,17 @@ require('dotenv').config()
 const { User } = require('../../models')
 
 
-let SellerAdmin = async (req,res) => {
+let Seller_Admin = async (req,res) => {
     console.log('왓다')
     let transporter = nodemailer.createTransport({
         service: 'Gmail',
         auth: {
-            user: process.env.USER, //generated ethereal user
-            pass: process.env.PASS, //generated ethereal password 
+            user: "simbianartist@gmail.com", //generated ethereal user
+            pass: "epiteomqkaae135", //generated ethereal password 
         }
     });
 
-    let url = `http://localhost:3000/admin/approveBTN`;
+    let url = `http://localhost:3000/admin/approvebtn`;
     let options = {
         from: 'simbianartist@gmail.com',
         to:'simbianartist@gmail.com',//임시로, 나중에는 body에서 가져오게끔한다
@@ -57,6 +57,6 @@ let AddUser = async (req,res) => {
 }
 
 module.exports = {
-    SellerAdmin,
+    Seller_Admin,
     AddUser
 }
