@@ -9,6 +9,7 @@ import {persistStore, persistReducer} from 'redux-persist'
 import storage from 'redux-persist/lib/storage';
 import {UserState} from '../reducers/user'
 import {MintState} from '../reducers/mint'
+import {ShipState} from './ship'
 import {Reducer} from 'redux'
 
 const persistConfig = {
@@ -19,11 +20,12 @@ const persistConfig = {
 
 export interface State {
     user:UserState,
-    mint:MintState
+    mint:MintState,
+    ship:ShipState
 }
 
 const combinedReducers = combineReducers({
-    user,mint
+    user, mint
 })
 
 export const rootReducer:Reducer<State,AnyAction> = (state,action) => {
@@ -41,7 +43,6 @@ export const rootReducer:Reducer<State,AnyAction> = (state,action) => {
 //             default :
 //                 return {state, action}
 //         }
-
 //     },
 //     user 
 // })

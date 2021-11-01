@@ -6,10 +6,21 @@ import Link from 'next/link';
 import useInput from '../../hooks/useInput';
 import { TextField } from '@mui/material';
 import Button from '@mui/material/Button';
-
-
+import { useSelector, useDispatch } from 'react-redux'
+import { shipInfo_REQUEST } from '../../reducers/ship';
 
 const Shippingfrom = () => {
+    interface shipEle {
+        orderer : string,
+        receiver : string,
+        phoneNum : string,
+        address : string,
+        postNumber : string,
+        addressDetail : string,
+        memo : string,
+        inputStatus : string
+    }
+
     // @ 주소 찾는 창
     const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false)
 
@@ -50,6 +61,8 @@ const Shippingfrom = () => {
         setInputStatus(radioBtnName)  
     }
 
+    const dispatch = useDispatch()
+
     // @ dispatch 할 때 보내줄 data 들
     const shippingData = {
         orderer,
@@ -64,7 +77,8 @@ const Shippingfrom = () => {
 
     const handelSubmit = ()=>{
         // 여기서 dispatch로 날리고
-        console.log(shippingData);
+        // console.log(shippingData);
+        dispatch(shipInfo_REQUEST(shippingData))
     }
     
     return (
