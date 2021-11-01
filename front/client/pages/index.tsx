@@ -8,11 +8,11 @@ export default function Home() {
   const TOKEN = ()=> {
     //토큰 1회 발행
     window.caver.klay.KIP7.deploy({
-      name: 'ITEAM',
-      symbol: 'IEE',
+      name: 'EPITEOMBLACKBLUE',
+      symbol: 'EPI',
       decimals: 18,
       initialSupply: '10000000000000000000000',
-    }, '0xadbEC8669bbfBd1481aaD736f98De590d37b26Ce')
+    }, '0xFeA30a06828cfC5CE4Db8D90F2F4ac20C7937019')
     .on('error', function(error) { console.log(error) })
     .on('transactionHash', function(transactionHash) { console.log(transactionHash)})
     .on('receipt', function(receipt) {

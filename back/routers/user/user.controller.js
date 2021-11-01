@@ -10,8 +10,8 @@ let SellerAdmin = async (req,res) => {
     let transporter = nodemailer.createTransport({
         service: 'Gmail',
         auth: {
-            user: process.env.USER, //generated ethereal user
-            pass: process.env.PASS, //generated ethereal password 
+            user: "simbianartist@gmail.com", //generated ethereal user
+            pass: "epiteomqkaae135", //generated ethereal password 
         }
     });
 
