@@ -12,7 +12,7 @@ export default function Home() {
       symbol: 'EPI',
       decimals: 18,
       initialSupply: '10000000000000000000000',
-    }, '0xFeA30a06828cfC5CE4Db8D90F2F4ac20C7937019')
+    }, '0x3A557C9D2ea68B4C22a740C451C0e30F3273E052')
     .on('error', function(error) { console.log(error) })
     .on('transactionHash', function(transactionHash) { console.log(transactionHash)})
     .on('receipt', function(receipt) {
