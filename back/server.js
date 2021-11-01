@@ -10,11 +10,11 @@ const socket = require('socket.io')
 const http = require('http')
 const server = http.createServer(app)
 const io = socket(server)
-
 const PORT = '4000'
 const {sequelize, Auction} = require('./models')
 const router = require('./routers/index')
-
+const connect = require('./schemas/index.js')
+connect()
 // app.use(cookieParser())
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({extended:false}))
@@ -37,20 +37,11 @@ sequelize.sync({ force: false, })
         console.log('access failed')
     })
 
+
+
+
 app.use('/',router)
 server.listen(PORT,()=>{
     console.log(`server listening on port ${PORT}`)
 })
 
-// io.sockets.on('connection',socket=>{
-//     console.log('connected')
-// const mongoose = require('mongose')
-
-// const 
-
-
-// app.get('/',(req,res)=>{
-//     res.send('나오니?')
-// })
-
-// })

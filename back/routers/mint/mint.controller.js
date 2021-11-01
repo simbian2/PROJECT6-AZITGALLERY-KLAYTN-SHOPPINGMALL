@@ -77,7 +77,6 @@ let mint_nft_post = async (req,res) => {
        );
        console.log(mintResult)
      }
-
 }
 
 
@@ -105,8 +104,9 @@ let KIP7Token_transfer = async () => {
   const value = 100000000000000000000
   const receipt = await kip7Instance.transfer(recipientAddress, value, opts)
   console.log(receipt)
-  
+
 }
+
 module.exports = {
     mint_nft_post,
     KIP7Token_transfer

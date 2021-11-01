@@ -4,6 +4,8 @@ const qs = require('qs');
 const nodemailer = require('nodemailer');
 const smtpTransporter = require('nodemailer-smtp-transport');
 require('dotenv').config()
+const User =  require('../../schemas/user')
+
 
 let Seller_Admin = async (req,res) => {
     console.log('왓다')
@@ -28,14 +30,43 @@ let Seller_Admin = async (req,res) => {
             console.log(err)
         } else {
             console.log('email has been successfully sent.');
-
         }
         transporter.close();
     })
-
 }
 
 
+
+let AddUser = (req,res) => {    
+    User.create([{
+        userInfo:{
+            name:req.body.Nickname,
+            contact:{
+                email:req.body.email,
+                phone:null,
+            },
+            walletAddress:req.body.walletAddress,
+            address:null,
+            joinDate:null        
+        },
+        type:{
+            true:[{}]
+        },
+        history:[{
+            buyInfo:{
+                buyDate:Date.now(),
+                orderNumber:null
+            }
+        }]
+    }])
+    
+    User.find({},(err,docs)=>{
+        console.log(docs)
+        res.send(docs)
+    })
+}
+
 module.exports = {
-    Seller_Admin
+    Seller_Admin,
+    AddUser
 }
