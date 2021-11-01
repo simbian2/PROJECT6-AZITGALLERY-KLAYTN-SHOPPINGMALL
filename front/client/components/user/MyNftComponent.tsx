@@ -6,12 +6,12 @@ import Selled from './Selled'
 import Notselled from './NotSelled'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from "../../reducers"
-import {State} from "../../reducers/user"
+import {UserState} from "../../reducers/user"
 
 const MyNftComponent = () => {
 
     const [tabBtn, settabBtn] = useState<number>(1);
-    const user:State = useSelector((state:RootState) => state.user);
+    const user:UserState = useSelector((state:RootState) => state.user);
     console.log(user.UserAddress)
 
     const btn1 = () => {
