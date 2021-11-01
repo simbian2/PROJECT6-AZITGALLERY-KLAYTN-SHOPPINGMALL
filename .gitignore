@@ -2,3 +2,4 @@
 ./front/.next**
 */package-lock.json
 back/db_config.json
+*/.env

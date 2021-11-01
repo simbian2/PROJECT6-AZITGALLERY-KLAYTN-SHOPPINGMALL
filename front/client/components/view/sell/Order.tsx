@@ -2,8 +2,18 @@ import React, { useState} from "react";
 import Styled from 'styled-components'
 import CloseIcon from '@mui/icons-material/Close';
 import Link from 'next/link'
+import { KipToken_SUCCESS } from "../../../reducers/mint";
+import { useSelector, useDispatch } from 'react-redux'
+
+declare global {
+    interface Window {
+        klaytn: any;
+        caver: any;
+    }
+}
 
 const Order = (props) => {
+    const dispatch = useDispatch()
     const [checked, setChecked] = useState<boolean>(false);
 
     const checkAgreement = (checkedState) => {
@@ -14,6 +24,30 @@ const Order = (props) => {
         alert('동의란을 확인해주세요')
     }
 
+    const Purchase = () => {
+
+        //KLAY로 TRANSACTION
+        window.caver.klay
+        .sendTransaction({
+          type: 'VALUE_TRANSFER',
+          from: window.klaytn.selectedAddress,
+          to: '0xb0b7b3a36e485b99ea9174f8cf8ede3a3d1a354b',
+          value: window.caver.utils.toPeb('1', 'KLAY'),
+          gas: 8000000
+        })
+        .once('transactionHash', transactionHash => {
+          console.log('txHash', transactionHash)
+        })
+        .once('receipt', receipt => {
+          console.log('receipt', receipt)
+        })
+        .once('error', error => {
+          console.log('error', error)
+        })
+
+        // dispatch(KipToken_SUCCESS())
+    }
+    
     return (
         <>
             <ModalWrapper flag={props.open}>
@@ -49,7 +83,7 @@ const Order = (props) => {
                     <OrderBtn>
                         {
                             checked 
-                            ? <Link href = "/ship"><a><button>Checkout</button></a></Link>
+                            ? <Link href = "/ship"><a><button onClick = {Purchase}>Checkout</button></a></Link>
                             : <button className="unChecked" onClick={unCheckedClick}>Checkout</button>
 
                         }

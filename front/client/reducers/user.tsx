@@ -3,22 +3,22 @@ import {HYDRATE} from 'next-redux-wrapper';
 
 
 
-export interface State {
+export interface UserState {
     loadding:boolean;
     data:Array<string | number | Object>;
     payload:{};
     error:string;
     UserAddress:string;
-    verify:boolean;
+    verify:number;
 }
 
-export const initialState : State = {
+export const initialState : UserState = {
     loadding:false,
     data:[],
     payload:{},
     error:'',
     UserAddress:'kaikasAddress',
-    verify:false,
+    verify:3,
 };
 
 
@@ -28,6 +28,9 @@ export const USER_LOGIN_SUCCESS = "USER_LOGIN_SUCCESS" as const;
 export const USER_LOGIN_ERROR = "USER_LOGIN_ERROR" as const;
 export const SELLER_ADMIN_SUCCESS = "SELLER_ADMIN_SUCCESS" as const;
 export const SELLER_ADMIN_BACK = "SELLER_ADMIN_BACK" as const;
+export const Seller_Admin_Access = "Seller_Admin_Access" as const;
+export const Seller_Admin_Deny = "Seller_Admin_Deny" as const;
+
 
 export const UserLogin_REQUEST = (UserAddress) => {
     return{
@@ -60,14 +63,28 @@ export const SellerAdmin_BACK = () => {
         type:SELLER_ADMIN_BACK,
     }
 }
+
+export const SellerAdminAccess_REQUEST = () => {
+    return{
+        type:Seller_Admin_Access,
+    }
+}
+
+export const SellerAdminDeny_REQUEST = () => {
+    return{
+        type:Seller_Admin_Deny,
+    }
+}
 type UserAction = 
 | ReturnType<typeof UserLogin_REQUEST>
 | ReturnType<typeof UserLogin_SUCCESS>
 | ReturnType<typeof UserLogin_ERROR>
 | ReturnType<typeof SellerAdmin_REQUEST>
 | ReturnType<typeof SellerAdmin_BACK>
+| ReturnType<typeof SellerAdminAccess_REQUEST>
+| ReturnType<typeof SellerAdminDeny_REQUEST>
 
-const reducer = (state:State=initialState, action:UserAction) => {
+const reducer = (state:UserState=initialState, action:UserAction) => {
     switch (action.type){
         case USER_LOGIN_REQUEST:
             return{
@@ -93,7 +110,17 @@ const reducer = (state:State=initialState, action:UserAction) => {
         case SELLER_ADMIN_BACK:
             return{
                 ...state,
-                verify:true
+                verify:1
+            }
+        case Seller_Admin_Access:
+            return{
+                ...state,
+                verify:0
+            }
+        case Seller_Admin_Deny:
+            return{
+                ...state,
+                verify:2
             }
         default:
             return state;

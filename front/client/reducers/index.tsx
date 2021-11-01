@@ -1,12 +1,15 @@
 import {combineReducers} from 'redux'
 import user from './user'
+import mint from './mint'
 import reducer from './user'
 import {initialState} from './user'
 import {AnyAction} from 'redux';
 import {HYDRATE} from 'next-redux-wrapper';
 import {persistStore, persistReducer} from 'redux-persist'
 import storage from 'redux-persist/lib/storage';
-import {State} from '../reducers/user'
+import {UserState} from '../reducers/user'
+import {MintState} from '../reducers/mint'
+import {Reducer} from 'redux'
 
 const persistConfig = {
     key: 'nextjs',
@@ -14,18 +17,34 @@ const persistConfig = {
     storage
 };
 
-const rootReducer = combineReducers({
-    index:(state:State = initialState,action:AnyAction)=>{
-        switch (action.type){
-            case HYDRATE:
-                return {...state, ...action};
-            default :
-                return {state, action}
-        }
+export interface State {
+    user:UserState,
+    mint:MintState
+}
 
-    },
-    user 
+const combinedReducers = combineReducers({
+    user,mint
 })
+
+export const rootReducer:Reducer<State,AnyAction> = (state,action) => {
+    let rootReducer = action.type === HYDRATE
+    ? {...state,...action.payload}
+    : combinedReducers(state,action)
+    return rootReducer
+}
+
+// const rootReducer = combineReducers({
+//     index:(state:State,action:AnyAction)=>{
+//         switch (action.type){
+//             case HYDRATE:
+//                 return {...state, ...action};
+//             default :
+//                 return {state, action}
+//         }
+
+//     },
+//     user 
+// })
 
 export default persistReducer(persistConfig, rootReducer);
 

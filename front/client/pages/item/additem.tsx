@@ -2,30 +2,43 @@ import React, { useEffect, useState } from "react"
 import AddItemComponent from '../../components/item/AddItemComponent'
 
 const addItem = () =>{
+    // 남은 NTF 등록 횟수 -> 느낌상 삭제해야 할 컴포넌트 같음
     const [n, setN] = useState<number>(10)
-
-    const [ifSell, setifSell] = useState<boolean>(true);
+    // 즉판/경매 여부(하위 컴포넌트로 옮겨도 무방할 느낌)
+    const [ifSell, setifSell] = useState<boolean>(true)
+    // 시간 연장 여부 옵션
     const [extension, setExtension] = useState<boolean>(true)
-
+    // 서비스 이용약관과 개인정보 보호정책 동의 여부 배열(둘 다 true여야 진행됨)
     const [agreed, setAgreed] = useState<Array<boolean>>([false,false])
-    const [allAgreed, setAllAgreed] = useState<boolean>(false)
-
+    // 파일 정보가 담기는 state
     const [file, setFile] = useState<Array<string>>([])
+    // 미리보기 렌더링을 위한 state
     const [fileBase, setFileBase] = useState<Array<string>>([])
+    // 단위 통화 (won/ether)
     const [currency, setCurrency] = useState<string>('won')
+    // 즉판 선택 시 가격 주의: string으로 들어감; input text는 string으로 받기 때문
+    // 나중에 필요 시 Number()를 통해 속성 변환 가능
     const [price, setPrice] = useState<string>('')
+    // 등록 상품명
     const [name, setName] = useState<string>('')
+    // 상품 설명란
     const [desc, setDesc] = useState<string>('')
+    // 경매 옵션 선택 시 경매 시작가
     const [aucPrice, setAucPrice] = useState<string>('')
+    // 경매 마감 시간
     const [aucTime, setAucTime] = useState<any>('')
-
+    // input에 대한 handlechange(각 컴포넌트에서 텍스트를 인자값으로 받아
+    // 각 컴포넌트마다 인자값에 따라 다르게 응답한다
     function handleTxtChange(e:any, item:string){
         let {value} = e.target
         if(item == "file"){
             setFile(value)
         } else if(item == "price"){
+            // isNaN의 결과값이 false인 경우는 숫자, true는 문자열 포함
+            // 입력값에 따라 달라지는 것이지 string/integer와는 관계 없음. 
             if(isNaN(value)!==false){
                 alert('숫자만 입력해주세요.')
+                // 이유는 모르지만 value로 적으면 작동하지 않음(이하 나오는 경우도 동일)
                 e.target.value=price
             }else {
             setPrice(value)
@@ -50,6 +63,7 @@ const addItem = () =>{
         }
     }
 
+    // 파일 업로드 핸들링+미리보기 핸들링
     const fileChange = (e) => {
         let {files} = e.target
         if(files.length+file.length>10){ //추후 수정
