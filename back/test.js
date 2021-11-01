@@ -14,7 +14,9 @@ app.use(bodyParser.json())
 
 
 require ('./mongodb')
-const {test} = require('./mongodb')
+const {User} = require('./mongodb')
+
+
 
 app.get('/',(req,res)=>{
     res.send('나오나?')
