@@ -27,25 +27,26 @@ const Order = (props) => {
     const Purchase = () => {
 
         //KLAY로 TRANSACTION
-        window.caver.klay
-        .sendTransaction({
-          type: 'VALUE_TRANSFER',
-          from: window.klaytn.selectedAddress,
-          to: '0xb0b7b3a36e485b99ea9174f8cf8ede3a3d1a354b',
-          value: window.caver.utils.toPeb('1', 'KLAY'),
-          gas: 8000000
-        })
-        .once('transactionHash', transactionHash => {
-          console.log('txHash', transactionHash)
-        })
-        .once('receipt', receipt => {
-          console.log('receipt', receipt)
-        })
-        .once('error', error => {
-          console.log('error', error)
-        })
+        // window.caver.klay
+        // .sendTransaction({
+        //   type: 'VALUE_TRANSFER',
+        //   from: window.klaytn.selectedAddress,
+        //   to: '0x6EE16198C57833ca659dEeb83B1e583AA8A74Ce6',
+        //   value: window.caver.utils.toPeb('1', 'KLAY'),
+        //   gas: 8000000
+        // })
+        // .once('transactionHash', transactionHash => {
+        //   console.log('txHash', transactionHash)
+        // })
+        // .once('receipt', receipt => {
+        //   console.log('receipt', receipt)
+        // })
+        // .once('error', error => {
+        //   console.log('error', error)
+        // })
 
-        // dispatch(KipToken_SUCCESS())
+        dispatch(KipToken_SUCCESS())
+        alert('EPI로 거래되셨습니다!')
     }
     
     return (
