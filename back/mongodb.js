@@ -1,20 +1,25 @@
+// mongoose는 mongodb와 연결을 쉽게 해주는 라이브러리
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const ObjectId = Schema.ObjectId
+const url = 'mongodb://localhost:27017/AzitGallery'
 
-mongoose.connect('mongodb://localhost:27017/AzitGallery',{
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
+// mongodb연결
+mongoose
+    .connect(url,{
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    })
+    .then(() => {
+        console.log("Connected to MongoDB");
+    })
+    .catch((err) => {
+        console.log(err);
+    });
 
-const connection = mongoose.connection
-connection.on('error',console.error)    
-connection.once('open',()=>{
-    console.log('connected mongodb')
-})
 
-
-const User = mongoose.model('User',new Schema({
+// 스키마 생성
+const UserSchema = new mongoose.Schema({
     userInfo:{
         name:{type:String},
         contact:{
@@ -39,11 +44,17 @@ const User = mongoose.model('User',new Schema({
         }
     }]
 
-}))
+})
 
+
+// 모델 생성
+// collection을 생성한다고 보면 됨.  --> 하나의 테이블 생성
+const User = mongoose.model("User",UserSchema)
+
+// db에 데이터를 넣어줌
 User.create([{
     userInfo:{
-        name:'mihee',
+        name:'mihee2',
         contact:{
             email:'asdf',
             phone:'asdf',
@@ -64,7 +75,9 @@ User.create([{
 }])
 
 
-console.log(User.find())
+User.find({},(err,docs)=>{
+    console.log(docs)
+})
 
 
 module.exports = User
