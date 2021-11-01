@@ -64,4 +64,7 @@ User.create([{
 }])
 
 
-//module.exports = test
+console.log(User.find())
+
+
+module.exports = User

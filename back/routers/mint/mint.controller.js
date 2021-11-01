@@ -77,20 +77,15 @@ let mint_nft_post = async (req,res) => {
        );
        console.log(mintResult)
      }
-
 }
 
-
-
 let KIP7Token_transfer = () => {
-
-
   const kip7Instance = new caver.klay.KIP7(0x686a97f78cd29b0a6f3e23d4dcd41604ff4e2913)
   kip7Instance.transfer('0xF2e88e4A35bBCa55d5d47D2357DefC3eD16CA830', 10000, { from: '0x04c8A80f860dB5F84dC6e8a3c0cFae516c80e4DF' }).then(console.log)
   console.log(kip7Instance)
   console.log('transfer')
-  
 }
+
 module.exports = {
     mint_nft_post,
     KIP7Token_transfer
