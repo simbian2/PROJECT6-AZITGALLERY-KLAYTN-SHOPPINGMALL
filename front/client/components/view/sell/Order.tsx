@@ -2,6 +2,8 @@ import React, { useState} from "react";
 import Styled from 'styled-components'
 import CloseIcon from '@mui/icons-material/Close';
 import Link from 'next/link'
+import { KipToken_SUCCESS } from "../../../reducers/mint";
+import { useSelector, useDispatch } from 'react-redux'
 
 declare global {
     interface Window {
@@ -11,6 +13,7 @@ declare global {
 }
 
 const Order = (props) => {
+    const dispatch = useDispatch()
     const [checked, setChecked] = useState<boolean>(false);
 
     const checkAgreement = (checkedState) => {
@@ -23,6 +26,7 @@ const Order = (props) => {
 
     const Purchase = () => {
 
+        //KLAY로 TRANSACTION
         window.caver.klay
         .sendTransaction({
           type: 'VALUE_TRANSFER',
@@ -40,8 +44,10 @@ const Order = (props) => {
         .once('error', error => {
           console.log('error', error)
         })
-        
+
+        // dispatch(KipToken_SUCCESS())
     }
+    
     return (
         <>
             <ModalWrapper flag={props.open}>
