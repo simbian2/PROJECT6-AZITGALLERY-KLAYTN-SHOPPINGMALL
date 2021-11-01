@@ -6,12 +6,13 @@ import Link from 'next/link'
 export default function Home() {
 
   const TOKEN = ()=> {
+    //토큰 1회 발행
     window.caver.klay.KIP7.deploy({
-      name: 'HONGDAE',
-      symbol: 'HONG',
+      name: 'HALLOWEENPUMKIN',
+      symbol: 'HPM',
       decimals: 18,
       initialSupply: '10000000000000000000000',
-    }, '0xF2e88e4A35bBCa55d5d47D2357DefC3eD16CA830')
+    }, '0x3A557C9D2ea68B4C22a740C451C0e30F3273E052')
     .on('error', function(error) { console.log(error) })
     .on('transactionHash', function(transactionHash) { console.log(transactionHash)})
     .on('receipt', function(receipt) {

@@ -2,10 +2,12 @@ import axios from 'axios';
 import {all,put,takeEvery,takeLatest,fork,call} from "redux-saga/effects";
 
 function loginAPI(data){
-    return axios.get(`https://api.tvmaze.com/search/shows?q=superman`)
+    return axios.post(``,data,{ withCredentials: true })
+    
 }
 
 function* login(action){
+
     let result = yield call(loginAPI,action)
 
     if (result.login_info == undefined) {
@@ -27,7 +29,7 @@ function* login(action){
 }
 
 function* SellerAdminSaga(){
-    const result = yield call(axios.post,`http://localhost:4000/user/SellerAdmin`)
+    const result = yield call(axios.post,`http://localhost:4000/user/selleradmin`)
 
         yield put({
             type:'SELLER_ADMIN_BACK',

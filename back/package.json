@@ -1,20 +1,32 @@
 {
-  "name": "back",
+  "name": "teamproject5_auction_test",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.24.0",
+    "axios": "^0.23.0",
+    "body-parser": "^1.19.0",
     "caver-js": "^1.6.4",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "http": "^0.0.1-security",
+    "moment": "^2.29.1",
+    "mongoose": "^6.0.12",
     "mysql": "^2.18.1",
+    "mysql2": "^2.3.2",
     "nodemailer": "^6.7.0",
     "nodemailer-smtp-transport": "^2.7.4",
+    "nunjucks": "^3.2.3",
+    "path": "^0.12.7",
+    "sequelize": "^6.7.0",
+    "sequelize-cli": "^6.2.0",
     "socket.io": "^4.3.1"
   }
 }
