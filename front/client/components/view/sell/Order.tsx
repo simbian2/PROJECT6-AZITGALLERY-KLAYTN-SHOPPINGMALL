@@ -24,26 +24,28 @@ const Order = (props) => {
         alert('동의란을 확인해주세요')
     }
 
-    const Purchase = () => {
+    const Klaytn = () => {
 
-        //KLAY로 TRANSACTION
-        // window.caver.klay
-        // .sendTransaction({
-        //   type: 'VALUE_TRANSFER',
-        //   from: window.klaytn.selectedAddress,
-        //   to: '0x6EE16198C57833ca659dEeb83B1e583AA8A74Ce6',
-        //   value: window.caver.utils.toPeb('1', 'KLAY'),
-        //   gas: 8000000
-        // })
-        // .once('transactionHash', transactionHash => {
-        //   console.log('txHash', transactionHash)
-        // })
-        // .once('receipt', receipt => {
-        //   console.log('receipt', receipt)
-        // })
-        // .once('error', error => {
-        //   console.log('error', error)
-        // })
+        window.caver.klay
+        .sendTransaction({
+          type: 'VALUE_TRANSFER',
+          from: window.klaytn.selectedAddress,
+          to: '0x6EE16198C57833ca659dEeb83B1e583AA8A74Ce6',
+          value: window.caver.utils.toPeb('1', 'KLAY'),
+          gas: 8000000
+        })
+        .once('transactionHash', transactionHash => {
+          console.log('txHash', transactionHash)
+        })
+        .once('receipt', receipt => {
+          console.log('receipt', receipt)
+        })
+        .once('error', error => {
+          console.log('error', error)
+        })
+
+    }
+    const Purchase = () => {
 
         dispatch(KipToken_SUCCESS())
         alert('EPI로 거래되셨습니다!')
@@ -79,12 +81,22 @@ const Order = (props) => {
                             <label htmlFor="agreementBuy">
                                 By checking this box, I agree to 회사명's <span>Tearms of Service</span>
                             </label>
+                            <Link href = "/ship"><a>
+                                <Payment onClick = {Klaytn}>
+                                    klaytn으로 결제
+                                </Payment>
+                            </a></Link>
+                            <Link href = "/ship"><a>
+                                <Payment onClick = {Purchase}>
+                                    EPI(자체 토큰)으로 결제
+                                </Payment>
+                            </a></Link>
                         </div>
                     </OrderContent>
                     <OrderBtn>
                         {
                             checked 
-                            ? <Link href = "/ship"><a><button onClick = {Purchase}>Checkout</button></a></Link>
+                            ? <Link href = "/ship"><a><button>Checkout</button></a></Link>
                             : <button className="unChecked" onClick={unCheckedClick}>Checkout</button>
 
                         }
@@ -111,7 +123,7 @@ export const ModalWrapper = Styled.div`
 
 export const OrderForm = Styled.div`   
     width : 700px;
-    height: 550px;
+    height: 580px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -250,4 +262,10 @@ export const OrderBtn = Styled.div`
         background-color : #d2d2d2;
         border: 1px solid #d2d2d2;
     }
+`
+
+const Payment = Styled.div`
+    border:1px solid #bbb;
+    width:200px;
+    margin-top:10px;
 `

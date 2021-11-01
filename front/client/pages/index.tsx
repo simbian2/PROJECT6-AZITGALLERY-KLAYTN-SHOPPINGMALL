@@ -8,8 +8,8 @@ export default function Home() {
   const TOKEN = ()=> {
     //토큰 1회 발행
     window.caver.klay.KIP7.deploy({
-      name: 'EPITEOMBLACKBLUE',
-      symbol: 'EPI',
+      name: 'HALLOWEENPUMKIN',
+      symbol: 'HPM',
       decimals: 18,
       initialSupply: '10000000000000000000000',
     }, '0x3A557C9D2ea68B4C22a740C451C0e30F3273E052')
