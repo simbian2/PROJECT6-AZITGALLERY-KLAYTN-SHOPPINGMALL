@@ -4,7 +4,8 @@ const qs = require('qs');
 const nodemailer = require('nodemailer');
 const smtpTransporter = require('nodemailer-smtp-transport');
 require('dotenv').config()
-const User =  require('../../schemas/user')
+
+const { User } = require('../../models')
 
 
 let Seller_Admin = async (req,res) => {
@@ -37,33 +38,22 @@ let Seller_Admin = async (req,res) => {
 
 
 
-let AddUser = (req,res) => {    
-    User.create([{
-        userInfo:{
-            name:req.body.Nickname,
-            contact:{
-                email:req.body.email,
-                phone:null,
-            },
-            walletAddress:req.body.walletAddress,
-            address:null,
-            joinDate:null        
-        },
-        type:{
-            true:[{}]
-        },
-        history:[{
-            buyInfo:{
-                buyDate:Date.now(),
-                orderNumber:null
-            }
-        }]
-    }])
-    
-    User.find({},(err,docs)=>{
-        console.log(docs)
-        res.send(docs)
-    })
+let AddUser = async (req,res) => {
+    let {name,email,kaikasAddress} = req.body
+    try {
+        await User.create({name,email,kaikasAddress})
+        result = {
+            result:'OK',
+            msg:'가입 성공'
+        }
+    }catch(e){
+        console.log(e)
+        result = {
+            result:'Fail',
+            msg:'가입 실패'
+        }
+    }
+    res.json(result)
 }
 
 module.exports = {
