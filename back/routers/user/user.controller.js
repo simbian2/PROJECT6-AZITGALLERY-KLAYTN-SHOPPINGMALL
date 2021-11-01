@@ -4,14 +4,16 @@ const qs = require('qs');
 const nodemailer = require('nodemailer');
 const smtpTransporter = require('nodemailer-smtp-transport');
 require('dotenv').config()
+const User =  require('../../schemas/user')
+
 
 let SellerAdmin = async (req,res) => {
     console.log('왓다')
     let transporter = nodemailer.createTransport({
         service: 'Gmail',
         auth: {
-            user: process.env.USER, //generated ethereal user
-            pass: process.env.PASS, //generated ethereal password 
+            user: "simbianartist@gmail.com", //generated ethereal user
+            pass: "epiteomqkaae135", //generated ethereal password 
         }
     });
 
@@ -28,14 +30,43 @@ let SellerAdmin = async (req,res) => {
             console.log(err)
         } else {
             console.log('email has been successfully sent.');
-
         }
         transporter.close();
     })
-
 }
 
 
+
+let AddUser = (req,res) => {    
+    User.create([{
+        userInfo:{
+            name:req.body.Nickname,
+            contact:{
+                email:req.body.email,
+                phone:null,
+            },
+            walletAddress:req.body.walletAddress,
+            address:null,
+            joinDate:null        
+        },
+        type:{
+            true:[{}]
+        },
+        history:[{
+            buyInfo:{
+                buyDate:Date.now(),
+                orderNumber:null
+            }
+        }]
+    }])
+    
+    User.find({},(err,docs)=>{
+        console.log(docs)
+        res.send(docs)
+    })
+}
+
 module.exports = {
-    SellerAdmin
+    SellerAdmin,
+    AddUser
 }
