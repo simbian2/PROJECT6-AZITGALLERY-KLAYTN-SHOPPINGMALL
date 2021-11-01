@@ -17,6 +17,7 @@
     "express-session": "^1.17.2",
     "http": "^0.0.1-security",
     "moment": "^2.29.1",
+    "mongoose": "^6.0.12",
     "mysql": "^2.18.1",
     "mysql2": "^2.3.2",
     "nodemailer": "^6.7.0",
