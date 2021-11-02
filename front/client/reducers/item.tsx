@@ -1,112 +1,87 @@
-export interface Item {
-    loading:boolean;
-    data:any;
-    payload:any;
-    error:any;
+import {AnyAction} from 'redux'
+import {HYDRATE} from 'next-redux-wrapper';
 
+export interface ItemState {
+    loading:boolean;
+    data:Array<string | number | Object>;
+    payload:{};
+    error:string;
+    UserAddress:string;
+    verify:number;
+    price: string;
+    name: string;
+    desc: string;
+    aucPrice: string;
+    currency: string;
+    aucTime: string;
+    extension: boolean;
 }
 
-const initialState :Item = {
+export const initialState : ItemState = {
     loading:false,
     data:[],
     payload:{},
-    error:''
+    error:'',
+    UserAddress:'kaikasAddress',
+    verify:200,
+    price: '',
+    name: '',
+    desc: '',
+    aucPrice: '',
+    currency: 'won',
+    aucTime: '',
+    extension: true,
 };
 
-export 
 
-const PIC_UPLOAD_REQUEST = "PIC_UPLOAD_REQUEST" as const;
-const PIC_UPLOAD_SUCCESS = "PIC_UPLOAD_SUCCESS" as const;
-const PIC_UPLOAD_ERROR = "PIC_UPLOAD_ERROR" as const;
+export const ITEMINFO_INSERT_REQUEST  = "ITEMINFO_INSERT_REQUEST" as const;
+export const ITEMINFO_INSERT_SUCCESS  = "ITEMINFO_INSERT_SUCCESS" as const;
+export const ITEMINFO_INSERT_ERROR = "ITEMINFO_INSERT_ERROR" as const;
 
-const ITEM_UPLOAD_REQUEST = "ITEM_UPLOAD_REQUEST" as const;
-const ITEM_UPLOAD_SUCCESS = "ITEM_UPLOAD_SUCCESS" as const;
-const ITEM_UPLOAD_ERROR = "ITEM_UPLOAD_ERROR" as const;
-
-
-/* 입력 */
-export const PicUpload_REQUEST = () => {
-    return {
-        type: PIC_UPLOAD_REQUEST,
-    }
-}
-export const PicUpload_SUCCESS = (data) => {
-    return {
-        type: PIC_UPLOAD_SUCCESS,
+export const itemInfo_REQUEST = (data) => {
+    return{
+        type:ITEMINFO_INSERT_REQUEST,
         data
     }
 }
-export const PicUpload_ERROR = () => {
-    return {
-        type: PIC_UPLOAD_ERROR,
+
+export const itemInfo_SUCCESS = () => {
+    return{
+        type:ITEMINFO_INSERT_SUCCESS,
     }
 }
 
-/* 가져오기 */
-export const AddItem_REQUEST = () => {
-    return {
-        type: ITEM_UPLOAD_REQUEST,
-    }
-}
-export const AddItem_SUCCESS = (data) => {
-    return {
-        type: ITEM_UPLOAD_SUCCESS,
-        data
-    }
-}
-export const AddItem_ERROR = () => {
-    return {
-        type: ITEM_UPLOAD_ERROR,
+export const itemInfo_ERROR = () => {
+    return{
+        type:ITEMINFO_INSERT_ERROR,
     }
 }
 
 type ItemAction = 
-| ReturnType<typeof PicUpload_REQUEST>
-| ReturnType<typeof PicUpload_SUCCESS>
-| ReturnType<typeof PicUpload_ERROR>
-| ReturnType<typeof AddItem_REQUEST>
-| ReturnType<typeof AddItem_SUCCESS>
-| ReturnType<typeof AddItem_ERROR>
+| ReturnType<typeof itemInfo_REQUEST>
+| ReturnType<typeof itemInfo_SUCCESS>
+| ReturnType<typeof itemInfo_ERROR>
 
-const itemReducer = (state = initialState, action:ItemAction) => {
-    switch (action.type) {
-        /* 사진 업로드 */
-        case PIC_UPLOAD_REQUEST:
-            return {
+const reducer = (state:ItemState=initialState, action:ItemAction) => {
+    switch (action.type){
+        case ITEMINFO_INSERT_REQUEST:
+            return{
                 ...state,
-                loading: true,
+                itemInfo : action.data
             }
-        case PIC_UPLOAD_SUCCESS:
-            return {
+        case ITEMINFO_INSERT_SUCCESS:
+            return{
                 ...state,
-                data: action.data,
-                loading: false,
+                
             }
-        case PIC_UPLOAD_ERROR:
-            return {
+        case ITEMINFO_INSERT_ERROR:
+            return{
                 ...state,
-                loading: false,
-            }
-        /* 최종 입력값 업로드 */
-        case ITEM_UPLOAD_REQUEST:
-            return {
-                ...state,
-                loading: true,
-            }
-        case ITEM_UPLOAD_SUCCESS:
-            return {
-                ...state,
-                data: action.data,
-                loading: true,
-            }
-        case ITEM_UPLOAD_ERROR:
-            return {
-                ...state,
-                loading: false,
+                
             }
         default:
-            return state
+            return state;
     }
 }
 
-export default itemReducer
+export default reducer
