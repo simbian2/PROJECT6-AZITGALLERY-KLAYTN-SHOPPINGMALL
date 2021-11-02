@@ -7,14 +7,12 @@ function sellTypeAPI(data){
     return axios.post (`${url}/type/selltype`,data)
 }
 
-function* sellType(action){
-    console.log("판매 경매",action.data);
-    
+function* sellType(action){  
     const result = yield call(sellTypeAPI, action.data)
 }
 
 function* reqSellType(){
-    yield takeLatest('SHIPINFO_INSERT_REQUEST',sellType)
+    yield takeLatest('SELECT_SELLTYPE_REQUEST',sellType)
 }
 
 
@@ -30,7 +28,7 @@ function* selectCategory(action){
 }
 
 function* reqSelectCategory(){
-    yield takeLatest('SHIPINFO_INSERT_REQUEST',selectCategory)
+    yield takeLatest('SELECT_CATEGORY_REQUEST',selectCategory)
 }
 
 
@@ -46,7 +44,7 @@ function* itemSearch(action){
 }
 
 function* reqItemSearch(){
-    yield takeLatest('SHIPINFO_INSERT_REQUEST',itemSearch)
+    yield takeLatest('ITEM_SEARCH_REQUEST',itemSearch)
 }
 
 
@@ -56,13 +54,13 @@ function sortTypeAPI(data){
 }
 
 function* sortType(action){
-    console.log(action.data);
+    // console.log(action.data);
     
     const result = yield call(sortTypeAPI, action.data)
 }
 
 function* reqSortType(){
-    yield takeLatest('SHIPINFO_INSERT_REQUEST',sortType)
+    yield takeLatest('ITEM_SORT_REQUEST',sortType)
 }
 
 export default function* typeSaga(){

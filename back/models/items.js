@@ -23,7 +23,11 @@ module.exports = class Item extends Sequelize.Model{
             },
             dueDate:{
                 type:Sequelize.DATE,
-                allowNull:false,
+                allowNull:true,
+            },
+            ifExtended:{ // 경매 연장 여부 옵션; 0=false 1=true
+                type:Sequelize.INTEGER(1),
+                allowNull: true,
             },
             registeredAt:{
                 type:Sequelize.DATE,
