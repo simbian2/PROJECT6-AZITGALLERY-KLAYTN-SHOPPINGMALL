@@ -33,6 +33,7 @@ const addItem = () =>{
     const [aucTime, setAucTime] = useState<any>('')
     // input에 대한 handlechange(각 컴포넌트에서 텍스트를 인자값으로 받아
     // 각 컴포넌트마다 인자값에 따라 다르게 응답한다
+    const [itemType, setItemType] = useState<string>('')
 
     const dispatch = useDispatch()
 
@@ -128,15 +129,21 @@ const addItem = () =>{
             setCurrency(value)
     }
 
+    const handleItemType = (e) => {
+        let {value} = e.target
+        console.log(value)
+            setItemType(value)
+    }
+
     const handleConfirm = () => {
         if(agreed[0] !== true || agreed[1] !== true){ //미동의시
             alert('모든 항목에 동의해주세요.')
             return false
         }
         else if((ifSell === true &&
-                (name=='' || desc=='' || price == '')) ||
+                (name=='' || desc=='' || price == '' || itemType == '')) ||
                 (ifSell === false &&
-                (name=='' ||desc=='' ||aucPrice=='' ||aucTime==''))){
+                (name=='' ||desc=='' ||aucPrice=='' ||aucTime=='' || itemType == ''))){
                 alert('모든 칸을 입력해주세요.')
                 return false
         } else if(file.length == 0 ){
@@ -150,34 +157,16 @@ const addItem = () =>{
     const handleSubmit = async () => { 
         let data = {}
         if(ifSell == true){
-            data = {price, currency, name, desc}
+            data = {price, currency, name, desc, itemType}
             dispatch(itemInfo_REQUEST(data))
+            dispatch(itemImageInfo_REQUEST(file))
         } else{
-            data = {name, desc, aucPrice, currency, aucTime, extension}
+            data = {name, desc, aucPrice, currency, aucTime, extension, itemType}
             dispatch(itemInfo_REQUEST(data))
+            dispatch(itemImageInfo_REQUEST(file))
         }
     }
-    const tempFile = async () => {
-        // console.log(file)
-        // file.map(async (items)=>{
-        // // get secure url form the server
-        // const response = await fetch('http://localhost:4000/item/uploadpics');
-        // console.log(response)
-        // const { url } = await response.json();
-        // // console.log(url)
-        // //post the image directly to the s3 bucket
-        // await fetch(url, {
-        //     method: "PUT",
-        //     headers: {
-        //         "Content-Type": "multipart/form-data"
-        //     },
-        //     body: items
-        //     })
-        //     const imageURL = url.split('?')[0];
-        //     console.log(imageURL)
-        // })
-        dispatch(itemImageInfo_REQUEST(file))
-    }
+
 
     const resetState = () => {
         window.location.reload() 
@@ -199,13 +188,13 @@ const addItem = () =>{
         handleTxtChange = {handleTxtChange}
         handleSubmit = {handleSubmit}
         handleConfirm = {handleConfirm}
+        handleItemType = {handleItemType}
         fileChange = {fileChange}
         fileBase = {fileBase}
         handleCurrency = {handleCurrency}
         deleteFile = {deleteFile}
         // 발행 후 초기화
         resetState = {resetState}
-        tempFile = {tempFile}
         />
 
     )
