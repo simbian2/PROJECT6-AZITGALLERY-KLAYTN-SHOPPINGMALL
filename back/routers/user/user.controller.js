@@ -58,6 +58,7 @@ let AddUser = async (req,res) => {
 
 
 let Signup_post = (req,res) => {
+    
     console.log('this is body')
     let key = Object.keys(req.body)
     let keyObject = JSON.parse(key)
@@ -65,6 +66,7 @@ let Signup_post = (req,res) => {
     console.log(keyObject.NickName)
     console.log(keyObject.Address)
     console.log(keyObject.Email)
+
 }
 module.exports = {
     Seller_Admin,
