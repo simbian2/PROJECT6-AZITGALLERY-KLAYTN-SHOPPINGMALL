@@ -2,23 +2,25 @@
 const { generateUploadURL } = require('../../s3')
 const express = require('express')
 
-const uploadPics = (req, res) => {
-    console.log('zxc')
-    console.log(req.file)
+const uploadPics = async (req, res) => {
+    console.log('uploadpics')
+    const link = await generateUploadURL();
+    res.json({ link })
+}
+
+const getUploadedPics = async (req, res) => {
     console.log(req.body)
+    res.json({success: true})
 }
 
 const uploadData = (req, res) => {
     console.log(req.body)
+    res.send({zzz:'zzz'})
 }
 
-const s3test = async (req, res) => {
-  const url = await generateUploadURL();
-  res.json({ url })
-}
 
 
 
 module.exports = {
-    uploadPics, s3test, uploadData
+    uploadPics, uploadData, getUploadedPics
 }

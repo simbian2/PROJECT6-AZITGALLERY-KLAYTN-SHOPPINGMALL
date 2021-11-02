@@ -1,11 +1,10 @@
-const aws = require('aws-sdk');
-const dotenv = require('dotenv');
-const crypto = require('crypto');
+const aws = require('aws-sdk')
+const dotenv = require('dotenv')
+const crypto = require('crypto')
 const { promisify } = require('util')
 const randomBytes = promisify(crypto.randomBytes)
-dotenv.config();
-
 dotenv.config()
+
 
 const region = 'ap-northeast-2'
 const bucketName = 'dfassf-bucket-test'
@@ -20,7 +19,7 @@ const s3 = new aws.S3({
   })
 
 async function generateUploadURL() {
-    const rawBytes = await randomBytes(16);
+    const rawBytes = await randomBytes(16)
     const imageName = rawBytes.toString('hex')
   
     const params = ({

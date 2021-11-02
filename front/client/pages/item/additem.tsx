@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import AddItemComponent from '../../components/item/AddItemComponent'
 import axios from 'axios'
 import {useDispatch} from 'react-redux'
-import { itemInfo_REQUEST } from '../../reducers/item';
+import { itemInfo_REQUEST } from '../../reducers/item'
+import { itemImageInfo_REQUEST } from '../../reducers/itemimage'
 
 const addItem = () =>{
     // 남은 NTF 등록 횟수 -> 느낌상 삭제해야 할 컴포넌트 같음
@@ -147,22 +148,35 @@ const addItem = () =>{
     }
 
     const handleSubmit = async () => { 
-        // axios같은거로 나중에 처리
-        console.log(file, price, currency, name, desc)
-        console.log(file, name, desc, aucPrice, currency, aucTime, extension)
         let data = {}
         if(ifSell == true){
             data = {price, currency, name, desc}
-            // await axios.post('http://localhost:4000/item/uploadpics',data)
             dispatch(itemInfo_REQUEST(data))
         } else{
             data = {name, desc, aucPrice, currency, aucTime, extension}
-            await axios.post('http://localhost:4000/item/uploadpics',data)
+            dispatch(itemInfo_REQUEST(data))
         }
     }
     const tempFile = async () => {
-        let result = await axios.post('http://localhost:4000/item/uploadpics',file)
-        console.log(result)
+        // console.log(file)
+        // file.map(async (items)=>{
+        // // get secure url form the server
+        // const response = await fetch('http://localhost:4000/item/uploadpics');
+        // console.log(response)
+        // const { url } = await response.json();
+        // // console.log(url)
+        // //post the image directly to the s3 bucket
+        // await fetch(url, {
+        //     method: "PUT",
+        //     headers: {
+        //         "Content-Type": "multipart/form-data"
+        //     },
+        //     body: items
+        //     })
+        //     const imageURL = url.split('?')[0];
+        //     console.log(imageURL)
+        // })
+        dispatch(itemImageInfo_REQUEST(file))
     }
 
     const resetState = () => {
