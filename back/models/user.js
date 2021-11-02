@@ -26,6 +26,10 @@ module.exports = class User extends Sequelize.Model{
             },
             likedItem:{
                 type:Sequelize.TEXT,               
+            },
+            kycAuthorized:{
+                type:Sequelize.BOOLEAN,
+                defaultValue:false
             }
         },{
             sequelize,
