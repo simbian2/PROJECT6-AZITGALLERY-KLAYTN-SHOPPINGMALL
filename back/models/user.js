@@ -26,6 +26,10 @@ module.exports = class User extends Sequelize.Model{
             },
             likedItem:{
                 type:Sequelize.TEXT,               
+            },
+            verify:{
+                type:Sequelize.NUMBER,
+                defaultValue:0
             }
         },{
             sequelize,
