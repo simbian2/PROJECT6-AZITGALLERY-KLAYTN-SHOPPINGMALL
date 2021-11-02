@@ -15,6 +15,7 @@ export interface ItemState {
     currency: string;
     aucTime: string;
     extension: boolean;
+    itemType: string;
 }
 
 export const initialState : ItemState = {
@@ -31,6 +32,7 @@ export const initialState : ItemState = {
     currency: 'won',
     aucTime: '',
     extension: true,
+    itemType: 'female'
 };
 
 
