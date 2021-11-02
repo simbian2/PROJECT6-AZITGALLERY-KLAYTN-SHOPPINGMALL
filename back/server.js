@@ -14,8 +14,8 @@ const PORT = '4000'
 const cors = require('cors');
 const {sequelize, Auction} = require('./models')
 const router = require('./routers/index')
-const connect = require('./schemas/index.js')
-connect()
+// const connect = require('./schemas/index.js')
+// connect()
 // app.use(cookieParser())
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({extended:false}))
