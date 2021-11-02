@@ -31,13 +31,15 @@ const addItem = () =>{
     const [aucPrice, setAucPrice] = useState<string>('')
     // 경매 마감 시간
     const [aucTime, setAucTime] = useState<any>('')
+    // 성별 및 아동에 따른 카테고리 분류
+    const [itemType, setItemType] = useState<string>('female')
+    
+    //디스패치 선언
+    const dispatch = useDispatch()
+    
+    
     // input에 대한 handlechange(각 컴포넌트에서 텍스트를 인자값으로 받아
     // 각 컴포넌트마다 인자값에 따라 다르게 응답한다
-    const [itemType, setItemType] = useState<string>('')
-
-    const dispatch = useDispatch()
-
-
     function handleTxtChange(e:any, item:string){
         let {value} = e.target
         if(item == "file"){

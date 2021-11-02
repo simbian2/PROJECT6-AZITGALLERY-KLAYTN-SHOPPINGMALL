@@ -3,7 +3,6 @@ const { generateUploadURL } = require('../../s3')
 const express = require('express')
 
 const uploadPics = async (req, res) => {
-    console.log('uploadpics')
     const link = await generateUploadURL();
     res.json({ link })
 }
