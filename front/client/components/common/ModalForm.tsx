@@ -36,6 +36,11 @@ const FormWrapper = Styled.div`
         background-color:#1e73fa;
         color:white;
     }
+
+    .btnLeft{
+          background-color:#e1f0ff;
+          color:black;
+    }
     div:nth-child(1) p{
         cursor : default;
         font-weight:900;

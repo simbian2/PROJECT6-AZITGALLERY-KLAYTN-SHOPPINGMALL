@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import AddItemComponent from '../../components/item/AddItemComponent'
+import axios from 'axios'
 
 const addItem = () =>{
     // 남은 NTF 등록 횟수 -> 느낌상 삭제해야 할 컴포넌트 같음
@@ -139,10 +140,22 @@ const addItem = () =>{
         }
     }
 
-    const handleSubmit = () => { 
+    const handleSubmit = async () => { 
         // axios같은거로 나중에 처리
         console.log(file, price, currency, name, desc)
         console.log(file, name, desc, aucPrice, currency, aucTime, extension)
+        let data = {}
+        if(ifSell == true){
+            data = {price, currency, name, desc}
+            await axios.post('http://localhost:4000/item/uploadpics',data)
+        } else{
+            data = {name, desc, aucPrice, currency, aucTime, extension}
+            await axios.post('http://localhost:4000/item/uploadpics',data)
+        }
+    }
+    const tempFile = async () => {
+        let result = await axios.post('http://localhost:4000/item/uploadpics',file)
+        console.log(result)
     }
 
     const resetState = () => {
@@ -171,6 +184,7 @@ const addItem = () =>{
         deleteFile = {deleteFile}
         // 발행 후 초기화
         resetState = {resetState}
+        tempFile = {tempFile}
         />
 
     )

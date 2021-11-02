@@ -15,7 +15,7 @@ const AddItemComponent = ({
     sellToggle, extensionToggle, ifAgreed,
     handleTxtChange, handleSubmit, handleConfirm,
     fileChange, fileBase, handleCurrency,
-    deleteFile, resetState
+    deleteFile, resetState, tempFile
     }) => {
 
     const dispatch = useDispatch()
@@ -73,7 +73,7 @@ const AddItemComponent = ({
                     />
                 </SectionWrapper>
                 <SectionWrapper>
-                    <SmallTitle>
+                    <SmallTitle onClick = {tempFile}>
                         이름
                     </SmallTitle>
                     <InputBox
