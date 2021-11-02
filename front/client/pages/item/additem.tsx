@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState } from 'react'
 import AddItemComponent from '../../components/item/AddItemComponent'
 import axios from 'axios'
+import {useDispatch} from 'react-redux'
+import { itemInfo_REQUEST } from '../../reducers/item';
 
 const addItem = () =>{
     // 남은 NTF 등록 횟수 -> 느낌상 삭제해야 할 컴포넌트 같음
@@ -30,6 +32,10 @@ const addItem = () =>{
     const [aucTime, setAucTime] = useState<any>('')
     // input에 대한 handlechange(각 컴포넌트에서 텍스트를 인자값으로 받아
     // 각 컴포넌트마다 인자값에 따라 다르게 응답한다
+
+    const dispatch = useDispatch()
+
+
     function handleTxtChange(e:any, item:string){
         let {value} = e.target
         if(item == "file"){
@@ -147,7 +153,8 @@ const addItem = () =>{
         let data = {}
         if(ifSell == true){
             data = {price, currency, name, desc}
-            await axios.post('http://localhost:4000/item/uploadpics',data)
+            // await axios.post('http://localhost:4000/item/uploadpics',data)
+            dispatch(itemInfo_REQUEST(data))
         } else{
             data = {name, desc, aucPrice, currency, aucTime, extension}
             await axios.post('http://localhost:4000/item/uploadpics',data)
