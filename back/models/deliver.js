@@ -6,16 +6,27 @@ module.exports = class Deliver extends Sequelize.Model{
             itemId:{
                 type:Sequelize.INTEGER,
             },
+            orderer:{
+                type:Sequelize.STRING
+            },
+            receiver:{
+                type:Sequelize.STRING
+            },
             buyerAddress:{
                 type:Sequelize.TEXT,
             },
-            buyerPhoneNum:{
+            phoneNum:{
                 type:Sequelize.INTEGER,
             },
-            invoiceNum:{
+            postNum:{
                 type:Sequelize.INTEGER,
+            },
+            memo:{
+                type:Sequelize.TEXT
+            },
+            inputStatus:{
+                type:Sequelize.STRING 
             }
-
         },{
             sequelize,
             timestamps:false,

@@ -62,8 +62,7 @@ module.exports = class Item extends Sequelize.Model{
             tableName:'Item',
             charset:'utf8',
             collate:'utf8_general_ci'
-        })
-      
+        }) 
     }
     static associate(db){
         db.Item.belongsTo(db.User,{foreignKey:'itemId',targetKey:'id'})

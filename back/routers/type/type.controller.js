@@ -2,8 +2,8 @@
 let get_selltype = async (req,res)=>{
     // 1 : 판매 
     // 2 : 경매
-
     console.log("판매경매 ===",req.body);
+    
 }
 
 /* 카테고리 선택 */

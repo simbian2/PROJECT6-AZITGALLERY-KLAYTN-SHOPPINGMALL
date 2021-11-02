@@ -7,6 +7,7 @@ module.exports = class User extends Sequelize.Model{
             name:{
                 type:Sequelize.STRING(30),
                 allowNull:false,
+                unique:true
             },
             email:{
                 type:Sequelize.STRING(50),
@@ -27,9 +28,12 @@ module.exports = class User extends Sequelize.Model{
             likedItem:{
                 type:Sequelize.TEXT,               
             },
+            sellType:{
+                type:Sequelize.BOOLEAN,
+                defaultValue:false
+            },
             verify:{
-                type:Sequelize.NUMBER,
-                defaultValue:0
+                type:Sequelize.INTEGER,
             }
         },{
             sequelize,

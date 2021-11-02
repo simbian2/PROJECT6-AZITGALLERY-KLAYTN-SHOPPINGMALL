@@ -38,10 +38,21 @@ let Seller_Admin = async (req,res) => {
 
 
 
-let AddUser = async (req,res) => {
-    let {name,email,kaikasAddress} = req.body
-    try {
-        await User.create({name,email,kaikasAddress})
+
+
+
+let Signup_post = async (req,res) => {
+    console.log('this is body')
+    let key = Object.keys(req.body)
+    let keyObject = JSON.parse(key)
+    let { NickName, Address,Email} = keyObject
+    console.log(keyObject)
+    console.log(keyObject.NickName)
+    console.log(keyObject.Address)
+    console.log(keyObject.Email)
+    let result
+    try{
+        await User.create({name:NickName,email:Email,kaikasAddress:Address})
         result = {
             result:'OK',
             msg:'가입 성공'
@@ -49,27 +60,13 @@ let AddUser = async (req,res) => {
     }catch(e){
         console.log(e)
         result = {
-            result:'Fail',
-            msg:'가입 실패'
+            result:'FAIL',
+            mas:'가입 실패'
         }
     }
     res.json(result)
 }
-
-
-let Signup_post = (req,res) => {
-    
-    console.log('this is body')
-    let key = Object.keys(req.body)
-    let keyObject = JSON.parse(key)
-    console.log(keyObject)
-    console.log(keyObject.NickName)
-    console.log(keyObject.Address)
-    console.log(keyObject.Email)
-
-}
 module.exports = {
     Seller_Admin,
-    AddUser,
     Signup_post
 }
