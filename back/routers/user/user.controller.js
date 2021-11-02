@@ -4,10 +4,11 @@ const qs = require('qs');
 const nodemailer = require('nodemailer');
 const smtpTransporter = require('nodemailer-smtp-transport');
 require('dotenv').config()
-const User =  require('../../schemas/user')
+
+const { User } = require('../../models')
 
 
-let SellerAdmin = async (req,res) => {
+let Seller_Admin = async (req,res) => {
     console.log('왓다')
     let transporter = nodemailer.createTransport({
         service: 'Gmail',
@@ -17,7 +18,7 @@ let SellerAdmin = async (req,res) => {
         }
     });
 
-    let url = `http://localhost:3000/admin/approveBTN`;
+    let url = `http://localhost:3000/admin/approvebtn`;
     let options = {
         from: 'simbianartist@gmail.com',
         to:'simbianartist@gmail.com',//임시로, 나중에는 body에서 가져오게끔한다
@@ -37,36 +38,38 @@ let SellerAdmin = async (req,res) => {
 
 
 
-let AddUser = (req,res) => {    
-    User.create([{
-        userInfo:{
-            name:req.body.Nickname,
-            contact:{
-                email:req.body.email,
-                phone:null,
-            },
-            walletAddress:req.body.walletAddress,
-            address:null,
-            joinDate:null        
-        },
-        type:{
-            true:[{}]
-        },
-        history:[{
-            buyInfo:{
-                buyDate:Date.now(),
-                orderNumber:null
-            }
-        }]
-    }])
-    
-    User.find({},(err,docs)=>{
-        console.log(docs)
-        res.send(docs)
-    })
+let AddUser = async (req,res) => {
+    let {name,email,kaikasAddress} = req.body
+    try {
+        await User.create({name,email,kaikasAddress})
+        result = {
+            result:'OK',
+            msg:'가입 성공'
+        }
+    }catch(e){
+        console.log(e)
+        result = {
+            result:'Fail',
+            msg:'가입 실패'
+        }
+    }
+    res.json(result)
 }
 
+
+let Signup_post = (req,res) => {
+    
+    console.log('this is body')
+    let key = Object.keys(req.body)
+    let keyObject = JSON.parse(key)
+    console.log(keyObject)
+    console.log(keyObject.NickName)
+    console.log(keyObject.Address)
+    console.log(keyObject.Email)
+
+}
 module.exports = {
-    SellerAdmin,
-    AddUser
+    Seller_Admin,
+    AddUser,
+    Signup_post
 }

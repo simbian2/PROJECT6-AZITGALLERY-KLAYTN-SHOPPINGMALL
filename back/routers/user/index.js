@@ -2,10 +2,10 @@ const express = require('express')
 const router = express.Router()
 const controller = require('./user.controller')
 
-// /user
-router.post('/SellerAdmin', controller.SellerAdmin)
+router.post('/selleradmin', controller.Seller_Admin)
 
 router.post('/AddUser', controller.AddUser)
 
+router.post('/signup',controller.Signup_post)
 
 module.exports = router

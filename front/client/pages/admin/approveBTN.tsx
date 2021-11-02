@@ -1,7 +1,7 @@
 import ApprovebuttonComponent from '../../components/approve/approvebutton'
 
 
-const approveBTN = () => {
+const approvebtn = () => {
     return (
         <>
             <ApprovebuttonComponent />
@@ -9,4 +9,4 @@ const approveBTN = () => {
     )
 }
 
-export default approveBTN
+export default approvebtn
