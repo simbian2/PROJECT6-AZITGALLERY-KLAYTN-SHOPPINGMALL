@@ -15,7 +15,7 @@ const cors = require('cors');
 const {sequelize, Auction} = require('./models')
 const router = require('./routers/index')
 // const connect = require('./schemas/index.js')
-// connect() 잠시 닫아두겠습니다.
+// connect()
 // app.use(cookieParser())
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({extended:false}))

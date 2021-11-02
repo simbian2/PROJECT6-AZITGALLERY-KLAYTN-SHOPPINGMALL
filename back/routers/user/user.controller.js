@@ -56,7 +56,20 @@ let AddUser = async (req,res) => {
     res.json(result)
 }
 
+
+let Signup_post = (req,res) => {
+    
+    console.log('this is body')
+    let key = Object.keys(req.body)
+    let keyObject = JSON.parse(key)
+    console.log(keyObject)
+    console.log(keyObject.NickName)
+    console.log(keyObject.Address)
+    console.log(keyObject.Email)
+
+}
 module.exports = {
     Seller_Admin,
-    AddUser
+    AddUser,
+    Signup_post
 }
