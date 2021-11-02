@@ -142,6 +142,7 @@ const reducer = (state: TypeState = initialState, action: typeAction) => {
         case SELECT_SELLTYPE_REQUEST:
             return {
                 ...state,
+                sellTypeData : action.data
             }
         case SELECT_SELLTYPE_SUCCESS:
             return {
@@ -157,6 +158,7 @@ const reducer = (state: TypeState = initialState, action: typeAction) => {
         case SELECT_CATEGORY_REQUEST:
             return {
                 ...state,
+                categoryData : action.data
             }
         case SELECT_CATEGORY_SUCCESS:
             return {
@@ -171,6 +173,7 @@ const reducer = (state: TypeState = initialState, action: typeAction) => {
         case ITEM_SEARCH_REQUEST:
             return {
                 ...state,
+                searchData : action.data
             }
         case ITEM_SEARCH_SUCCESS:
             return {
@@ -185,6 +188,7 @@ const reducer = (state: TypeState = initialState, action: typeAction) => {
         case ITEM_SORT_REQUEST:
             return {
                 ...state,
+                sortData : action.data
             }
         case ITEM_SORT_SUCCESS:
             return {
