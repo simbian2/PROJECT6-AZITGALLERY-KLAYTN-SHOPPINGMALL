@@ -43,12 +43,12 @@ export const shipInfo_ERROR = () => {
     }
 }
 
-type shipAction = 
+type ShipAction = 
 | ReturnType<typeof shipInfo_REQUEST>
 | ReturnType<typeof shipInfo_SUCCESS>
 | ReturnType<typeof shipInfo_ERROR>
 
-const reducer = (state:ShipState=initialState, action:shipAction) => {
+const reducer = (state:ShipState=initialState, action:ShipAction) => {
     switch (action.type){
         case SHIPINFO_INSERT_REQUEST:
             return{

@@ -2,7 +2,7 @@ import Styled from 'styled-components'
 import { Input, Button } from '@mui/material'
 
 const SearchBar = (props) => {
-    const {search, onChangeSearch} = props
+    const {search, onChangeSearch, searchSubmit} = props
 
     return (
         <>
@@ -12,7 +12,7 @@ const SearchBar = (props) => {
                         <Input placeholder="상품 검색" value={search} onChange={onChangeSearch}/>
                     </SearchBox>
                     <SearchBox>
-                        <Button variant="outlined">검색</Button>
+                        <Button variant="outlined" onClick={searchSubmit}>검색</Button>
                     </SearchBox>
                 </SearchInner>
             </Search>
