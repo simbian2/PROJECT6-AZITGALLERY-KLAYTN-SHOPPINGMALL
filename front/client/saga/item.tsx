@@ -1,70 +1,28 @@
-import { all, fork, put, takeLatest, call } from 'redux-saga/effects'
-import axios from 'axios'
+import axios from 'axios';
+import {all,put,takeLatest,fork,call} from "redux-saga/effects";
 import {url} from './url'
 
-/*
-
-파일 업로드
-NFT발행
-데이터 전송?
-
-*/
-
-function picAPI(data) {
-    return axios.post(`${url}/item/additem/fileupload`, data)   
+function itemAPI(data){
+    return axios.post (`${url}/item/uploaddata`,data)
 }
 
-function* picUpload(action) {
-    const result = yield call(picAPI, action.data)
-    const { data } = result
-
-    if (data.result === 'OK') {
-        yield put({
-            type: 'PIC_UPLOAD_SUCCESS',
-            data: data.msg
-        })
-    } else {
-        yield put({
-            type: 'PIC_UPLOAD_ERROR',
-            data: data.msg
-        })
-    }
-}
-
-function* reqUpload() {
-    yield takeLatest('PIC_UPLOAD_REQUEST', picUpload)
-}
-
-function itemAPI(data) {
-    return axios.post(`${url}/item/additem/itemupload`, data)   
-}
-
-function* addItem(action) {
+function* itemInfo(action){
+    // console.log(action.data);
+    
     const result = yield call(itemAPI, action.data)
-    const { data } = result
 
-    if (data.result === 'OK') {
-        yield put({
-            type: 'ITEM_UPLOAD_SUCCESS',
-            data: data.msg
-        })
-    } else {
-        yield put({
-            type: 'ITEM_UPLOAD_ERROR',
-            data: data.msg
-        })
-    }
+    // yield put({
+    //     type:'MINT_NFT_RETURN',
+    //     verify:5000
+    // })  
 }
 
-function* reqAddItem() {
-    yield takeLatest('ITEM_UPLOAD_REQUEST', addItem)
+function* reqItem(){
+    yield takeLatest('ITEMINFO_INSERT_REQUEST',itemInfo)
 }
 
-
-export default function* itemSaga() {
+export default function* itemSaga(){
     yield all([
-        fork(reqUpload),
-        fork(reqAddItem),
-        // fork(reqGetLikes),
+        fork(reqItem)
     ])
 }
