@@ -37,11 +37,11 @@ app.use(cors({
 //     saveUninitialized: true,
 // }))
 
-sequelize.sync({ force: false, })
+sequelize.sync({ force: true, })
     .then(() => {
         console.log('access successful')
-    }).catch(() => {
-        console.log('access failed')
+    }).catch((e) => {
+        console.log(e,'access failed')
     })
 
 
