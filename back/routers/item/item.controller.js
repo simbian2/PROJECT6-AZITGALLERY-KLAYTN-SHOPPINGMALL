@@ -10,6 +10,26 @@ const uploadPics = (req, res) => {
 
 const uploadData = (req, res) => {
     console.log(req.body)
+    // 나중에는 creator 도 가져와야함..
+    const {price, currency, name, desc} = req.body
+
+    let result = {};
+    try {
+        await Board.create({ creator: 'youki', title: name, price})
+        result = {
+            result: 'OK',
+            msg: 'NFT 성공'
+        }
+        let resu =  await Board.findAndCountAll({})
+        await Like.create({likeBoardIdx:resu.count})
+    } catch (error) {
+        console.log(error)
+        result = {
+            result: 'Fail',
+            msg: 'NFT 실패..'
+        }
+    }
+    res.json(result)
 }
 
 const s3test = async (req, res) => {
