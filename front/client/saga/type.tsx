@@ -8,7 +8,7 @@ function sellTypeAPI(data){
 }
 
 function* sellType(action){
-    // console.log(action.data);
+    console.log("판매 경매",action.data);
     
     const result = yield call(sellTypeAPI, action.data)
 }
@@ -24,7 +24,7 @@ function selectCategoryAPI(data){
 }
 
 function* selectCategory(action){
-    // console.log(action.data);
+    console.log(action.data);
     
     const result = yield call(selectCategoryAPI, action.data)
 }
@@ -36,11 +36,11 @@ function* reqSelectCategory(){
 
 /* 상품 검색 */
 function itemSearchAPI(data){
-    return axios.post (`${url}/type/selltype`,data)
+    return axios.post (`${url}/type/search`,data)
 }
 
 function* itemSearch(action){
-    // console.log(action.data);
+    console.log(action.data);
     
     const result = yield call(itemSearchAPI, action.data)
 }
@@ -52,11 +52,11 @@ function* reqItemSearch(){
 
 /* 상품 정렬 - 최근발행 | 인기 많은 순 */
 function sortTypeAPI(data){
-    return axios.post (`${url}/type/selltype`,data)
+    return axios.post (`${url}/type/sort`,data)
 }
 
 function* sortType(action){
-    // console.log(action.data);
+    console.log(action.data);
     
     const result = yield call(sortTypeAPI, action.data)
 }

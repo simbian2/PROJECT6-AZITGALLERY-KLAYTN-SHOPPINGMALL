@@ -122,7 +122,7 @@ export const itemSort_ERROR = () => {
 }
 
 
-type typeAction =
+type TypeAction =
     | ReturnType<typeof sellType_REQUEST>
     | ReturnType<typeof sellType_SUCCESS>
     | ReturnType<typeof sellType_ERROR>
@@ -136,7 +136,7 @@ type typeAction =
     | ReturnType<typeof itemSort_SUCCESS>
     | ReturnType<typeof itemSort_ERROR>
 
-const reducer = (state: TypeState = initialState, action: typeAction) => {
+const reducer = (state: TypeState = initialState, action: TypeAction) => {
     switch (action.type) {
         /* 판매 경매 선택 */
         case SELECT_SELLTYPE_REQUEST:

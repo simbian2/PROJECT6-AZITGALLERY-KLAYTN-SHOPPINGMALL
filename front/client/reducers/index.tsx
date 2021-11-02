@@ -1,6 +1,8 @@
 import {combineReducers} from 'redux'
 import user from './user'
 import mint from './mint'
+import ship from './ship'
+import type from './type'
 import reducer from './user'
 import {initialState} from './user'
 import {AnyAction} from 'redux';
@@ -27,7 +29,7 @@ export interface State {
 }
 
 const combinedReducers = combineReducers({
-    user, mint
+    user, mint, ship, type
 })
 
 export const rootReducer:Reducer<State,AnyAction> = (state,action) => {
