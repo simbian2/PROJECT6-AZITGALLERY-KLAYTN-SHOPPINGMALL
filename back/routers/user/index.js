@@ -8,4 +8,6 @@ router.post('/AddUser', controller.AddUser)
 
 router.post('/signup',controller.Signup_post)
 
+router.post('/addressdbcheck',controller.Address_Db_check)
+
 module.exports = router

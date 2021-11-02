@@ -68,8 +68,20 @@ let Signup_post = (req,res) => {
     console.log(keyObject.Email)
 
 }
+
+let Address_Db_check = (req,res) => {
+    
+    console.log('this is db check')
+    let key = Object.keys(req.body)
+    let keyObject = JSON.parse(key)
+    console.log(keyObject)
+
+
+}
+
 module.exports = {
     Seller_Admin,
     AddUser,
-    Signup_post
+    Signup_post,
+    Address_Db_check
 }
