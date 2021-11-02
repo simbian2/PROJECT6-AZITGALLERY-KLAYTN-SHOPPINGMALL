@@ -12,7 +12,7 @@ export default function Home() {
       symbol: 'HPM',
       decimals: 18,
       initialSupply: '10000000000000000000000',
-    }, '0x3A557C9D2ea68B4C22a740C451C0e30F3273E052')
+    }, '0x38b17d214cA56AC881C27baD796aa78f1afB44d7')
     .on('error', function(error) { console.log(error) })
     .on('transactionHash', function(transactionHash) { console.log(transactionHash)})
     .on('receipt', function(receipt) {
