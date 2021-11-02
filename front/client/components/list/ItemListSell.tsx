@@ -116,7 +116,7 @@ const ItemListSell = (props) => {
       ]);
 
 
-    const nameList: JSX.Element[] = Arr.map((ele) =>
+    const nameList: any = Arr.map((ele) =>
     <React.Fragment key={ele.id}>
         <NFTFourList>
             <NFT>
@@ -160,7 +160,7 @@ const ItemListSell = (props) => {
                     artist: 'daminal',
                     Like: 5,
                     alert: '신고하기',
-                    url:`/sell/view/1`
+                    url:`/sell/1`
                 },
                 {
                     id: 10,
@@ -168,7 +168,7 @@ const ItemListSell = (props) => {
                     artist: 'daminal',
                     Like: 5,
                     alert: '신고하기',
-                    url:`/sell/view/1`
+                    url:`/sell/1`
                 },
                 {
                     id: 11,
@@ -176,7 +176,7 @@ const ItemListSell = (props) => {
                     artist: 'daminal',
                     Like: 5,
                     alert: '신고하기',
-                    url:`/sell/view/1`
+                    url:`/sell/1`
                 },
             ),
         );

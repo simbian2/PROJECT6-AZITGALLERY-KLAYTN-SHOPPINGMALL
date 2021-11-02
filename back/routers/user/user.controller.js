@@ -5,17 +5,20 @@ const nodemailer = require('nodemailer');
 const smtpTransporter = require('nodemailer-smtp-transport');
 require('dotenv').config()
 
-let SellerAdmin = async (req,res) => {
+const { User } = require('../../models')
+
+
+let Seller_Admin = async (req,res) => {
     console.log('왓다')
     let transporter = nodemailer.createTransport({
         service: 'Gmail',
         auth: {
-            user: process.env.USER, //generated ethereal user
-            pass: process.env.PASS, //generated ethereal password 
+            user: "simbianartist@gmail.com", //generated ethereal user
+            pass: "epiteomqkaae135", //generated ethereal password 
         }
     });
 
-    let url = `http://localhost:3000/admin/approveBTN`;
+    let url = `http://localhost:3000/admin/approvebtn`;
     let options = {
         from: 'simbianartist@gmail.com',
         to:'simbianartist@gmail.com',//임시로, 나중에는 body에서 가져오게끔한다
@@ -28,14 +31,45 @@ let SellerAdmin = async (req,res) => {
             console.log(err)
         } else {
             console.log('email has been successfully sent.');
-
         }
         transporter.close();
     })
-
 }
 
 
+
+let AddUser = async (req,res) => {
+    let {name,email,kaikasAddress} = req.body
+    try {
+        await User.create({name,email,kaikasAddress})
+        result = {
+            result:'OK',
+            msg:'가입 성공'
+        }
+    }catch(e){
+        console.log(e)
+        result = {
+            result:'Fail',
+            msg:'가입 실패'
+        }
+    }
+    res.json(result)
+}
+
+
+let Signup_post = (req,res) => {
+    
+    console.log('this is body')
+    let key = Object.keys(req.body)
+    let keyObject = JSON.parse(key)
+    console.log(keyObject)
+    console.log(keyObject.NickName)
+    console.log(keyObject.Address)
+    console.log(keyObject.Email)
+
+}
 module.exports = {
-    SellerAdmin
+    Seller_Admin,
+    AddUser,
+    Signup_post
 }

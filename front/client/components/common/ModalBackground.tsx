@@ -2,7 +2,7 @@ import Styled from 'styled-components'
 import React,{useEffect} from 'react'
 
 
-const ModalBackground = ({children}) =>{
+const ModalBackground: any = ({children}) =>{
     useEffect(() => {
         document.body.style.cssText = `
           position: fixed; 

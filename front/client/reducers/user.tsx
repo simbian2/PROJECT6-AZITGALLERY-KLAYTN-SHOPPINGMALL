@@ -10,6 +10,9 @@ export interface UserState {
     error:string;
     UserAddress:string;
     verify:number;
+    NickName:string;
+    Address:string;
+    Email:string;
 }
 
 export const initialState : UserState = {
@@ -19,6 +22,9 @@ export const initialState : UserState = {
     error:'',
     UserAddress:'kaikasAddress',
     verify:3,
+    NickName:'',
+    Address:'',
+    Email:''
 };
 
 
@@ -30,7 +36,7 @@ export const SELLER_ADMIN_SUCCESS = "SELLER_ADMIN_SUCCESS" as const;
 export const SELLER_ADMIN_BACK = "SELLER_ADMIN_BACK" as const;
 export const Seller_Admin_Access = "Seller_Admin_Access" as const;
 export const Seller_Admin_Deny = "Seller_Admin_Deny" as const;
-
+export const SIGNUP_POST_SUCCESS = "SIGNUP_POST_SUCCESS" as const;
 
 export const UserLogin_REQUEST = (UserAddress) => {
     return{
@@ -75,6 +81,14 @@ export const SellerAdminDeny_REQUEST = () => {
         type:Seller_Admin_Deny,
     }
 }
+
+export const SignupPost_SUCCESS = (data) => {
+    return{
+        type:SIGNUP_POST_SUCCESS,
+        data
+    }
+}
+
 type UserAction = 
 | ReturnType<typeof UserLogin_REQUEST>
 | ReturnType<typeof UserLogin_SUCCESS>
@@ -83,6 +97,7 @@ type UserAction =
 | ReturnType<typeof SellerAdmin_BACK>
 | ReturnType<typeof SellerAdminAccess_REQUEST>
 | ReturnType<typeof SellerAdminDeny_REQUEST>
+| ReturnType<typeof SignupPost_SUCCESS>
 
 const reducer = (state:UserState=initialState, action:UserAction) => {
     switch (action.type){
@@ -121,6 +136,10 @@ const reducer = (state:UserState=initialState, action:UserAction) => {
             return{
                 ...state,
                 verify:2
+            }
+        case SIGNUP_POST_SUCCESS:
+            return{
+                ...state,
             }
         default:
             return state;

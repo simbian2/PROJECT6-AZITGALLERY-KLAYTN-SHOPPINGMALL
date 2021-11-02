@@ -6,12 +6,13 @@ import React,{ useState } from 'react'
 import useInput from '../../hooks/useInput'
 import SucJoin from './SucJoin'
 import { useSelector, useDispatch } from 'react-redux'
+import { SignupPost_SUCCESS } from "../../reducers/user"
 import { setUncaughtExceptionCaptureCallback } from 'process'
 import Router from 'next/router'
 import { RootState } from "../../reducers"
 
 const SignUp = () => {
-
+    const dispatch = useDispatch()
     const [nickName, setNickName] = useState<string>("");
     const [email, setEmail] = useState<string>("");
 
@@ -95,6 +96,14 @@ const SignUp = () => {
         if(checked1 !== true || checked2 !== true || checked3 !== true){
             // alert("필수 동의사항에 체크해주세요.")
         }
+
+        let data = {
+            NickName:nickName,
+            Address:user.UserAddress,
+            Email:email,
+            
+        }
+        dispatch(SignupPost_SUCCESS(data))
     }
 
 
