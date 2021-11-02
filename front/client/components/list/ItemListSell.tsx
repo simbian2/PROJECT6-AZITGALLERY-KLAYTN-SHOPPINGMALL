@@ -117,7 +117,7 @@ const ItemListSell = (props) => {
 
 
     const nameList: any = Arr.map((ele) =>
-    <React.Fragment>
+    <React.Fragment key={ele.id}>
         <NFTFourList>
             <NFT>
                 <Link href = {ele.url}>
