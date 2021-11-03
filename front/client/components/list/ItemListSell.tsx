@@ -25,7 +25,7 @@ const ItemListSell = (props) => {
     } = ItemListCSS
 
     const { gender, List, handlegender, handleList } = props.CategoryState
-    let [loading, setLoading] = useState<boolean>(true)
+    let [loading, setLoading] = useState<boolean>(false)
 
     let [count,setCount] = useState<number>(0)
     interface ArrEle {
