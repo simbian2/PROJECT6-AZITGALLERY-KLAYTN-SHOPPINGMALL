@@ -6,7 +6,8 @@ import React,{ useState } from 'react'
 import useInput from '../../hooks/useInput'
 import SucJoin from './SucJoin'
 import { useSelector, useDispatch } from 'react-redux'
-import { SignupPost_SUCCESS } from "../../reducers/user"
+import { SignUp_REQUEST } from "../../reducers/user"
+import { Userlist_REQUEST } from "../../reducers/user"
 import { setUncaughtExceptionCaptureCallback } from 'process'
 import Router from 'next/router'
 import { RootState } from "../../reducers"
@@ -103,7 +104,8 @@ const SignUp = () => {
             Email:email,
             
         }
-        dispatch(SignupPost_SUCCESS(data))
+        dispatch(SignUp_REQUEST(data))
+        dispatch(Userlist_REQUEST())
     }
 
 

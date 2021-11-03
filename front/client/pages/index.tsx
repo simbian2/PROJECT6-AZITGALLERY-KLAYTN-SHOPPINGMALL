@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import ItemList from '../components/list/ItemList'
 import Link from 'next/link'
 import Styled from 'styled-components'
+
 
 export default function Home() {
 
@@ -23,6 +24,8 @@ export default function Home() {
         console.log(newKIP7Instance.options.address) // instance with the new token contract address
     })
   }
+
+
 
   return (
     <>

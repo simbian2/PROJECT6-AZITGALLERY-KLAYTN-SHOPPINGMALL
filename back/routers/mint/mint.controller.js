@@ -27,12 +27,12 @@ let mint_nft_post = async (req,res) => {
   // keyring에 대한 자세한 내용은 https://ko.docs.klaytn.com/bapp/sdk/Caver-js/api-references/Caver.wallet/keyring 를 참고하세요.
   // https://baobab.wallet.klaytn.com/access/0xdfaf037869bb807239e8c46d3b3472ac72adbaef  개인키
   const keyring = caver.wallet.keyring.createFromPrivateKey(
-    "0xbdfd58e5ca1d1b548b234772c5fe1d1afe6de7438cdaceed533a5357b1b35895"
+    "0x2a2ba3fd1b322c63eb6fd471a4512836b93a8e5be9a0948c473ddc822cb19214"
   );
   // wallet에 keyring이 추가되지 않은 경우에만 keyring을 추가합니다.
   if (!caver.wallet.getKeyring(keyring.address)) {
     const singleKeyRing = caver.wallet.keyring.createFromPrivateKey(
-      "0xbdfd58e5ca1d1b548b234772c5fe1d1afe6de7438cdaceed533a5357b1b35895"
+      "0x2a2ba3fd1b322c63eb6fd471a4512836b93a8e5be9a0948c473ddc822cb19214"
     );
     caver.wallet.add(singleKeyRing);
   }
@@ -70,7 +70,7 @@ let mint_nft_post = async (req,res) => {
        // 자세한 내용은 https://ko.docs.klaytn.com/bapp/sdk/caver-js/api-references/caver.kct/KIP-17#KIP-17-mintwithtokenuri 를 참고하세요.
        mintResult = await kip_17.mintWithTokenURI(
         // https://baobab.wallet.klaytn.com/access/0xdfaf037869bb807239e8c46d3b3472ac72adbaef  account주소를 넣는다
-         "0x3A557C9D2ea68B4C22a740C451C0e30F3273E052",
+         "0x38b17d214ca56ac881c27bad796aa78f1afb44d7",
          randomTokenID,
          tokenURI,
          { from: keyring.address }
