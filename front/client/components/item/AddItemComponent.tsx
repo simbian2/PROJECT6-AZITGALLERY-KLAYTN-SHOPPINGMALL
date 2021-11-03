@@ -16,7 +16,9 @@ const AddItemComponent = ({
     handleTxtChange, handleSubmit, handleConfirm,
     fileChange, fileBase, handleCurrency,
     deleteFile, resetState, 
-    handleItemType, handleTags
+    handleItemType, handleTags,
+    color, size, handleKeyPress,
+    colorVal, sizeVal
     }) => {
 
     const dispatch = useDispatch()
@@ -40,6 +42,28 @@ const AddItemComponent = ({
 
     const test = () => {
         dispatch(MintNFT_REQUEST())
+    }
+
+    const ColorBar = () => {
+        return color.map(x=>{
+            return (
+            <BarWrapper>
+                <ColorSizeItem>{x}</ColorSizeItem>
+            </BarWrapper>
+
+            )
+        })
+    }
+
+    const SizeBar = () => {
+        return(
+        <BarWrapper>
+            {size.map(x=>{
+                <ColorSizeItem>{x}</ColorSizeItem>
+            })}
+
+        </BarWrapper>
+        )
     }
     
     return(
@@ -100,11 +124,17 @@ const AddItemComponent = ({
                     <SmallerTitle>색상</SmallerTitle>
                     <InputBox
                         onChange = {(e)=>handleTags(e,"color")}
+                        onKeyPress = {(e)=>handleKeyPress(e,"color")}
+                        value = {colorVal}
                     />
+                    <ColorBar/>
                     <SmallerTitle>사이즈</SmallerTitle>
                     <InputBox
                         onChange = {(e)=>handleTags(e,"size")}
+                        onKeyPress = {(e)=>handleKeyPress(e,"size")}
+                        value = {sizeVal}
                     />
+                    <SizeBar/><br/>
                 </SectionWrapper>
                 <SectionWrapper>
                     <SmallTitle>
@@ -153,12 +183,14 @@ const SmallTitle = Styled.h4`
     margin-top: 30px;
     font-size:24px;
     margin-bottom:20px;
+    display: block;
 `
 
 const SmallerTitle = Styled.div`
     color:#2d3741; 
     font-size:20px;
     margin-top:20px;
+    display: block;
 `
 
 const DescText = Styled.div`
@@ -170,6 +202,8 @@ const InputBox = Styled.input`
     width: 690px;
     height: 30px;
     font-size: 25px;
+    display: block;
+    margin-bottom: 20px;
 `
 
 const TextBox = Styled.textarea`
@@ -213,4 +247,20 @@ const RightBtn = Styled.button`
     top: 50%;
     transform: translate(-50%, -50%);
     cursor: pointer;
+`
+
+const BarWrapper = Styled.div`
+    width: 695px;
+    display: block;
+    height: auto;
+    background-color: red;
+`
+
+const ColorSizeItem = Styled.div`
+    background: lightgray;
+    padding: 5px 20px 5px 20px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    float: left;
+    display: block;
 `

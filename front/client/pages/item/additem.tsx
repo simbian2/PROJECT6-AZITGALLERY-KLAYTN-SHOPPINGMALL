@@ -33,11 +33,15 @@ const addItem = () =>{
     const [aucTime, setAucTime] = useState<any>('')
     // 성별 및 아동에 따른 카테고리 분류
     const [itemType, setItemType] = useState<string>('female')
-    // 색상
-    const [color, setColor] = useState<string>('')
-    //사이즈
-    const [size, setSize] = useState<string>('')
-    
+    // 색상 배열
+    const [color, setColor] = useState<Array<string>>([])
+    // 색상 입력값
+    const [colorVal, setColorVal] = useState<string>('')
+    //사이즈 배열
+    const [size, setSize] = useState<Array<string>>([])
+    // 사이즈 입력값
+    const [sizeVal, setSizeVal] = useState<string>('')
+   
     //디스패치 선언
     const dispatch = useDispatch()
     
@@ -143,7 +147,7 @@ const addItem = () =>{
 
     function handleTags(e:any, item:string){
         let {value} = e.target
-        let chkLetters = /[a-zA-Z0-9,ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/
+        let chkLetters = /[a-zA-Z 0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/
         function handleChk(txt){
             let text = txt.split('')
             let arr = []
@@ -161,24 +165,35 @@ const addItem = () =>{
 
         if(item == 'color'){
             if(handleChk(value) === false){
-                handleChk(value)
-                alert('특수문자는 컴마만 사용이 가능합니다.')
-                e.target.value = color
+                alert('특수문자는 입력이 불가능합니다.')
+                e.target.value = colorVal
             } else{
-                setColor(value)
+                setColorVal(value)
             }
         } else if(item == 'size'){
             if(handleChk(value) === false){
-                handleChk(value)
-                alert('특수문자는 컴마만 사용이 가능합니다.')
-                e.target.value = size
+                alert('특수문자는 입력이 불가능합니다.')
+                e.target.value = sizeVal
             } else{
-                setColor(value)
+                setSizeVal(value)
             }
         }
-        console.log(color,size)
     }
 
+    function handleKeyPress(e:any, item:string){
+        if(item == 'color' && e.key === 'Enter'){
+            let newColor = [...color]
+            newColor.push(colorVal)
+            setColor(newColor)
+            setColorVal('')
+        } else if(item == 'size' && e.key === 'Enter'){
+            let newSize = [...size]
+            newSize.push(sizeVal)
+            setSize(newSize)
+            setSizeVal('')
+        }
+
+    }
 
     const handleConfirm = () => {
         if(agreed[0] !== true || agreed[1] !== true){ //미동의시
@@ -187,10 +202,10 @@ const addItem = () =>{
         }
         else if((ifSell === true &&
                 (name=='' || desc=='' || price == '' || itemType == '' ||
-                color == '' || size == '')) ||
+                color.length == 0 || size.length == 0)) ||
                 (ifSell === false &&
                 (name=='' ||desc=='' ||aucPrice=='' ||aucTime=='' || itemType == '' ||
-                color == '' || size == ''))){
+                color.length == 0 || size.length == 0))){
                 alert('모든 칸을 입력해주세요.')
                 return false
         } else if(file.length == 0 ){
@@ -236,10 +251,17 @@ const addItem = () =>{
         fileChange = {fileChange}
         fileBase = {fileBase}
         handleCurrency = {handleCurrency}
+        handleTags = {handleTags}
+        color = {color}
+        size = {size}
+        colorVal = {colorVal}
+        sizeVal  = {sizeVal}
+        // enter key event 위함
+        handleKeyPress = {handleKeyPress}
+        // 파일 삭제용 핸들러
         deleteFile = {deleteFile}
         // 발행 후 초기화
         resetState = {resetState}
-        handleTags = {handleTags}
         />
 
     )
