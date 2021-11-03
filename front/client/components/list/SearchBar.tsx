@@ -29,6 +29,10 @@ const Search = Styled.li`
 const SearchInner = Styled.div`
     display : flex;
     gap : 10px;
+
+    @media screen and (max-width : 1095px) {
+    
+    }
 `
 
 const SearchBox = Styled.div`

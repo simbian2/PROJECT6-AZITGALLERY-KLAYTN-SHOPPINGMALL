@@ -47,6 +47,10 @@ const CategoryWrapper = Styled.div`
     height: auto;
     /* background: yellow; */
     display : inline-block;
+
+    @media screen and (max-width : 1095px) {
+    display:none;
+}
 `
 const H3 = Styled.div`
     font-size: 18px;
@@ -84,6 +88,7 @@ const Ul = Styled.ul`
         font-weight: ${props => (props.flag == 3 ? 'bold' : 'none')};
         text-decoration : ${props => (props.flag == 3 ? 'underline' : 'none')};
     }
+
 `
 
 const LI = Styled.li`

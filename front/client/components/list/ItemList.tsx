@@ -121,6 +121,10 @@ const Menu = Styled.li`
         cursor : default;
         font-size: 20px;
     }
+
+    
+
+  
 `
 
 const MenuBar = Styled.ul`
@@ -140,5 +144,7 @@ const AuctionTab = Styled.div`
     font-size: 23px;
     color:  ${props => (props.flag == 2 ? '#000000b3' : '#a0a0a0b3')};
     font-weight: ${props => (props.flag == 2 ? 'bold' : 'none')};
-
 `
+
+
+
