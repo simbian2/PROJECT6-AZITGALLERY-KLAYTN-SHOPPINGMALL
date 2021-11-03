@@ -96,9 +96,9 @@ const SellAucWrapper = Styled.div`
         float: left;
     }
     select{
-        margin-top: 40px;
+        margin-top: 20px;
         display: block;
-        width: 200px;
+        width: 270px;
         height: 34px;
         font-size: 25px;
     }
@@ -128,7 +128,6 @@ const SmallerTitle = Styled.div`
     color:#2d3741; 
     font-size:20px;
     margin-top:20px;
-    margin-bottom: 20px;
 `
 
 const DescText = Styled.div`

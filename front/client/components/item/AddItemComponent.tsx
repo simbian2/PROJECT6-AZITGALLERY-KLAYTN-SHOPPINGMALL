@@ -85,7 +85,7 @@ const AddItemComponent = ({
                     <SmallTitle>
                         카테고리
                     </SmallTitle>
-                    <select onChange = {handleItemType}>
+                    <select className = "category" onChange = {handleItemType}>
                             <option value = "female">여성</option>
                             <option value = "male">남성</option>
                             <option value = "kids">아동</option>
@@ -122,7 +122,7 @@ const TopWrapper = Styled.div`
 const SectionWrapper = Styled.div`
     margin-bottom: 50px;
     display: block;
-    select{
+    .category{
         margin-top: 40px;
         display: block;
         width: 400px;

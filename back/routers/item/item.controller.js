@@ -1,19 +1,21 @@
 // const { sequelize, Auction, Items } = require('../../models/index')
-const { generateUploadURL } = require('../../s3')
+const { generate_url } = require('../../s3')
 const express = require('express')
 
-const uploadPics = async (req, res) => {
-    const link = await generateUploadURL();
+const upload_pics = async (req, res) => {
+    const link = await generate_url();
     res.json({ link })
 }
 
-const getUploadedPics = async (req, res) => {
+const get_uploaded_pics = async (req, res) => {
     console.log(req.body)
     res.json({success: true})
 }
 
-const uploadData = (req, res) => {
+const upload_data = (req, res) => {
+    // console.log(req.body[0])
     console.log(req.body)
+
     res.send({zzz:'zzz'})
 }
 
@@ -21,5 +23,5 @@ const uploadData = (req, res) => {
 
 
 module.exports = {
-    uploadPics, uploadData, getUploadedPics
+    upload_pics, get_uploaded_pics, upload_data
 }

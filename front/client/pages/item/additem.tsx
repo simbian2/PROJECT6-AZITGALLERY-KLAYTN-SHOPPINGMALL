@@ -159,13 +159,15 @@ const addItem = () =>{
     const handleSubmit = async () => { 
         let data = {}
         if(ifSell == true){
-            data = {price, currency, name, desc, itemType}
-            dispatch(itemInfo_REQUEST(data))
-            dispatch(itemImageInfo_REQUEST(file))
+            data = {price, currency, name, desc, itemType, file}
+            // console.log(data,file)
+            dispatch(itemInfo_REQUEST([data, file]))
+            // dispatch(itemImageInfo_REQUEST(file))
         } else{
-            data = {name, desc, aucPrice, currency, aucTime, extension, itemType}
-            dispatch(itemInfo_REQUEST(data))
-            dispatch(itemImageInfo_REQUEST(file))
+            data = {name, desc, aucPrice, currency, aucTime, extension, itemType, file}
+            // console.log(data,file)
+            dispatch(itemInfo_REQUEST([data, file]))
+            // dispatch(itemImageInfo_REQUEST(file))
         }
     }
 
