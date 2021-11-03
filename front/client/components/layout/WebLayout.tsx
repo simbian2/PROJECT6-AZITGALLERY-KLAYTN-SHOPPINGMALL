@@ -27,6 +27,8 @@ const WebWrap = Styled.div`
     height: auto;
     overflow: hidden;
     background:#FAFAFA;
+
+    
 `
 
 const WebInnerWrap = Styled.div`

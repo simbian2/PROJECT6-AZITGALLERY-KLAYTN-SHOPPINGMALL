@@ -11,7 +11,7 @@ let printName = document.querySelector('.printName')
 let printPrice = document.querySelector('.printPrice')
 
 async function loadData(){
-    let {data} = await axios.post('http://localhost:3000/maindata',{
+    let {data} = await axios.post('http://localhost:4000/maindata',{
         productId: 1
     }) //productId는 상태값에서 가져오면 된다?
     console.log(data[0])
@@ -54,7 +54,7 @@ async function submitValue(){
         if(isNaN(txtInput.value) === false){
             // isNaN이 true면 숫자가 아닌 값이 입력되어 있다는 것
             // 그러므로 false가 뜰 때 진행해야 함
-            let test = await axios.post('http://localhost:3000/auction',{
+            let test = await axios.post('http://localhost:4000/auction',{
             name: nameInput.value, price: txtInput.value, productId: 1
             // 테스트 버전에서 상품 ID는 1번으로만 진행되나, 실제로는 상품별로 ID값을 다르게 주어야 함
             })

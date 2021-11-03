@@ -1,24 +1,45 @@
 // const { sequelize, Auction, Items } = require('../../models/index')
-const { generateUploadURL } = require('../../s3')
+const { generate_url } = require('../../s3')
 const express = require('express')
 
-const uploadPics = (req, res) => {
-    console.log('zxc')
-    console.log(req.file)
-    console.log(req.body)
+const upload_pics = async (req, res) => {
+    const link = await generate_url();
+    res.json({ link })
 }
 
-const uploadData = (req, res) => {
-    console.log(req.body)
+const get_uploaded_pics = async (req, res) => {
+    console.log("여기 =======",req.body)
+    res.json({success: true})
 }
 
-const s3test = async (req, res) => {
-  const url = await generateUploadURL();
-  res.json({ url })
+const upload_data = (req, res) => {
+    console.log("여기2 =======",req.body)
+    // 나중에는 creator 도 가져와야함..
+    const {price, currency, name, desc} = req.body
+
+    // let result = {};
+    // try {
+    //     await Board.create({ creator: 'youki', title: name, price})
+    //     result = {
+    //         result: 'OK',
+    //         msg: 'NFT 성공'
+    //     }
+    //     let resu =  await Board.findAndCountAll({})
+    //     await Like.create({likeBoardIdx:resu.count})
+    // } catch (error) {
+    //     console.log(error)
+    //     result = {
+    //         result: 'Fail',
+    //         msg: 'NFT 실패..'
+    //     }
+    // }
+    // res.json(result)
+    res.send({zzz:'zzz'})
 }
+
 
 
 
 module.exports = {
-    uploadPics, s3test, uploadData
+    upload_pics, get_uploaded_pics, upload_data
 }

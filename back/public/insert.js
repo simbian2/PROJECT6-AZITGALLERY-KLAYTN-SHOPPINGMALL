@@ -18,11 +18,11 @@ async function submitValue(){
     console.log(chkValue, priceInput.value, timeInput.value)
     if(priceInput.value.length !== 0 && timeInput.value.length !== 0){
         if(isNaN(priceInput.value) === false){
-            let test = await axios.post('http://localhost:3000/insertdata',{
+            let test = await axios.post('http://localhost:4000/insertdata',{
             price: priceInput.value, time: timeInput.value, ifExtended: chkValue
             })
             if(test.data.success === true){
-                location.href = 'http://localhost:3000/main'
+                location.href = 'http://localhost:4000/main'
             } else{
                 alert('오류가 발생하였습니다.')
             }
