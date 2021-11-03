@@ -9,10 +9,11 @@ import { useSelector, useDispatch } from 'react-redux'
 
 const User = () => {
     const dispatch = useDispatch()
+    const User = useSelector((state:RootState) => state.user);
 
     const SellerAdmin = () => {
         alert('인증을 위해서 이메일을 확인해주세요')
-        dispatch(SellerAdmin_REQUEST(undefined))
+        dispatch(SellerAdmin_REQUEST(User.UserAddress))
     }
     const user = useSelector((state:RootState) => state.user);
     return(

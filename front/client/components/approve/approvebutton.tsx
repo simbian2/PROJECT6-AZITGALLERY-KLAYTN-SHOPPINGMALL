@@ -1,13 +1,15 @@
 import Styled from 'styled-components'
 import React, { useState } from 'react'
-import { SellerAdmin_BACK } from '../../reducers/user'
+import { SellerAdminWait_REQUEST } from '../../reducers/user'
 import { RootState } from "../../reducers"
 import { useSelector, useDispatch } from 'react-redux'
 import Link from 'next/link'
+
 const approvebutton = () => {
     const dispatch = useDispatch()
+    const User = useSelector((state:RootState) => state.user);
     const SellerAdmin = () => {
-        dispatch(SellerAdmin_BACK())
+        dispatch(SellerAdminWait_REQUEST(User.UserAddress))
     }
     return (
         <>
