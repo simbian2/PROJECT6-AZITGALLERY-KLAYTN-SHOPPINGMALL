@@ -3,30 +3,33 @@ import {all,put,takeLatest,fork,call} from "redux-saga/effects";
 import {url} from './url'
 
 async function itemAPI(data){
-    console.log(data)
-    // let fileArray = new Array
-    let thisarray = new Array
-    let fileArray = data[1].map(async (items)=>{
-        // get secure url form the server
-        const response = await fetch(`${url}/item/uploadpics`)
-        const { link } = await response.json()
-        //post the image directly to the s3 bucket
-        await fetch(link, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "multipart/form-data"
-            },
-            body: items
+    // s3에서 리턴받은 주소를 넣을 배열
+    let fileArr = []
+    // 이미지를 배열에 넣는 함수
+    async function putImagesLink(){
+        // data[1]의 파일들을 s3에 각각 올리고 업로드 주소값을 받아 배열에 넣는다
+        let fileArray = data[1].map(async (items)=>{
+            const response = await fetch(`${url}/item/uploadpics`)
+            const { link } = await response.json()
+            await fetch(link, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                },
+                body: items
+            })
+            const imageURL = link.split('?')[0];
+            fileArr.push(imageURL)
         })
-        const imageURL = link.split('?')[0];
-        // console.log(imageURL)
-        //fileArray.push(imageURL)
-        return imageURL
-        // return await axios.post(`${url}/item/uploadpics`,{data:imageURL})
+        // 모든 파일에 대해 값을 받아온 뒤 시행한다
+        await Promise.all(fileArray)
+    }
+    
+    // then으로 강제로 await을 시켜 전송
+    putImagesLink().then(x=>{
+        let result =  axios.post(`${url}/item/uploaddata`,[data[0],fileArr])
     })
-    console.log(thisarray)
 
-    let result = await axios.post(`${url}/item/uploaddata`,fileArray)
 }
 
 function* itemInfo(action){
