@@ -1,18 +1,17 @@
-// truffle.js config for klaytn.
-const PrivateKeyConnector = require('connect-privkey-to-provider')
-const NETWORK_ID = '1001'
-const GASLIMIT = '20000000'
-const URL = 'https://api.baobab.klaytn.net:8651'
-const PRIVATE_KEY = '0xc85895b05b9f40872e744884dc835078f5c744e1a8202775c1002a5046a14807' // 싱글 따옴표 안에 자신의 프라이빗 키 입력하세요.
-
-// 스마트 컨트랙트를 배포할 수 있는 간단한 기본 설정
 module.exports = {
     networks: {
-        klaytn: {
-            provider: new PrivateKeyConnector(PRIVATE_KEY, URL),
-            network_id: NETWORK_ID,
-            gas: GASLIMIT,
-            gasPrice: null,
-        }
-    }
-}
+        baobab: {
+            host: '127.0.0.1',
+            port: 8651,
+            from: '0x5865EEE986Aa06deA32907ED4Ac05A654b9a3eEd', // 계정 주소를 입력하세요
+            network_id: '1001', // Baobab 네트워크 id
+            gas: 20000000, // 트랜잭션 가스 한도
+            gasPrice: 25000000000, // Baobab의 gasPrice는 25 Gpeb입니다
+        },
+    },
+    compilers: {
+      solc: {
+        version: "0.5.6"    // 컴파일러 버전을 0.5.6로 설정합니다
+      }
+  }
+};
