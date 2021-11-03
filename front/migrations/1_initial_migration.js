@@ -1,6 +1,6 @@
 const Migrations = artifacts.require("./Migrations.sol");
-const KlaytnGreeter = artifacts.require("./KlaytnGreeter.sol");
+const MyERC20 = artifacts.require("./MyERC20.sol");
 module.exports = function(deployer) {
   deployer.deploy(Migrations);
-  deployer.deploy(KlaytnGreeter, 'Hello, Klaytn');
+  deployer.deploy(MyERC20, 'BAOBABTOKEN', 'BAO', 8);
 };
