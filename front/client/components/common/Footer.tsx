@@ -120,4 +120,14 @@ const FooterWrapper = Styled.div`
         line-height: 22px;
     }
 
+    @media screen and (max-width : 1095px) {
+        .footerInner{
+        width : 800px;
+        height : 100%;
+        margin : 0 auto;
+        padding: 2.5% 2%;
+        box-sizing: border-box;
+    }
+}
+
 `

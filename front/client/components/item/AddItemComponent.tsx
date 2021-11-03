@@ -16,7 +16,7 @@ const AddItemComponent = ({
     handleTxtChange, handleSubmit, handleConfirm,
     fileChange, fileBase, handleCurrency,
     deleteFile, resetState, 
-    handleItemType
+    handleItemType, handleTags
     }) => {
 
     const dispatch = useDispatch()
@@ -83,14 +83,28 @@ const AddItemComponent = ({
                 </SectionWrapper>
                 <SectionWrapper>
                     <SmallTitle>
-                        카테고리
+                        상세정보
                     </SmallTitle>
-                    <select onChange = {handleItemType}>
+                    <select className = "category" onChange = {handleItemType}>
                             <option value = "female">여성</option>
                             <option value = "male">남성</option>
                             <option value = "kids">아동</option>
                             <option value = "common">남녀 공용</option>
                     </select>
+                </SectionWrapper>
+                <SectionWrapper>
+                    <SmallTitle>
+                        색상 및 사이즈
+                    </SmallTitle>
+                    <DescText>색상과 사이즈는 ,로 구분해주세요.</DescText>
+                    <SmallerTitle>색상</SmallerTitle>
+                    <InputBox
+                        onChange = {(e)=>handleTags(e,"color")}
+                    />
+                    <SmallerTitle>사이즈</SmallerTitle>
+                    <InputBox
+                        onChange = {(e)=>handleTags(e,"size")}
+                    />
                 </SectionWrapper>
                 <SectionWrapper>
                     <SmallTitle>
@@ -122,7 +136,7 @@ const TopWrapper = Styled.div`
 const SectionWrapper = Styled.div`
     margin-bottom: 50px;
     display: block;
-    select{
+    .category{
         margin-top: 40px;
         display: block;
         width: 400px;
@@ -139,6 +153,17 @@ const SmallTitle = Styled.h4`
     margin-top: 30px;
     font-size:24px;
     margin-bottom:20px;
+`
+
+const SmallerTitle = Styled.div`
+    color:#2d3741; 
+    font-size:20px;
+    margin-top:20px;
+`
+
+const DescText = Styled.div`
+    color:gray;
+    font-size:16px;
 `
 
 const InputBox = Styled.input`

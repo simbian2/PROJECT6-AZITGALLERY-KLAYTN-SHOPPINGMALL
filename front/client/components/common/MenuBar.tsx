@@ -125,6 +125,67 @@ const MenubarWrapper = Styled.div`
         text-decoration:none;
     }
 
+    @media screen and (max-width : 1095px) {
+    box-sizing:border-box;
+    height:90px;
+    padding: 1.4% 0;
+    display:flex;
+    flex-direction:row;
+    justify-content:space-around;
+    align-items: stretch;
+    border-bottom:2px solid rgba(20,30,40,.08);
+    font-size:30px;
+    font-weight:550;
+    line-height:50px;
+
+    & > div {
+        width : 1300px;
+        height : auto;
+    }
+
+    span{
+        width: 200px;
+        margin-right:400px;
+    }
+    ul li {
+        display:none;
+        list-style:none;
+        float:left;
+    }
+    ul>li, a{
+        margin-right:20px;
+        color:rgba(0,0,0,.5);
+        background: #fafafa;
+
+    }
+    ul>li:hover, a:hover{
+        color:#343a40;
+    }
+    ul a:hover{
+        color:#1e73fa;
+        border-bottom: 4px solid #1e73fa;
+        padding-bottom:31px;
+    }
+    ul>li:nth-child(4){
+        width:60px;
+        text-align:center;
+        padding:13px;
+        padding-top:7px;
+        margin-bottom:3px;
+        line-height:15px;
+        border:1px solid #007bff;
+        background-color:#007bff;
+        border-radius:5%;
+        color:#fff;
+        margin-left:15px;
+    }
+    ul>li:nth-child(4):hover{
+        background-color:#1e73fa;
+    }
+    a{
+        text-decoration:none;
+    }
+}
 `
 const LOG = Styled.li`
     cursor:pointer;

@@ -3,9 +3,9 @@ const router = express.Router()
 const controller = require('./main.controller')
 
 router.get('/', controller.insert)
-router.post('/insertdata', controller.insertData)
+router.post('/insertdata', controller.insert_data)
 router.get('/main', controller.main)
-router.post('/maindata', controller.mainData)
+router.post('/maindata', controller.main_data)
 router.post('/auction', controller.auction)
 
 

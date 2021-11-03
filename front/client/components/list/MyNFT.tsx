@@ -29,6 +29,10 @@ export default MyNFT
 const MyNFTAll = Styled.ul`
     height:480px;
     cursor : default;
+
+    @media screen and (max-width : 1095px) {
+        display:none;
+}
     
 `
 
