@@ -33,6 +33,10 @@ const addItem = () =>{
     const [aucTime, setAucTime] = useState<any>('')
     // 성별 및 아동에 따른 카테고리 분류
     const [itemType, setItemType] = useState<string>('female')
+    // 색상
+    const [color, setColor] = useState<string>('')
+    //사이즈
+    const [size, setSize] = useState<string>('')
     
     //디스패치 선언
     const dispatch = useDispatch()
@@ -75,7 +79,7 @@ const addItem = () =>{
     }
 
     // 파일 업로드 핸들링+미리보기 핸들링
-    const fileChange = (e) => {
+    const fileChange = (e:any) => {
         let {files} = e.target
         if(files.length+file.length>10){ //추후 수정
             alert('한 번에 올릴 수 있는 파일 갯수는 최대 10개입니다.')
@@ -97,7 +101,7 @@ const addItem = () =>{
         }
     }
 
-    function deleteFile(key){
+    function deleteFile(key:number){
         if(confirm('정말 삭제하시겠습니까?')){
             let newFileArray = [...file]
             let newFileBaseArray = [...fileBase]
@@ -126,16 +130,55 @@ const addItem = () =>{
         }
     }
 
-    const handleCurrency = (e) => {
+    const handleCurrency = (e:any) => {
         let {value} = e.target
             setCurrency(value)
     }
 
-    const handleItemType = (e) => {
+    const handleItemType = (e:any) => {
         let {value} = e.target
         console.log(value)
             setItemType(value)
     }
+
+    function handleTags(e:any, item:string){
+        let {value} = e.target
+        let chkLetters = /[a-zA-Z0-9,ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/
+        function handleChk(txt){
+            let text = txt.split('')
+            let arr = []
+            text.forEach(x=>{
+                arr.push(chkLetters.test(x))
+            })
+            let chk
+            arr.find(ele=>{
+                if(ele==false){
+                    chk = false
+                } else{ chk = true}
+            })
+            return chk
+        }
+
+        if(item == 'color'){
+            if(handleChk(value) === false){
+                handleChk(value)
+                alert('특수문자는 컴마만 사용이 가능합니다.')
+                e.target.value = color
+            } else{
+                setColor(value)
+            }
+        } else if(item == 'size'){
+            if(handleChk(value) === false){
+                handleChk(value)
+                alert('특수문자는 컴마만 사용이 가능합니다.')
+                e.target.value = size
+            } else{
+                setColor(value)
+            }
+        }
+        console.log(color,size)
+    }
+
 
     const handleConfirm = () => {
         if(agreed[0] !== true || agreed[1] !== true){ //미동의시
@@ -143,9 +186,11 @@ const addItem = () =>{
             return false
         }
         else if((ifSell === true &&
-                (name=='' || desc=='' || price == '' || itemType == '')) ||
+                (name=='' || desc=='' || price == '' || itemType == '' ||
+                color == '' || size == '')) ||
                 (ifSell === false &&
-                (name=='' ||desc=='' ||aucPrice=='' ||aucTime=='' || itemType == ''))){
+                (name=='' ||desc=='' ||aucPrice=='' ||aucTime=='' || itemType == '' ||
+                color == '' || size == ''))){
                 alert('모든 칸을 입력해주세요.')
                 return false
         } else if(file.length == 0 ){
@@ -160,17 +205,12 @@ const addItem = () =>{
         let data = {}
         if(ifSell == true){
             data = {price, currency, name, desc, itemType}
-            // console.log(data,file)
             dispatch(itemInfo_REQUEST([data, file]))
-            // dispatch(itemImageInfo_REQUEST(file))
         } else{
             data = {name, desc, aucPrice, currency, aucTime, extension, itemType}
-            // console.log(data,file)
             dispatch(itemInfo_REQUEST([data, file]))
-            // dispatch(itemImageInfo_REQUEST(file))
         }
     }
-
 
     const resetState = () => {
         window.location.reload() 
@@ -199,6 +239,7 @@ const addItem = () =>{
         deleteFile = {deleteFile}
         // 발행 후 초기화
         resetState = {resetState}
+        handleTags = {handleTags}
         />
 
     )

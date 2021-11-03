@@ -27,7 +27,7 @@ async function itemAPI(data){
     
     // then으로 강제로 await을 시켜 전송
     putImagesLink().then(x=>{
-        let result =  axios.post(`${url}/item/uploaddata`,[data[0],fileArr])
+        let result = axios.post(`${url}/item/uploaddata`,[data[0],fileArr])
     })
 
 }
