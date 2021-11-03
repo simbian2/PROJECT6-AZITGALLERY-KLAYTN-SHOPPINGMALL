@@ -15,7 +15,8 @@ const AddItemComponent = ({
     sellToggle, extensionToggle, ifAgreed,
     handleTxtChange, handleSubmit, handleConfirm,
     fileChange, fileBase, handleCurrency,
-    deleteFile, resetState
+    deleteFile, resetState, 
+    handleItemType
     }) => {
 
     const dispatch = useDispatch()
@@ -82,6 +83,17 @@ const AddItemComponent = ({
                 </SectionWrapper>
                 <SectionWrapper>
                     <SmallTitle>
+                        카테고리
+                    </SmallTitle>
+                    <select onChange = {handleItemType}>
+                            <option value = "female">여성</option>
+                            <option value = "male">남성</option>
+                            <option value = "kids">아동</option>
+                            <option value = "common">남녀 공용</option>
+                    </select>
+                </SectionWrapper>
+                <SectionWrapper>
+                    <SmallTitle>
                         설명
                     </SmallTitle>
                     <TextBox
@@ -110,6 +122,13 @@ const TopWrapper = Styled.div`
 const SectionWrapper = Styled.div`
     margin-bottom: 50px;
     display: block;
+    select{
+        margin-top: 40px;
+        display: block;
+        width: 400px;
+        height: 34px;
+        font-size: 25px;
+    }
 `
 
 const BigTitle = Styled.h3`

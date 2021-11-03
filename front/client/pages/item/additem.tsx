@@ -1,5 +1,9 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState } from 'react'
 import AddItemComponent from '../../components/item/AddItemComponent'
+import axios from 'axios'
+import {useDispatch} from 'react-redux'
+import { itemInfo_REQUEST } from '../../reducers/item'
+import { itemImageInfo_REQUEST } from '../../reducers/itemimage'
 
 const addItem = () =>{
     // 남은 NTF 등록 횟수 -> 느낌상 삭제해야 할 컴포넌트 같음
@@ -27,6 +31,13 @@ const addItem = () =>{
     const [aucPrice, setAucPrice] = useState<string>('')
     // 경매 마감 시간
     const [aucTime, setAucTime] = useState<any>('')
+    // 성별 및 아동에 따른 카테고리 분류
+    const [itemType, setItemType] = useState<string>('female')
+    
+    //디스패치 선언
+    const dispatch = useDispatch()
+    
+    
     // input에 대한 handlechange(각 컴포넌트에서 텍스트를 인자값으로 받아
     // 각 컴포넌트마다 인자값에 따라 다르게 응답한다
     function handleTxtChange(e:any, item:string){
@@ -120,15 +131,21 @@ const addItem = () =>{
             setCurrency(value)
     }
 
+    const handleItemType = (e) => {
+        let {value} = e.target
+        console.log(value)
+            setItemType(value)
+    }
+
     const handleConfirm = () => {
         if(agreed[0] !== true || agreed[1] !== true){ //미동의시
             alert('모든 항목에 동의해주세요.')
             return false
         }
         else if((ifSell === true &&
-                (name=='' || desc=='' || price == '')) ||
+                (name=='' || desc=='' || price == '' || itemType == '')) ||
                 (ifSell === false &&
-                (name=='' ||desc=='' ||aucPrice=='' ||aucTime==''))){
+                (name=='' ||desc=='' ||aucPrice=='' ||aucTime=='' || itemType == ''))){
                 alert('모든 칸을 입력해주세요.')
                 return false
         } else if(file.length == 0 ){
@@ -139,11 +156,19 @@ const addItem = () =>{
         }
     }
 
-    const handleSubmit = () => { 
-        // axios같은거로 나중에 처리
-        console.log(file, price, currency, name, desc)
-        console.log(file, name, desc, aucPrice, currency, aucTime, extension)
+    const handleSubmit = async () => { 
+        let data = {}
+        if(ifSell == true){
+            data = {price, currency, name, desc, itemType}
+            dispatch(itemInfo_REQUEST(data))
+            dispatch(itemImageInfo_REQUEST(file))
+        } else{
+            data = {name, desc, aucPrice, currency, aucTime, extension, itemType}
+            dispatch(itemInfo_REQUEST(data))
+            dispatch(itemImageInfo_REQUEST(file))
+        }
     }
+
 
     const resetState = () => {
         window.location.reload() 
@@ -165,6 +190,7 @@ const addItem = () =>{
         handleTxtChange = {handleTxtChange}
         handleSubmit = {handleSubmit}
         handleConfirm = {handleConfirm}
+        handleItemType = {handleItemType}
         fileChange = {fileChange}
         fileBase = {fileBase}
         handleCurrency = {handleCurrency}
