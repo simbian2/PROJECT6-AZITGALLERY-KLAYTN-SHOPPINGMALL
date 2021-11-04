@@ -104,7 +104,6 @@ let KIP7Token_transfer = async () => {
   const value = 100000000000000000000
   const receipt = await kip7Instance.transfer(recipientAddress, value, opts)
   console.log(receipt)
-
 }
 
 let kipswap_post = async () => {

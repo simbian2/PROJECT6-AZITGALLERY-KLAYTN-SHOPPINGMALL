@@ -9,7 +9,16 @@
 let get_selltype = async (req,res)=>{
     // tabBtn = 1 : 판매 
     // tabBtn = 2 : 경매
-    const{ tabBtn, genderSelect, select, search} = req.body
+
+    
+    // let sellType
+    // const{ tabBtn, genderSelect, select, search} = req.body
+    // if(tabBtn==1){
+    //     sellType = false
+    // }else if(tabBtn==2){
+    //     sellType = true
+    // }
+
 
 }
 
