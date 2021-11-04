@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const moment = require('moment');
 
-module.exports = class User extends Sequelize.Model{
+module.exports = class Category extends Sequelize.Model{
     static init(sequelize){
         return super.init({
             category_idx:{
@@ -9,33 +9,22 @@ module.exports = class User extends Sequelize.Model{
                 allowNull:false,
                 unique:true
             },
-            item_code:{
-                type:Sequelize.STRING(50),
-                unique:true,
-            },
-            gender:{
-                type:Sequelize.TEXT,
-                allowNull:false,
-            },
-            season:{
-                type:Sequelize.BOOLEAN,
-                defaultValue:false
-            },
-            age:{
-                type:Sequelize.BOOLEAN,
-                defaultValue:false
+            main_category_code:{
+                type:Sequelize.INTEGER,
             },
             item_classification:{
-                type:Sequelize.BOOLEAN,
-                defaultValue:false
+                type:Sequelize.STRING(30),
+            },
+            category_name:{
+                type:Sequelize.STRING(20),
             },
         },{
             sequelize,
             timestamps:false,
             underscored:false,
             paranoid:false,
-            modelName:'User',
-            tableName:'user',
+            modelName:'Category',
+            tableName:'category',
             charset:'utf8',
             collate:'utf8_general_ci'
         })
