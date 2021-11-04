@@ -1,5 +1,5 @@
 import Styled from 'styled-components'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ItemListSell from './ItemListSell'
 import ItemListAuction from './ItemListAuction'
 import MyNft from './MyNFT'
@@ -7,13 +7,30 @@ import useInput from '../../hooks/useInput'
 import SearchBar from './SearchBar'
 import { useSelector, useDispatch } from 'react-redux'
 import { sellType_REQUEST, genderCategorySelect_REQUEST, itemSearch_REQUEST, itemSort_REQUEST } from '../../reducers/type'
-
+import axios from 'axios'
+import {url} from '../../saga/url'
 
 const ItemList = () => {
     const dispatch = useDispatch()
 
     // @ 판매 경매 선택 버튼
     const [tabBtn, settabBtn] = useState<number>(1);
+    // @ 주문이 들어오면 state를 바꿔줌; useEffect로 알람 띄울 것
+    const [notiOn, setNotiOn] = useState<boolean>(false)
+
+    const notiHandler = async () => {
+        let {data} = await axios.post(`${url}/sendnoti`,{data:'zzzzz'})
+
+        // if(data.message == 'unread'){
+        //     setNotiOn(true)
+        // }
+    }
+    notiHandler()
+    useEffect(()=>{
+        if(notiOn === true){
+            alert('확인하지 않은 주문이 있습니다.')
+        }
+    },[notiOn])
 
     const sellBtn = () => {
         settabBtn(1)
