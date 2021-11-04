@@ -11,7 +11,7 @@ module.exports = class Seller extends Sequelize.Model{
                 type:Sequelize.STRING(30),
             },
             admin_approval:{
-                type:Sequelize.INT,     // 1: 신청 2: 승인 3: 반려
+                type:Sequelize.INTEGER,     // 1: 신청 2: 승인 3: 반려
             },
             email_validation:{
                 type:Sequelize.BOOLEAN,
