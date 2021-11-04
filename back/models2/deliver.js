@@ -43,7 +43,7 @@ module.exports = class Deliver extends Sequelize.Model{
             },
             deliver_company:{
                 type:Sequelize.STRING,
-                comment:'배송회사'
+                comment:'배송회사'  
             }
 
         },{
