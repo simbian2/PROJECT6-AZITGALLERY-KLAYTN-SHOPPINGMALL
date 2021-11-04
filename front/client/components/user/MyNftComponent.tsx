@@ -1,5 +1,5 @@
 import Styled from 'styled-components'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Own from './own'
 import Selled from './Selled'
@@ -29,6 +29,13 @@ const MyNftComponent = () => {
         
     }
 
+    // @ 여기서 NFT (구매한 , 판매된 , 미판매된 ) 가져옴 - dispatch 로 요청
+    useEffect(()=>{
+        // dispatch(Userlist_REQUEST())
+        
+    },[])
+
+
     return(
         <>  
             <MyInfo> 
@@ -43,7 +50,7 @@ const MyNftComponent = () => {
                 <Header>
                     <MenuBar>
                         <Menu>
-                            <Menu1 onClick={btn1}>소유한 NFT</Menu1>
+                            <Menu1 onClick={btn1}>구매한 NFT</Menu1>
                         </Menu>
                         <Menu>
                             <Menu1>|</Menu1>
