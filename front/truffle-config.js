@@ -1,17 +1,28 @@
+const HDWalletProvider = require("truffle-hdwallet-provider-klaytn");
+const privateKey = "0xd6e223fa53d08f3b9b26a914c4bfffa4e0867d74fe1fdbbdf3f5e2b45f109405" // Enter your private key;
 module.exports = {
-    networks: {
-        baobab: {
-            host: '127.0.0.1',
-            port: 8651,
-            from: '0x5865EEE986Aa06deA32907ED4Ac05A654b9a3eEd', // 계정 주소를 입력하세요
-            network_id: '1001', // Baobab 네트워크 id
-            gas: 20000000, // 트랜잭션 가스 한도
-            gasPrice: 25000000000, // Baobab의 gasPrice는 25 Gpeb입니다
-        },
+  networks: {
+    development: {
+      host: "localhost",
+      port: 8545,
+      network_id: "*" // Match any network id
     },
-    compilers: {
-      solc: {
-        version: "0.5.6"    // 컴파일러 버전을 0.5.6로 설정합니다
-      }
+    testnet: {
+      provider: () => new HDWalletProvider(privateKey, "https://kaikas.baobab.klaytn.net:8651/"),
+      network_id: '1001', //Klaytn baobab testnet's network id
+      gas: '8500000',
+      gasPrice: null
+    },
+    mainnet: {
+      provider: () => new HDWalletProvider(privateKey, "https://your.cypress.en.url:8651"),
+      network_id: '8217', //Klaytn mainnet's network id
+      gas: '8500000',
+      gasPrice: null
+    }
+  },
+  compilers: {
+    solc: {
+      version: "0.5.6"
+    }
   }
 };
