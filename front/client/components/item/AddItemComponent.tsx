@@ -121,7 +121,7 @@ const AddItemComponent = ({
                 </SectionWrapper>
                 <SectionWrapper>
                     <SmallTitle>
-                        상세정보
+                        분류
                     </SmallTitle>
                     <select className = "category" onChange = {handleItemType}>
                             <option value = "female">여성</option>
@@ -134,7 +134,7 @@ const AddItemComponent = ({
                     <SmallTitle>
                         색상 및 사이즈
                     </SmallTitle>
-                    <DescText>엔터를 누르면 자동으로 입력되며 띄어쓰기는 입력이 불가합니다.</DescText>
+                    <DescText>엔터를 누르면 자동으로 입력되며 띄어쓰기는 불가합니다.</DescText>
                     <SmallerTitle>색상</SmallerTitle>
                     <InputBox
                         onChange = {(e)=>handleTags(e,"color")}
@@ -279,6 +279,7 @@ const ColorSizeItem = Styled.div`
     float: left;
     display: block;
     position: relative;
+    border-radius: 5px;
 `
 
 const CloseButton = Styled.div`
