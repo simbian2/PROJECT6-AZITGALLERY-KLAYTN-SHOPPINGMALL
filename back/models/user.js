@@ -1,48 +1,48 @@
-const Sequelize = require('sequelize');
-const moment = require('moment');
+const Sequelize = require('sequelize')
+const moment = require('moment')
 
 module.exports = class User extends Sequelize.Model{
     static init(sequelize){
         return super.init({
+            user_idx:{
+                type:Sequelize.INTEGER,
+                autoIncrement:true,
+                primaryKey:true,
+                unique:true
+            },
             name:{
                 type:Sequelize.STRING(30),
-                allowNull:false,
             },
-            email:{
-                type:Sequelize.STRING(50),
-                unique:true,
+            kaikas_address:{
+                type:Sequelize.STRING(100),
             },
-            kaikasAddress:{
-                type:Sequelize.TEXT,
-                allowNull:false,
+            contact : {
+                type : Sequelize.STRING(100),
             },
-            createdAt:{
+            address : {
+                type : Sequelize.STRING(100),
+            },
+            join_date:{
                 type:Sequelize.DATE,
-                allowNull:false,
-                defaultValue:Sequelize.NOW
+                defaultValue:Sequelize.NOW,
+                get:function(){
+                    return moment(this.getDataValue('date')).format('YYYY-MM-DD-hh-mm-dd')
+                }     
             },
-            buyItemNft:{
-                type:Sequelize.TEXT,
-            },
-            likedItem:{
-                type:Sequelize.TEXT,               
-            },
-            kycAuthorized:{
-                type:Sequelize.BOOLEAN,
-                defaultValue:false
+            email : {
+                type : Sequelize.STRING(100),
             }
         },{
             sequelize,
             timestamps:false,
-            underscored:false,
-            paranoid:false,
             modelName:'User',
-            tableName:'User',
+            tableName:'user',
+            paranoid:false,
             charset:'utf8',
             collate:'utf8_general_ci'
         })
     }
     static associate(db){
-        db.User.hasMany(db.Item,{foreignKey:'itemId',sourceKey:'id'})
+
     }
 }
