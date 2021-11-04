@@ -26,6 +26,7 @@ export const initialState : MintState = {
 export const MINT_NFT_SUCCESS  = "MINT_NFT_SUCCESS" as const;
 export const MINT_NFT_RETURN  = "MINT_NFT_RETURN" as const;
 export const KIP_TOKEN_SUCCESS = "KIP_TOKEN_SUCCESS" as const;
+export const KIP_SWAP_REQUEST = "KIP_SWAP_REQUEST" as const;
 
 export const MintNFT_REQUEST = () => {
     return{
@@ -45,10 +46,17 @@ export const KipToken_SUCCESS = () => {
     }
 }
 
+export const KipSwap_REQUEST = () => {
+    return{
+        type:KIP_SWAP_REQUEST,
+    }
+}
+
 type MintAction = 
 | ReturnType<typeof MintNFT_REQUEST>
 | ReturnType<typeof MintNFT_RETURN>
 | ReturnType<typeof KipToken_SUCCESS>
+| ReturnType<typeof KipSwap_REQUEST>
 
 const reducer = (state:MintState=initialState, action:MintAction) => {
     switch (action.type){
@@ -66,6 +74,10 @@ const reducer = (state:MintState=initialState, action:MintAction) => {
             return{
                 ...state,
                 verify:'return?'
+            }
+        case KIP_SWAP_REQUEST:
+            return{
+                ...state,
             }
         default:
             return state;

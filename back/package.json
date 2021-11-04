@@ -1,10 +1,10 @@
 {
   "name": "teamproject5_auction_test",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
@@ -33,5 +33,6 @@
     "sequelize-cli": "^6.2.0",
     "socket.io": "^4.3.1",
     "util": "^0.12.4"
-  }
+  },
+  "description": ""
 }

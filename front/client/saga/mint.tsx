@@ -20,9 +20,16 @@ function* KipTokenSaga(){
     })  
 }
 
+function* KipSwapSaga(){
+    const result = yield call(axios.post,`http://localhost:4000/mint/kipswap`)
+
+ 
+}
+
 function* watchMint(){
     yield takeLatest('MINT_NFT_SUCCESS',MintNftSaga)
     yield takeLatest('KIP_TOKEN_SUCCESS',KipTokenSaga)
+    yield takeLatest('KIP_SWAP_REQUEST',KipSwapSaga)
 }
 
 export default function* MintSaga(){
