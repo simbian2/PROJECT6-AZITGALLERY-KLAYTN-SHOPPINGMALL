@@ -20,8 +20,8 @@ module.exports = class ShipInfo extends Sequelize.Model{
         },{
             sequelize,
             timestamps:false,
-            modelName:'ShipInfo',
-            tableName:'shipinfo',
+            modelName:'Ship_info',
+            tableName:'ship_info',
             paranoid:false,
             charset:'utf8',
             collate:'utf8_general_ci'

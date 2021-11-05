@@ -34,13 +34,11 @@ if (config.use_env_variable) {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-db.AuctionHistory = AuctionHistory
+
 db.Auction = Auction
-db.Category = Category
 db.DirectDeal = DirectDeal
 db.ItemDetail = ItemDetail
 db.ItemImg = ItemImg
-db.ItemInfo = ItemInfo
 db.Item = Item
 db.LikeList = LikeList
 db.NftImg = NftImg
@@ -50,14 +48,15 @@ db.Seller = Seller
 db.ShipInfo = ShipInfo
 db.SubCategory = SubCategory
 db.User = User
+db.Category = Category
+db.ItemInfo = ItemInfo
+db.AuctionHistory = AuctionHistory
 
-AuctionHistory.init(sequelize)
+
 Auction.init(sequelize)
-Category.init(sequelize)
 DirectDeal.init(sequelize)
 ItemDetail.init(sequelize)
 ItemImg.init(sequelize)
-ItemInfo.init(sequelize)
 Item.init(sequelize)
 LikeList.init(sequelize)
 NftImg.init(sequelize)
@@ -67,9 +66,9 @@ Seller.init(sequelize)
 ShipInfo.init(sequelize)
 SubCategory.init(sequelize)
 User.init(sequelize)
-
-
-
+Category.init(sequelize)
+ItemInfo.init(sequelize)
+AuctionHistory.init(sequelize)
 
 
 

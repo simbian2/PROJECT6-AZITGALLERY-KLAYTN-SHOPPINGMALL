@@ -27,6 +27,6 @@ module.exports = class Seller extends Sequelize.Model{
         })
     }
     static associate(db){
-
+        db.Seller.belongsTo(db.User,{foreignKey:'user_idx',targetKey:'user_idx'})
     }
 }
