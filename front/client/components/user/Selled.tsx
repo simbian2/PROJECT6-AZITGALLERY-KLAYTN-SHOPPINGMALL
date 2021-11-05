@@ -2,6 +2,7 @@ import Styled from 'styled-components'
 import React, { useState } from 'react'
 import Link from 'next/link'
 import Alert from '@mui/material/Alert';
+import Waybill from '../view/Waybill';
 
 const Selled = () => {
 
@@ -72,10 +73,18 @@ const Selled = () => {
         },
     ]);
 
+    // @ 배송등록하기
+    const [deliveryForm, setDeliveryForm] = useState<boolean>(false)
+    
+    const setDelivery = () =>{
+        setDeliveryForm(prev => !prev)
+    }
 
     const nameList: JSX.Element[] = Arr.map((ele) =>
         <NFTFourList>
-            <Alert severity="error">배송 등록 전!</Alert>
+            <Alert severity="error">
+                <a className="deliverySet" onClick={setDelivery}>배송 등록 하기!</a>
+            </Alert>
             <NFT>
                 <NFTImg>
                     <div><img /></div>
@@ -133,6 +142,12 @@ const Selled = () => {
 
     return (
         <>
+        {
+            deliveryForm
+            ? <Waybill setClose={setDelivery}/>
+            : <></>
+        }
+            
             <NonCompleted>{nameList}</NonCompleted>
             <div>{compeltedList}</div>
         </>
@@ -152,6 +167,16 @@ const NFTFourList = Styled.ul`
     list-style:none;
     margin-right:18px;
     margin-left:11px;
+
+    .deliverySet{
+        text-decoration: underline;
+        background: #f4f491;
+        cursor : pointer;
+    }
+
+    .MuiPaper-root{
+        cursor : default;
+    }
     
 `
 const NFT = Styled.li`
