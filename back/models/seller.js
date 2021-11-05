@@ -8,13 +8,17 @@ module.exports = class Seller extends Sequelize.Model{
                 type:Sequelize.INTEGER,
             },
             seller_code:{
-                type:Sequelize.STRING(30),
+                type:Sequelize.STRING(200),
             },
             admin_approval:{
                 type:Sequelize.INTEGER,     // 1: 신청 2: 승인 3: 반려
             },
             email_validation:{
                 type:Sequelize.BOOLEAN,
+            },
+            brand_name:{
+                type:Sequelize.STRING
+
             }
         },{
             sequelize,
@@ -27,6 +31,7 @@ module.exports = class Seller extends Sequelize.Model{
         })
     }
     static associate(db){
-
+        db.Seller.belongsTo(db.User,{foreignKey:'user_idx',targetKey:'user_idx'}),
+        db.Seller.hasMany(db.BuyerList,{foreignKey:'sender_idx',sourceKey:'user_idx'})
     }
 }
