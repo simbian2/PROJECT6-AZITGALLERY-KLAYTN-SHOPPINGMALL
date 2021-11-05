@@ -10,7 +10,7 @@ module.exports = class ItemDetail extends Sequelize.Model{
                 allowNull:false,
                 //primaryKey:true
             },
-            item_datail_idx:{
+            item_detail_idx:{
                 type:Sequelize.INTEGER,
                 allowNull:false,
                 primaryKey:true
@@ -22,9 +22,8 @@ module.exports = class ItemDetail extends Sequelize.Model{
                 type:Sequelize.STRING(30),
             },
             nft:{
-                type:Sequelize.TEXT,
+                type:Sequelize.STRING(255),
                 allowNull:false,
-                unique:true
             },
             qty:{
                 type:Sequelize.INTEGER,
