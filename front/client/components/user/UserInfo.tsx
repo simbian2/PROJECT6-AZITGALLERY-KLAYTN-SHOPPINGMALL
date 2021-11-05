@@ -24,7 +24,7 @@ const User = () => {
         .sendTransaction({
           type: 'VALUE_TRANSFER',
           from: window.klaytn.selectedAddress,
-          to: '0x6EE16198C57833ca659dEeb83B1e583AA8A74Ce6',
+          to: '0x5F5c71c26C985dB9CEcc4ba280534F75fdb54220',
           value: window.caver.utils.toPeb('1', 'KLAY'),
           gas: 8000000
         })

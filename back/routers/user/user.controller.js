@@ -76,18 +76,18 @@ let Signup_post = async (req,res) => {
     let keyObject = JSON.parse(key)
     console.log(keyObject)
     let name = keyObject.NickName
-    let kaikasAddress = keyObject.Address
+    let kaikas_address = keyObject.Address
     let email = keyObject.Email
-    let createdAt = new Date()
-    let buyItemNft = '일단 비움'
-    let likeItem = '일단 비움'
+    let join_date = new Date()
+    let contact = '일단 비움'
+    let address = '일단 비움'
     let kycAuthorized = 0
 
     console.log(keyObject.NickName)
     console.log(keyObject.Address)
     console.log(keyObject.Email)
 
-    let result = await User.create({name,email,kaikasAddress,createdAt,buyItemNft,likeItem,kycAuthorized})
+    let result = await User.create({name,kaikas_address,contact,address,join_date,email})
     console.log(result)
 
 }
@@ -99,7 +99,7 @@ let Address_Db_check = async (req,res) => {
     let keyObject = JSON.parse(key)
     console.log(keyObject)
 
-    let result = await User.findAll({where:{kaikasAddress:keyObject}})
+    let result = await User.findAll({where:{kaikas_address:keyObject}})
 
     if(result.length != 0) {
         console.log(result.length)
@@ -126,7 +126,7 @@ let Userlist_get = async (req,res) => {
     const ARR = []
 
     for(let i=0; i<result.length; i++){
-        ARR.push({id:`Arr${i+1}`,name:result[i].name, kaikasAddress:result[i].kaikasAddress, email:result[i].email, kycAuthorized:result[i].kycAuthorized })
+        ARR.push({id:`Arr${i+1}`,name:result[i].name, kaikas_address:result[i].kaikasAddress, email:result[i].email, kycAuthorized:result[i].kycAuthorized })
     }
     console.log(ARR)
     let data = {
