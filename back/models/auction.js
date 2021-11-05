@@ -1,39 +1,31 @@
 const Sequelize = require('sequelize')
-const moment = require('moment')
 
-// 추후 상품id 추가할 것
 module.exports = class Auction extends Sequelize.Model{
     static init(sequelize){
-        return super.init({ 
-            name:{
-                type:Sequelize.STRING(50),
-                allowNull:false,
+        return super.init({
+            auction_idx:{
+                type:Sequelize.INTEGER,
             },
-            price:{
-                type:Sequelize.INTEGER(30),
-                allowNull:false,
-            },
-            registeredAt:{
+            end_date:{
                 type:Sequelize.DATE,
-                allowNull:false,
-                defaultValue:Sequelize.NOW,
-                get: function(){
-                    return moment(this.getDataValue('date')).format('Y-M-D')
-                }
             },
-            productId:{
-                type:Sequelize.INTEGER(10),
-                allowNull:false,
-            }
+            if_extended:{
+                type:Sequelize.BOOLEAN,
+            },
+            start_date:{
+                type:Sequelize.DATE,    
+            }           
         },{
             sequelize,
-            timestamps:false,
-            underscored:false,
-            paranoid:false,
+            timestamps:true,
             modelName:'Auction',
             tableName:'auction',
+            paranoid:true,
             charset:'utf8',
             collate:'utf8_general_ci'
         })
+    }
+    static associate(db){
+
     }
 }

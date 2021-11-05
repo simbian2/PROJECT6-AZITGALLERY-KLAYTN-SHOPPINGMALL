@@ -33,11 +33,15 @@ const addItem = () =>{
     const [aucTime, setAucTime] = useState<any>('')
     // 성별 및 아동에 따른 카테고리 분류
     const [itemType, setItemType] = useState<string>('female')
-    // 색상
-    const [color, setColor] = useState<string>('')
-    //사이즈
-    const [size, setSize] = useState<string>('')
-    
+    // 색상 배열
+    const [color, setColor] = useState<Array<string>>([])
+    // 색상 입력값
+    const [colorVal, setColorVal] = useState<string>('')
+    //사이즈 배열
+    const [size, setSize] = useState<Array<string>>([])
+    // 사이즈 입력값
+    const [sizeVal, setSizeVal] = useState<string>('')
+   
     //디스패치 선언
     const dispatch = useDispatch()
     
@@ -101,6 +105,7 @@ const addItem = () =>{
         }
     }
 
+    // 등록된 파일 삭제하는 핸들러
     function deleteFile(key:number){
         if(confirm('정말 삭제하시겠습니까?')){
             let newFileArray = [...file]
@@ -114,14 +119,17 @@ const addItem = () =>{
         }
     }
 
+    // 직판/경매 선택
     const sellToggle = (value:boolean) => {
         setifSell(value)
     }
 
+    // 경매 선택 시 연장 여부 선택
     const extensionToggle = (value:boolean) => {
         setExtension(value)
     }
 
+    // 동의 항목 관련
     const ifAgreed = (value:number) => {
         if(value === 1){
             setAgreed([!agreed[0],agreed[1]])
@@ -130,20 +138,24 @@ const addItem = () =>{
         }
     }
 
+    // 통화 선택
     const handleCurrency = (e:any) => {
         let {value} = e.target
             setCurrency(value)
     }
 
+    // 옷 카테고리 선택
     const handleItemType = (e:any) => {
         let {value} = e.target
-        console.log(value)
             setItemType(value)
     }
 
+    // 사이즈, 컬러에 대한 onChange
     function handleTags(e:any, item:string){
         let {value} = e.target
-        let chkLetters = /[a-zA-Z0-9,ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/
+        // 특수문자(띄어쓰기 포함) 제외
+        let chkLetters = /[a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/
+        // 입력된 값을 한자 한자 쪼개서 하나라도 특수문자가 있으면 false 리턴
         function handleChk(txt){
             let text = txt.split('')
             let arr = []
@@ -159,27 +171,55 @@ const addItem = () =>{
             return chk
         }
 
+        // 컬러와 사이즈에서 입력받은 각각의 경우에 대해
+        // 위의 유효성검사 함수 실행, false 리턴받으면 경고메시지 표출
+        // 및 해당 값 밸류를 직전 state로 회귀시킴
         if(item == 'color'){
             if(handleChk(value) === false){
-                handleChk(value)
-                alert('특수문자는 컴마만 사용이 가능합니다.')
-                e.target.value = color
+                alert('특수문자와 띄어쓰기 없이 입력해 주세요.')
+                e.target.value = colorVal
             } else{
-                setColor(value)
+                setColorVal(value)
             }
         } else if(item == 'size'){
             if(handleChk(value) === false){
-                handleChk(value)
-                alert('특수문자는 컴마만 사용이 가능합니다.')
-                e.target.value = size
+                alert('특수문자와 띄어쓰기 없이 입력해 주세요.')
+                e.target.value = sizeVal
             } else{
-                setColor(value)
+                setSizeVal(value)
             }
         }
-        console.log(color,size)
     }
 
+    // 엔터 누르면 등록되게 하는 함수
+    function handleKeyPress(e:any, item:string){
+        // 빈칸일 때 작동하지 않도록 설정
+        if(colorVal !== '' && item == 'color' && e.key === 'Enter'){
+            let newColor = [...color]
+            newColor.push(colorVal)
+            setColor(newColor)
+            setColorVal('')
+        } else if(sizeVal !== '' && item == 'size' && e.key === 'Enter'){
+            let newSize = [...size]
+            newSize.push(sizeVal)
+            setSize(newSize)
+            setSizeVal('')
+        }
+    }
 
+    function deleteItem(key:number, item:string){
+        if(item == "color"){
+            let newColorArray = [...color]
+            newColorArray.splice(key,1)
+            setColor(newColorArray)
+        } else if(item == "size"){
+            let newSizeArray = [...size]
+            newSizeArray.splice(key,1)
+            setSize(newSizeArray)
+        }
+    }
+
+    // 모든 value 최종 submit 전, 미입력 항목이 있는지 검증(nft관련 팝업 전 단계)
     const handleConfirm = () => {
         if(agreed[0] !== true || agreed[1] !== true){ //미동의시
             alert('모든 항목에 동의해주세요.')
@@ -187,10 +227,10 @@ const addItem = () =>{
         }
         else if((ifSell === true &&
                 (name=='' || desc=='' || price == '' || itemType == '' ||
-                color == '' || size == '')) ||
+                color.length == 0 || size.length == 0)) ||
                 (ifSell === false &&
                 (name=='' ||desc=='' ||aucPrice=='' ||aucTime=='' || itemType == '' ||
-                color == '' || size == ''))){
+                color.length == 0 || size.length == 0))){
                 alert('모든 칸을 입력해주세요.')
                 return false
         } else if(file.length == 0 ){
@@ -201,17 +241,19 @@ const addItem = () =>{
         }
     }
 
+    // 최종 밸류 submit, nft 팝업에서 예 누른 이후
     const handleSubmit = async () => { 
         let data = {}
         if(ifSell == true){
-            data = {price, currency, name, desc, itemType}
+            data = {price, currency, name, desc, itemType, color, size}
             dispatch(itemInfo_REQUEST([data, file]))
         } else{
-            data = {name, desc, aucPrice, currency, aucTime, extension, itemType}
+            data = {name, desc, aucPrice, currency, aucTime, extension, itemType, color, size}
             dispatch(itemInfo_REQUEST([data, file]))
         }
     }
 
+    // 새 NFT발행 시 그냥 새로고침
     const resetState = () => {
         window.location.reload() 
     }
@@ -236,10 +278,18 @@ const addItem = () =>{
         fileChange = {fileChange}
         fileBase = {fileBase}
         handleCurrency = {handleCurrency}
+        handleTags = {handleTags}
+        color = {color}
+        size = {size}
+        colorVal = {colorVal}
+        sizeVal  = {sizeVal}
+        deleteItem = {deleteItem}
+        // enter key event 위함
+        handleKeyPress = {handleKeyPress}
+        // 파일 삭제용 핸들러
         deleteFile = {deleteFile}
         // 발행 후 초기화
         resetState = {resetState}
-        handleTags = {handleTags}
         />
 
     )

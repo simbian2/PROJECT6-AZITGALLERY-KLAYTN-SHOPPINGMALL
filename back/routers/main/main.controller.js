@@ -108,5 +108,9 @@ let auction = async (req, res) => {
     }
 }
 
-
-module.exports = {insert, insert_data, main, main_data, auction,}
+// 새로운 주문 들어오면.
+let sendNoti = (req, res) => {
+    console.log('asd', req.body)
+    res.json({message:'unread'})
+}
+module.exports = {insert, insert_data, main, main_data, auction, sendNoti}

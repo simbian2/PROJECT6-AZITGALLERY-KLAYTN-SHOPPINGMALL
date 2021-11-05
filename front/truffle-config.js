@@ -1,5 +1,6 @@
 const HDWalletProvider = require("truffle-hdwallet-provider-klaytn");
-const privateKey = "0x05093921499b3e0c2c50e4b62d0b472ca371bd83c3769218526635ac17980080" // Enter your private key;
+const privateKey = "0xd6e223fa53d08f3b9b26a914c4bfffa4e0867d74fe1fdbbdf3f5e2b45f109405" // Enter your private key;
+
 module.exports = {
   networks: {
     development: {

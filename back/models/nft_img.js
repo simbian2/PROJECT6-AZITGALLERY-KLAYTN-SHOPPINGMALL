@@ -1,31 +1,26 @@
 const Sequelize = require('sequelize')
+const moment = require('moment')
 
-module.exports = class Deliver extends Sequelize.Model{
+// 추후 상품id 추가할 것
+module.exports = class NftImg extends Sequelize.Model{
     static init(sequelize){
-        return super.init({
-            itemId:{
+        return super.init({ 
+            nft_img_idx:{
                 type:Sequelize.INTEGER,
+                allowNull:false
             },
-            buyerAddress:{
+            nft_img:{
                 type:Sequelize.TEXT,
-            },
-            buyerPhoneNum:{
-                type:Sequelize.INTEGER,
-            },
-            invoiceNum:{
-                type:Sequelize.INTEGER,
             }
-
         },{
             sequelize,
             timestamps:false,
             underscored:false,
             paranoid:false,
-            modelName:'Deliver',
-            tableName:'deliver',
+            modelName:'Nft_img',
+            tableName:'nft_img',
             charset:'utf8',
             collate:'utf8_general_ci'
         })
     }
-
 }

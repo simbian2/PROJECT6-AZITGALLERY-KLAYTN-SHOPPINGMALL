@@ -1,6 +1,7 @@
 import Styled from 'styled-components'
 import React, { useState } from 'react'
 import Link from 'next/link'
+import Alert from '@mui/material/Alert';
 
 const Selled = () => {
 
@@ -11,7 +12,9 @@ const Selled = () => {
         Like: number,
         alert: string
     }
+    // @ 나중에 가라데이터 지우고 back 에서 가져옴
 
+    // @ 배송 등록 전, 판매된 NFT 리스트들
     const [Arr, setArr] = React.useState<ArrEle[]>([
         {
             id: 1,
@@ -20,7 +23,34 @@ const Selled = () => {
             Like: 0,
             alert: '신고하기'
         },
-        {   id: 2,
+        {
+            id: 2,
+            subject: 'asdg',
+            artist: 'daminal',
+            Like: 5,
+            alert: '신고하기'
+        },
+        {
+            id: 3,
+            subject: 'asdg',
+            artist: 'daminal',
+            Like: 5,
+            alert: '신고하기'
+        },
+        
+    ]);
+
+    // @ 배송 등록 후, 판매된 NFT 리스트들
+    const [Arr2, setArr2] = React.useState<ArrEle[]>([
+        {
+            id: 1,
+            subject: 'ffffffffff',
+            artist: 'daminal',
+            Like: 0,
+            alert: '신고하기'
+        },
+        {
+            id: 2,
             subject: 'asdg',
             artist: 'daminal',
             Like: 5,
@@ -34,27 +64,55 @@ const Selled = () => {
             alert: '신고하기'
         },
         {
-            id: 3,
-            subject: 'hfdsh',
+            id: 4,
+            subject: 'gahhfdsh',
             artist: 'daminal',
             Like: 5,
             alert: '신고하기'
         },
-      ]);
+    ]);
 
 
     const nameList: JSX.Element[] = Arr.map((ele) =>
         <NFTFourList>
+            <Alert severity="error">배송 등록 전!</Alert>
             <NFT>
                 <NFTImg>
-                    {/* <div><img src={require('../../src/지도.jpg').default} /></div> */}
-                    <div><img  /></div>
+                    <div><img /></div>
                 </NFTImg>
                 <Line></Line>
                 <NFTOne>
                     <NFTOneList>
                         <NFTSubject>{ele.subject}</NFTSubject>
-                        {/* 여기 a 빠졌는데 동작되는 이유.. a 추가하면 오류남 */}
+                        <NFTartist>{ele.artist}</NFTartist>
+                    </NFTOneList>
+                    <NFTOneImg>
+                        <img></img>
+                    </NFTOneImg>
+                </NFTOne>
+                <NFTOne>
+                    <NFTOneList>
+                        <NFTSubject>@ {ele.Like}</NFTSubject>
+                    </NFTOneList>
+                    <NFTDeclaration>
+                        <NFTSubject>* * *</NFTSubject>
+                    </NFTDeclaration>
+                </NFTOne>
+            </NFT>
+        </NFTFourList>
+    );
+
+    const compeltedList: JSX.Element[] = Arr2.map((ele) =>
+        <NFTFourList>
+            <Alert severity="success">배송 등록 완료!</Alert>
+            <NFT>
+                <NFTImg>
+                    <div><img /></div>
+                </NFTImg>
+                <Line></Line>
+                <NFTOne>
+                    <NFTOneList>
+                        <NFTSubject>{ele.subject}</NFTSubject>
                         <NFTartist>{ele.artist}</NFTartist>
                     </NFTOneList>
                     <NFTOneImg>
@@ -75,13 +133,18 @@ const Selled = () => {
 
     return (
         <>
-            <div>{nameList}</div>
+            <NonCompleted>{nameList}</NonCompleted>
+            <div>{compeltedList}</div>
         </>
     )
 }
 
 export default Selled
 
+
+const NonCompleted = Styled.div`
+    float: left;
+`
 
 
 const NFTFourList = Styled.ul`

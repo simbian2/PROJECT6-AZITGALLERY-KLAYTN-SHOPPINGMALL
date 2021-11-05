@@ -39,23 +39,34 @@ let Seller_Admin = async (req,res) => {
 
 
 
-let AddUser = async (req,res) => {
-    let {name,email,kaikasAddress} = req.body
-    try {
-        await User.create({name,email,kaikasAddress})
-        result = {
-            result:'OK',
-            msg:'가입 성공'
-        }
-    }catch(e){
-        console.log(e)
-        result = {
-            result:'Fail',
-            msg:'가입 실패'
-        }
-    }
-    res.json(result)
-}
+
+
+
+// let Signup_post = async (req,res) => {
+//     console.log('this is body')
+//     let key = Object.keys(req.body)
+//     let keyObject = JSON.parse(key)
+//     let { NickName, Address,Email} = keyObject
+//     console.log(keyObject)
+//     console.log(keyObject.NickName)
+//     console.log(keyObject.Address)
+//     console.log(keyObject.Email)
+//     let result
+//     try{
+//         await User.create({name:NickName,email:Email,kaikasAddress:Address})
+//         result = {
+//             result:'OK',
+//             msg:'가입 성공'
+//         }
+//     }catch(e){
+//         console.log(e)
+//         result = {
+//             result:'FAIL',
+//             mas:'가입 실패'
+//         }
+//     }
+//     res.json(result)
+// }
 
 
 let Signup_post = async (req,res) => {
@@ -158,7 +169,7 @@ let selleradmin_wait = async (req,res) => {
 
 module.exports = {
     Seller_Admin,
-    AddUser,
+    // AddUser,
     Signup_post,
     Address_Db_check,
     Userlist_get,

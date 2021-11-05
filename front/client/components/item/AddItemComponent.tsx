@@ -16,7 +16,10 @@ const AddItemComponent = ({
     handleTxtChange, handleSubmit, handleConfirm,
     fileChange, fileBase, handleCurrency,
     deleteFile, resetState, 
-    handleItemType, handleTags
+    handleItemType, handleTags,
+    color, size, handleKeyPress,
+    colorVal, sizeVal,
+    deleteItem
     }) => {
 
     const dispatch = useDispatch()
@@ -40,6 +43,41 @@ const AddItemComponent = ({
 
     const test = () => {
         dispatch(MintNFT_REQUEST())
+    }
+
+    const ColorBar = () => {
+        return (
+            <BarWrapper>
+                {color.map((x,k)=>{
+                    return (
+                        <ColorSizeItem key = {k}>
+                            {x}
+                            <CloseButton 
+                            onClick = {()=>{deleteItem(k,"color")}}
+                            >&#10006;</CloseButton>
+                        </ColorSizeItem>
+                    )
+                })}
+            </BarWrapper>
+        )
+    }
+
+    const SizeBar = () => {
+        return (
+            <BarWrapper>
+            {size.map((x,k)=>{
+                return (
+                    <ColorSizeItem key = {k}>
+                        {x}
+                        <CloseButton
+                        onClick = {()=>{deleteItem(k,"size")}}
+                        >&#10006;</CloseButton>
+                    </ColorSizeItem>
+                    
+                    )
+                })}
+            </BarWrapper>
+        )
     }
     
     return(
@@ -83,7 +121,7 @@ const AddItemComponent = ({
                 </SectionWrapper>
                 <SectionWrapper>
                     <SmallTitle>
-                        상세정보
+                        분류
                     </SmallTitle>
                     <select className = "category" onChange = {handleItemType}>
                             <option value = "female">여성</option>
@@ -96,15 +134,21 @@ const AddItemComponent = ({
                     <SmallTitle>
                         색상 및 사이즈
                     </SmallTitle>
-                    <DescText>색상과 사이즈는 ,로 구분해주세요.</DescText>
+                    <DescText>엔터를 누르면 자동으로 입력되며 띄어쓰기는 불가합니다.</DescText>
                     <SmallerTitle>색상</SmallerTitle>
                     <InputBox
                         onChange = {(e)=>handleTags(e,"color")}
+                        onKeyPress = {(e)=>handleKeyPress(e,"color")}
+                        value = {colorVal}
                     />
+                    <ColorBar/>
                     <SmallerTitle>사이즈</SmallerTitle>
                     <InputBox
                         onChange = {(e)=>handleTags(e,"size")}
+                        onKeyPress = {(e)=>handleKeyPress(e,"size")}
+                        value = {sizeVal}
                     />
+                    <SizeBar/>
                 </SectionWrapper>
                 <SectionWrapper>
                     <SmallTitle>
@@ -153,12 +197,14 @@ const SmallTitle = Styled.h4`
     margin-top: 30px;
     font-size:24px;
     margin-bottom:20px;
+    display: block;
 `
 
 const SmallerTitle = Styled.div`
     color:#2d3741; 
     font-size:20px;
     margin-top:20px;
+    display: block;
 `
 
 const DescText = Styled.div`
@@ -170,11 +216,13 @@ const InputBox = Styled.input`
     width: 690px;
     height: 30px;
     font-size: 25px;
+    display: block;
+    margin-bottom: 20px;
 `
 
 const TextBox = Styled.textarea`
-width:690px;
-height: 200px;
+    width:690px;
+    height: 200px;
 `
 
 const BottomBtnWrapper = Styled.div`
@@ -213,4 +261,43 @@ const RightBtn = Styled.button`
     top: 50%;
     transform: translate(-50%, -50%);
     cursor: pointer;
+`
+
+const BarWrapper = Styled.div`
+    padding-top: 20px;
+    padding-left: 10px;
+    width: 695px;
+    display: block;
+    overflow: hidden;
+`
+
+const ColorSizeItem = Styled.div`
+    background: lightgray;
+    padding: 5px 20px 5px 20px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    float: left;
+    display: block;
+    position: relative;
+    border-radius: 5px;
+`
+
+const CloseButton = Styled.div`
+    position: absolute;
+    right: -10px;
+    top: -10px;
+    width: 20px;
+    height:20px;
+    border-radius: 10px;
+    background-color:white;
+    padding-left:4px;
+    line-height:23px;
+    box-sizing: border-box;
+    cursor: pointer;
+    -ms-user-select: none; 
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    opacity: 0.6;
 `
