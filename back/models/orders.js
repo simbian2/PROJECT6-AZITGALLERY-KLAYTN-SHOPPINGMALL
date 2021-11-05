@@ -16,6 +16,9 @@ module.exports = class Orders extends Sequelize.Model{
             buyer:{
                 type:Sequelize.INTEGER,
             },
+            receiver:{
+                type:Sequelize.STRING(30),
+            },
             receiver_address:{
                 type:Sequelize.TEXT,
             },
@@ -41,7 +44,7 @@ module.exports = class Orders extends Sequelize.Model{
             underscored:false,
             paranoid:false,
             modelName:'Orders',
-            tableName:'order',
+            tableName:'orders',
             charset:'utf8',
             collate:'utf8_general_ci'
         })

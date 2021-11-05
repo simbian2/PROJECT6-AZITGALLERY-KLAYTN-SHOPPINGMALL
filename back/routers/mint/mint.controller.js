@@ -85,8 +85,6 @@ let mint_nft_post = async (req,res) => {
        console.log(mintResult)
      }
 
-    /* db에 insert */
-    //  let result = await ItemDetail.create({size:size,color:color,nft:0,qty:1,item_code:0})
 }
 
 
