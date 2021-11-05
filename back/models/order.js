@@ -18,7 +18,6 @@ module.exports = class Orders extends Sequelize.Model{
             },
             receiver_address:{
                 type:Sequelize.TEXT,
-                allowNull:false,
             },
             receiver_contact:{
                 type:Sequelize.INTEGER,

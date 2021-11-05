@@ -11,29 +11,27 @@ import { MintNFT_REQUEST } from "../../reducers/mint";
 import { RootState } from "../../reducers"
 
 const AddItemComponent = ({
-    n, ifSell, extension, 
-    sellToggle, extensionToggle, ifAgreed,
+    n, ifSell, extension, sellToggle, extensionToggle, ifAgreed,
     handleTxtChange, handleSubmit, handleConfirm,
-    fileChange, fileBase, handleCurrency,
-    deleteFile, resetState, 
-    handleItemType, handleTags,
-    color, size, handleKeyPress,
-    colorVal, sizeVal,
-    deleteItem
+    fileChange, fileBase, handleCurrency, deleteFile, 
+    resetState, handleItemType, handleTags, deleteItem,
+    color, size, handleKeyPress, colorVal, sizeVal,
     }) => {
 
     const dispatch = useDispatch()
     const mint = useSelector((state:RootState) => state.mint);
     const [nftCreateState,setnftCreateState] = useState<boolean>(false);
     const createNftCh = () => {
-        dispatch(MintNFT_REQUEST())
+        const data = {color:color, size:size}
+        dispatch(MintNFT_REQUEST(data))
         if(handleConfirm() === true){
             setnftCreateState(prev=>!prev)
         }
     }
+    
     const [cancelNft,setcancelNft] = useState<boolean>(false);
-    const cancelNftCh = () => {
 
+    const cancelNftCh = () => {
         setcancelNft(prev=>!prev)
     }
     const closeBtn = () => {
@@ -42,7 +40,7 @@ const AddItemComponent = ({
     }
 
     const test = () => {
-        dispatch(MintNFT_REQUEST())
+     
     }
 
     const ColorBar = () => {

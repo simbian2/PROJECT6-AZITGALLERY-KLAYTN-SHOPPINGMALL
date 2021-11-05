@@ -3,8 +3,6 @@ import user from './user'
 import mint from './mint'
 import ship from './ship'
 import type from './type'
-import item from './item'
-// import itemImage from './itemimage'
 import reducer from './user'
 import {initialState} from './user'
 import {AnyAction} from 'redux';
@@ -14,8 +12,6 @@ import storage from 'redux-persist/lib/storage';
 import {UserState} from '../reducers/user'
 import {MintState} from '../reducers/mint'
 import {ShipState} from './ship'
-import {ItemState} from './item'
-// import {ItemImageState} from './itemimage'
 import { TypeState } from './type'
 import {Reducer} from 'redux'
 
@@ -30,13 +26,11 @@ export interface State {
     mint:MintState,
     ship:ShipState,
     type:TypeState,
-    item:ItemState,
-    // itemImage:ItemImageState,
+
 }
 
 const combinedReducers = combineReducers({
-    user, mint, ship, type, item,
-    //  itemImage
+    user, mint, ship, type,
 })
 
 export const rootReducer:Reducer<State,AnyAction> = (state,action) => {
