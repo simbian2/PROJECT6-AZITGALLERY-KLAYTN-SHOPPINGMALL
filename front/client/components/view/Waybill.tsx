@@ -5,13 +5,7 @@ import useInput from '../../hooks/useInput'
 import { useState } from 'react'
 
 const Waybill = (props) => {
-    const { setClose } = props
-
-    const [selectDeliveryCompany, setDeliveryCompany] = useState<string>('')
-    const deliveryCompnay = (e) =>{
-        setDeliveryCompany(e.target.value)
-    }
-    const [deliveryNum, onChangeDeliveryNum] = useInput('')
+    const { setClose, deliveryCompnay, deliveryNum, onChangeDeliveryNum } = props
 
     return (
         <>
@@ -25,8 +19,8 @@ const Waybill = (props) => {
                             </li>
                             <li className="company">택배사</li>
                             <li className="companySelect">
-                                <select title="택배사 선택" name="deliveryCompany" id="deliveryCompany" onChange={deliveryCompnay}>
-                                    <option selected disabled>택배사 선택</option>
+                                <select title="택배사 선택" defaultValue="default" name="deliveryCompany" id="deliveryCompany" onChange={deliveryCompnay}>
+                                    <option value="default" disabled>택배사 선택</option>
                                     <option value="CJ대한통운">CJ대한통운</option>
                                     <option value="우체국택배">우체국택배</option>
                                     <option value="한진택배">한진택배</option>
@@ -37,7 +31,7 @@ const Waybill = (props) => {
                             </li>
                             <li className="number">운송장</li>
                             <li className="numberInput">
-                                <input type="text" placeholder="운송장 번호 - 없이 입력" value={deliveryNum} onChange={onChangeDeliveryNum}/>
+                                <input type="text" placeholder="운송장 번호 - 없이 입력" value={deliveryNum} onChange={onChangeDeliveryNum} />
                             </li>
                         </ul>
                         <SetForm onClick={setClose}>운송장 등록</SetForm>

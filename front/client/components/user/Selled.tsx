@@ -3,6 +3,9 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import Alert from '@mui/material/Alert';
 import Waybill from '../view/Waybill';
+import useInput from '../../hooks/useInput';
+import { useDispatch } from 'react-redux';
+import { deliveryInfo_REQUEST } from '../../reducers/ship';
 
 const Selled = () => {
 
@@ -38,7 +41,7 @@ const Selled = () => {
             Like: 5,
             alert: '신고하기'
         },
-        
+
     ]);
 
     // @ 배송 등록 후, 판매된 NFT 리스트들
@@ -74,10 +77,33 @@ const Selled = () => {
     ]);
 
     // @ 배송등록하기
+    const dispatch = useDispatch()
+
     const [deliveryForm, setDeliveryForm] = useState<boolean>(false)
-    
-    const setDelivery = () =>{
+
+    const setDelivery = () => {
         setDeliveryForm(prev => !prev)
+
+        if(selectDeliveryCompany && deliveryNum !== ''){
+            dispatch(deliveryInfo_REQUEST(deliveryInfo))
+        }
+        setDeliveryCompany('')
+        setDeliveryNum('')
+    }
+
+    // @ 배송 관련 정보들
+    const [selectDeliveryCompany, setDeliveryCompany] = useState<string>('')
+    const deliveryCompnay = (e) => {
+        setDeliveryCompany(e.target.value)
+    }
+    const [deliveryNum, setDeliveryNum] = useState<string>('')
+    const onChangeDeliveryNum = (e) => {
+        setDeliveryNum(e.target.value)
+    }
+
+    const deliveryInfo = {
+        selectDeliveryCompany,
+        deliveryNum
     }
 
     const nameList: JSX.Element[] = Arr.map((ele) =>
@@ -142,12 +168,12 @@ const Selled = () => {
 
     return (
         <>
-        {
-            deliveryForm
-            ? <Waybill setClose={setDelivery}/>
-            : <></>
-        }
-            
+            {
+                deliveryForm
+                    ? <Waybill setClose={setDelivery} deliveryCompnay={deliveryCompnay} deliveryNum={deliveryNum} onChangeDeliveryNum={onChangeDeliveryNum} />
+                    : <></>
+            }
+
             <NonCompleted>{nameList}</NonCompleted>
             <div>{compeltedList}</div>
         </>
