@@ -77,8 +77,8 @@ let signup_post = async (req,res) => {
     console.log('this is body')
     let key = Object.keys(req.body)
     let keyObject = JSON.parse(key)
-    console.log(keyObject,"111")
-    let name = keyObject.NickName
+    console.log(keyObject)
+    let nick_name = keyObject.NickName
     let kaikas_address = keyObject.Address
     let email = keyObject.Email
     let join_date = new Date()
@@ -90,7 +90,7 @@ let signup_post = async (req,res) => {
     console.log(keyObject.Address,)
     console.log(keyObject.Email)
 
-    let result = await User.create({name,kaikas_address,contact,address,join_date,email})
+    let result = await User.create({nick_name,kaikas_address,contact,address,join_date,email})
     console.log(result)
 
 }
@@ -178,10 +178,11 @@ let selleradmin_wait = async (req,res) => {
     let key = Object.keys(req.body)
     const keyObject = JSON.parse(key)
     console.log(keyObject)
-    const name = 0
+    const name = 1
     let admin_approval = 1
     let email_validation = true
-    let result = await Seller.create({user_idx:name,seller_code:keyObject,admin_approval,email_validation})
+    let brand_name = 'NULL'
+    let result = await Seller.create({user_idx:name,seller_code:keyObject,admin_approval,email_validation,brand_name})
 
 }
 
