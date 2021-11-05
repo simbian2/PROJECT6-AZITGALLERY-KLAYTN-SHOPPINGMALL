@@ -1,3 +1,4 @@
+const { User, ItemDetail } = require('../../models')
 
   //https://baobab.scope.klaytn.com/account/0xdfaf037869bb807239e8c46d3b3472ac72adbaef?tabId=txList
 const option = {
@@ -21,26 +22,31 @@ const option = {
 
 let mint_nft_post = async (req,res) => {
     console.log('NFT')
+    let key = Object.keys(req.body)
+    let keyObject = JSON.parse(key)
+    console.log(keyObject)
+    const color = String(keyObject.color)
+    const size = String(keyObject.size)
 
   // 개인키를 바탕으로 keyring을 생성합니다.
   // https://baobab.wallet.klaytn.com/access/0xdfaf037869bb807239e8c46d3b3472ac72adbaef 여기서 
   // keyring에 대한 자세한 내용은 https://ko.docs.klaytn.com/bapp/sdk/Caver-js/api-references/Caver.wallet/keyring 를 참고하세요.
   // https://baobab.wallet.klaytn.com/access/0xdfaf037869bb807239e8c46d3b3472ac72adbaef  개인키
   const keyring = caver.wallet.keyring.createFromPrivateKey(
-    "0x126dd02e303ea1f8e1bf91a1ba99f8d06efbc501c40961d718950b29f03abd80"
+    "0xee787cc5b6cb27bc9ff018be6fad5db255a759c62e6170e18a80a282436a3699"
   );
   // wallet에 keyring이 추가되지 않은 경우에만 keyring을 추가합니다.
   if (!caver.wallet.getKeyring(keyring.address)) {
     const singleKeyRing = caver.wallet.keyring.createFromPrivateKey(
-      "0x126dd02e303ea1f8e1bf91a1ba99f8d06efbc501c40961d718950b29f03abd80"
+      "0xee787cc5b6cb27bc9ff018be6fad5db255a759c62e6170e18a80a282436a3699"
     );
     caver.wallet.add(singleKeyRing);
   }
   // 넘어온 데이터를 바탕으로 새로운 KIP-17을 배포(=새로운 명품 등록)합니다. 
   const kip17 = await caver.kct.kip17.deploy(
     {
-      name: 'LULUBYE',
-      symbol: 'FEV',
+      name: 'EPITEOM',
+      symbol: 'EPI',
     },
     keyring.address
   );
@@ -63,20 +69,22 @@ let mint_nft_post = async (req,res) => {
        // 본 예제에서는 임의의 sellerID와 productID를 json 형태로 저장합니다.
        // 토큰 이미지 URL이나 기타 정보를 tokenURI에 저장할 수 있습니다.
        tokenURI = JSON.stringify({
-         sellerID: 0,
-         productID: 'dafdsfdsf',
+          color: color,
+         size: size,
        });
        // KIP-17.mintWithTokenURI를 이용해서 새로운 토큰을 발행합니다.
        // 자세한 내용은 https://ko.docs.klaytn.com/bapp/sdk/caver-js/api-references/caver.kct/KIP-17#KIP-17-mintwithtokenuri 를 참고하세요.
        mintResult = await kip_17.mintWithTokenURI(
         // https://baobab.wallet.klaytn.com/access/0xdfaf037869bb807239e8c46d3b3472ac72adbaef  account주소를 넣는다
-         "0x5f5c71c26c985db9cecc4ba280534f75fdb54220",
+         "0xeda67a83f6c1f82f5affdadef2ff6aa81b3d1901",
          randomTokenID,
          tokenURI,
          { from: keyring.address }
        );
        console.log(mintResult)
      }
+
+     let result = await ItemDetail.create({size:size,color:color,nft:0,qty:1,item_code:0})
 }
 
 

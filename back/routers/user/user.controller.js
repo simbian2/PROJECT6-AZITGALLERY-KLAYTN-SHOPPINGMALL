@@ -4,8 +4,10 @@ const nodemailer = require('nodemailer');
 const smtpTransporter = require('nodemailer-smtp-transport');
 require('dotenv').config()
 const { auction, deliver, item, user } = require("../../models");
-const { User } = require('../../models')
+const { User, Seller } = require('../../models')
 
+
+/* 이메일 보내기 */
 
 let Seller_Admin = async (req,res) => {
     console.log('왓다')
@@ -68,6 +70,7 @@ let Seller_Admin = async (req,res) => {
 //     res.json(result)
 // }
 
+/* 회원가입 */
 
 let Signup_post = async (req,res) => {
     
@@ -91,6 +94,8 @@ let Signup_post = async (req,res) => {
     console.log(result)
 
 }
+
+/* 이미 회원가입 했는지, 아니면 새로운 회원인지 */
 
 let Address_Db_check = async (req,res) => {
     
@@ -118,15 +123,17 @@ let Address_Db_check = async (req,res) => {
 
 }
 
+/* 모든 회원들 정보를 불러오기 */
+
 let Userlist_get = async (req,res) => {
 
-    let result = await User.findAll({})
+    let result = await Seller.findAll({})
   
 
     const ARR = []
 
     for(let i=0; i<result.length; i++){
-        ARR.push({id:`Arr${i+1}`,name:result[i].name, kaikas_address:result[i].kaikasAddress, email:result[i].email, kycAuthorized:result[i].kycAuthorized })
+        ARR.push({id:`Arr${i+1}`,name:result[i].user_idx, kaikas_address:result[i].seller_code, kycAuthorized:result[i].admin_approval })
     }
     console.log(ARR)
     let data = {
@@ -137,13 +144,15 @@ let Userlist_get = async (req,res) => {
 
 }
 
+/* 반려 또는 승인 */
+
 let selleradmin_access = async (req,res) => {
 
     let key = Object.keys(req.body)
     let keyObject = JSON.parse(key)
     console.log(keyObject)
 
-    let result = await User.update({kycAuthorized:3},{where:{name:keyObject}})
+    let result = await Seller.update({admin_approval:3},{where:{seller_code:keyObject}})
 
 }
 
@@ -153,17 +162,21 @@ let selleradmin_deny = async (req,res) => {
     let keyObject = JSON.parse(key)
     console.log(keyObject)
 
-    let result = await User.update({kycAuthorized:2},{where:{name:keyObject}})
+    let result = await Seller.update({admin_approval:2},{where:{seller_code:keyObject}})
 
 }
+
+/* 일반 구매자를 판매자 테이블로 이동 */
 
 let selleradmin_wait = async (req,res) => {
 
     let key = Object.keys(req.body)
-    let keyObject = JSON.parse(key)
+    const keyObject = JSON.parse(key)
     console.log(keyObject)
-
-    let result = await User.update({kycAuthorized:1},{where:{kaikasAddress:keyObject}})
+    const name = 0
+    let admin_approval = 1
+    let email_validation = true
+    let result = await Seller.create({user_idx:name,seller_code:keyObject,admin_approval,email_validation})
 
 }
 
