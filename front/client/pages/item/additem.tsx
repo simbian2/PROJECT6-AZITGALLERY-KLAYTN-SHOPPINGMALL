@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import AddItemComponent from '../../components/item/AddItemComponent'
 import axios from 'axios'
-import {useDispatch} from 'react-redux'
-import { itemInfo_REQUEST } from '../../reducers/item'
-import { itemImageInfo_REQUEST } from '../../reducers/itemimage'
+import {url} from '../../saga/url'
 
 const addItem = () =>{
     // 남은 NTF 등록 횟수 -> 느낌상 삭제해야 할 컴포넌트 같음
@@ -42,9 +40,6 @@ const addItem = () =>{
     // 사이즈 입력값
     const [sizeVal, setSizeVal] = useState<string>('')
    
-    //디스패치 선언
-    const dispatch = useDispatch()
-    
     
     // input에 대한 handlechange(각 컴포넌트에서 텍스트를 인자값으로 받아
     // 각 컴포넌트마다 인자값에 따라 다르게 응답한다
@@ -246,11 +241,42 @@ const addItem = () =>{
         let data = {}
         if(ifSell == true){
             data = {price, currency, name, desc, itemType, color, size}
-            dispatch(itemInfo_REQUEST([data, file]))
+
+            sendDataToServer([data,file])
         } else{
             data = {name, desc, aucPrice, currency, aucTime, extension, itemType, color, size}
-            dispatch(itemInfo_REQUEST([data, file]))
+
+            sendDataToServer([data,file])
         }
+    }
+
+    function sendDataToServer(data:Array<any>){
+        // s3에서 리턴받은 주소를 넣을 배열
+        let fileArr = []
+        // 이미지를 배열에 넣는 함수
+        async function putImagesLink(){
+            // data[1]의 파일들을 s3에 각각 올리고 업로드 주소값을 받아 배열에 넣는다
+            let fileArray = data[1].map(async (items)=>{
+                const response = await fetch(`${url}/item/uploadpics`)
+                const { link } = await response.json()
+                await fetch(link, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "multipart/form-data"
+                    },
+                    body: items
+                })
+                const imageURL = link.split('?')[0];
+                fileArr.push(imageURL)
+            })
+            // 모든 파일에 대해 값을 받아온 뒤 시행한다
+            await Promise.all(fileArray)
+        }
+        
+        // then으로 강제로 await을 시켜 전송
+        putImagesLink().then(x=>{
+            let result = axios.post(`${url}/item/uploaddata`,[data[0],fileArr])
+        })
     }
 
     // 새 NFT발행 시 그냥 새로고침
