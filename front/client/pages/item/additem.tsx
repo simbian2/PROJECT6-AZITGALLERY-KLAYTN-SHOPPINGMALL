@@ -171,14 +171,14 @@ const addItem = () =>{
         // 및 해당 값 밸류를 직전 state로 회귀시킴
         if(item == 'color'){
             if(handleChk(value) === false){
-                alert('특수문자와 띄어쓰기 없이 입력해 주세요.')
+                alert('특수문자나 띄어쓰기 없이 입력해 주세요.')
                 e.target.value = colorVal
             } else{
                 setColorVal(value)
             }
         } else if(item == 'size'){
             if(handleChk(value) === false){
-                alert('특수문자와 띄어쓰기 없이 입력해 주세요.')
+                alert('특수문자나 띄어쓰기 없이 입력해 주세요.')
                 e.target.value = sizeVal
             } else{
                 setSizeVal(value)
@@ -241,11 +241,9 @@ const addItem = () =>{
         let data = {}
         if(ifSell == true){
             data = {price, currency, name, desc, itemType, color, size}
-
             sendDataToServer([data,file])
         } else{
             data = {name, desc, aucPrice, currency, aucTime, extension, itemType, color, size}
-
             sendDataToServer([data,file])
         }
     }
@@ -272,7 +270,6 @@ const addItem = () =>{
             // 모든 파일에 대해 값을 받아온 뒤 시행한다
             await Promise.all(fileArray)
         }
-        
         // then으로 강제로 await을 시켜 전송
         putImagesLink().then(x=>{
             let result = axios.post(`${url}/item/uploaddata`,[data[0],fileArr])
@@ -283,7 +280,6 @@ const addItem = () =>{
     const resetState = () => {
         window.location.reload() 
     }
-
 
     return(
         <AddItemComponent 

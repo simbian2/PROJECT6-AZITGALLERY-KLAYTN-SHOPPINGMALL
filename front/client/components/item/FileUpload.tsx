@@ -16,18 +16,18 @@ const FileUpload = ({fileChange, fileBase, deleteFile}) =>{
                 <input type = "file" id = "fileUp" 
                 onChange = {fileChange.bind(this)} 
                 accept="image/*"
-                multiple></input>
+                multiple
+                />
             </UploadWrapper>
             <PrevWrapper>
-                {fileBase.map((item, key) => {
+                {fileBase.map((x, k) => {
                     return(
-                        <ImageContent key = {key}>
+                        <ImageContent key = {k}>
                             <img
-                                src={item}
-                                // alt="First slide"
+                                src={x}
                             />
                             <CloseButton
-                                onClick = {()=>{deleteFile(key)}}
+                                onClick = {()=>{deleteFile(k)}}
                             >&#10006;</CloseButton>
                         </ImageContent>
                     )
