@@ -23,6 +23,10 @@ module.exports = class OrderDetail extends Sequelize.Model{
             price:{
                 type:Sequelize.INTEGER,
                 comment:'상품당가격'
+            },
+            order_detail_id:{
+                type:Sequelize.INTEGER,
+                allowNull:false
             }
         },{
             sequelize,

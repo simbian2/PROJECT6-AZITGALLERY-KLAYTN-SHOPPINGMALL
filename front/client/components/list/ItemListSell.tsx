@@ -158,9 +158,11 @@ const ItemListSell = (props) => {
     </React.Fragment>
     );
 
-    const handleClick = (): void => {
+    const handleClick = () => {
 
-        dispatch(PlusItemlist_REQUEST())
+        dispatch(PlusItemlist_REQUEST(list.listlength))
+        setArr(list.itemList)
+        console.log('dispatch?')
     };
 
     useEffect(() => {

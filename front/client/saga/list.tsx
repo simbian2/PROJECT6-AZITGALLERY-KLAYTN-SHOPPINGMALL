@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {all,put,takeEvery,takeLatest,fork,call} from "redux-saga/effects";
+import { Json } from 'sequelize/types/lib/utils';
 
 function listitemAPI() {
     return axios.get(`http://localhost:4000/list/alllist`)
@@ -19,16 +20,17 @@ function* reqlistitem(){
 }
 
 
-function pluslistitemAPI() {
-    return axios.get(`http://localhost:4000/list/pluslist`)
+function pluslistitemAPI(action) {
+    return axios.post(`http://localhost:4000/list/pluslist`,JSON.stringify(action.data))
 }
 
-function* pluslistitemSaga(){
-    const result = yield call(pluslistitemAPI)
+function* pluslistitemSaga(action){
+    const result = yield call(pluslistitemAPI,action)
    
     yield put({
         type:'PLUS_ITEM_LIST_SUCCESS',
-        data:result.data.ARR
+        data:result.data.ARR,
+        Pluslength:result.data.Pluslength
     })
 }
 

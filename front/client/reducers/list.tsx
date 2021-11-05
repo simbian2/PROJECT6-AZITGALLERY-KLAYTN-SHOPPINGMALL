@@ -5,10 +5,12 @@ import {HYDRATE} from 'next-redux-wrapper';
 
 export interface ListState {
     itemList: Array<any>;
+    listlength: number;
 }
 
 export const initialState : ListState = {
     itemList: [],
+    listlength: 3,
 };
 
 
@@ -24,6 +26,7 @@ export const PLUS_ITEM_LIST_ERROR = "PLUS_ITEM_LIST_ERROR" as const;
 export const Itemlist_REQUEST = () => {
     return {
         type: ITEM_LIST_REQUEST,
+  
     }
 }
 
@@ -41,17 +44,19 @@ export const Itemlist_ERROR = () => {
     }
 }
 
-export const PlusItemlist_REQUEST = () => {
+export const PlusItemlist_REQUEST = (data) => {
     return {
         type: PLUS_ITEM_LIST_REQUEST,
+        data:data
     }
 }
 
-export const PlusItemlist_SUCCESS = (data) => {
+export const PlusItemlist_SUCCESS = (data,Pluslength) => {
     console.log(data)
     return {
         type: PLUS_ITEM_LIST_SUCCESS,
-        data: data
+        data: data,
+        Pluslength: Pluslength
     }
 }
 
@@ -92,10 +97,13 @@ const reducer = (state:ListState=initialState, action:ListAction) => {
          
             }
         case PLUS_ITEM_LIST_SUCCESS:
+            console.log(action.Pluslength)
             return{
                 ...state,
-                itemList: action.data
+                itemList: action.data,
+                listlength: action.Pluslength
             }
+          
         case PLUS_ITEM_LIST_ERROR:
             return{
                 ...state,
