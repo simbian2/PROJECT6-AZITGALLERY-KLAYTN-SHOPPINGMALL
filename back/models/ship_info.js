@@ -12,11 +12,12 @@ module.exports = class ShipInfo extends Sequelize.Model{
                 // 운송장 번호에서 - 같은게 들어있을 수도 있어서 이렇게 처리합니다.
             },
             order_num:{
-                type:Sequelize.STRING(100),
+                type:Sequelize.INTEGER,
             },
             item_delivery_state:{
                 type:Sequelize.STRING(20),      // 배송준비중, 배송중, 배송완료
             },
+
         },{
             sequelize,
             timestamps:false,
@@ -28,6 +29,7 @@ module.exports = class ShipInfo extends Sequelize.Model{
         })
     }
     static associate(db){
+        db.ShipInfo.belongsTo(db.OrderDetail,{foreignKey:'order_num',targetKey:'order_detail_id'})
 
     }
 }

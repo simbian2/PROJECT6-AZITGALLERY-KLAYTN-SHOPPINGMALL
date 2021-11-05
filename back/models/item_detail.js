@@ -30,7 +30,7 @@ module.exports = class ItemDetail extends Sequelize.Model{
                 type:Sequelize.INTEGER,
             },
             item_code:{
-                type:Sequelize.STRING,
+                type:Sequelize.STRING(100),
                 comment:'item_info에서 받은 item_code + size와 color별 index'
             },
         },{

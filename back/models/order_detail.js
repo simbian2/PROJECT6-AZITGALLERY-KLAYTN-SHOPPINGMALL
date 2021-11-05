@@ -18,7 +18,11 @@ module.exports = class OrderDetail extends Sequelize.Model{
                 type:Sequelize.INTEGER,
             },
             item_code:{
-                type:Sequelize.STRING,
+                type:Sequelize.STRING(100),
+            },
+            price:{
+                type:Sequelize.INTEGER,
+                comment:'상품당가격'
             }
         },{
             sequelize,
@@ -30,5 +34,9 @@ module.exports = class OrderDetail extends Sequelize.Model{
             charset:'utf8',
             collate:'utf8_general_ci'
         })
+    }
+    static associate(db){
+        db.OrderDetail.belongsTo(db.Orders,{foreignKey:'order_detail_id',targetKey:'order_num'}),
+        db.OrderDetail.hasOne(db.ShipInfo,{foreignKey:'order_num',sourceKey:'order_detail_id'})
     }
 }

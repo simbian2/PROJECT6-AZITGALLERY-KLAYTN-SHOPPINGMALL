@@ -28,7 +28,7 @@ module.exports = class Item extends Sequelize.Model{
                 comment:'0:0~10/1:10~20/2:20~30/3:30~40/4:40~'
             },
             item_code:{
-                type:Sequelize.INTEGER,
+                type:Sequelize.STRING(100),
             }
         },{
             sequelize,
@@ -43,7 +43,7 @@ module.exports = class Item extends Sequelize.Model{
     }
     static associate(db){
         db.Item.belongsTo(db.User,{foreignKey:'creator',targetKey:'user_idx'}),
-        db.Item.hasOne(db.Category,{foreignKey:'id',sourceKey:'item_id'})
+        db.Item.belongsTo(db.Category,{foreignKey:'item_id',targetKey:'id'})
         db.Item.hasOne(db.ItemInfo,{foreignKey:'item_info_idx',sourceKey:'item_id'})
     }
 }

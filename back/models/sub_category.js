@@ -4,6 +4,9 @@ const moment = require('moment')
 module.exports = class SubCategory extends Sequelize.Model{
     static init(sequelize){
         return super.init({
+            main_category_idx:{
+                type:Sequelize.INTEGER,
+            },
             item_code:{
                 type:Sequelize.STRING(100),
             },
@@ -24,6 +27,6 @@ module.exports = class SubCategory extends Sequelize.Model{
         })
     }
     static associate(db){
-        db.SubCategory.belongsTo(db.Category,{foreignKey:'id',targetKey:'id'})
+        db.SubCategory.belongsTo(db.Category,{foreignKey:'main_category_idx',targetKey:'id'})
     }
 }

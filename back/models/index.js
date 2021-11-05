@@ -14,11 +14,12 @@ const Item = require('./item');
 const LikeList = require('./like_list');
 const NftImg = require('./nft_img');
 const OrderDetail = require('./order_detail');
-const Order = require('./Order');
+const Orders = require('./Order');
 const Seller = require('./seller');
 const ShipInfo = require('./ship_info');
 const SubCategory = require('./sub_category');
 const User = require('./user');
+const BuyerList = require('./buyer_list')
 
 
 const db = {};
@@ -43,7 +44,7 @@ db.Item = Item
 db.LikeList = LikeList
 db.NftImg = NftImg
 db.OrderDetail = OrderDetail
-db.Order = Order
+db.Orders = Orders
 db.Seller = Seller
 db.ShipInfo = ShipInfo
 db.SubCategory = SubCategory
@@ -51,6 +52,7 @@ db.User = User
 db.Category = Category
 db.ItemInfo = ItemInfo
 db.AuctionHistory = AuctionHistory
+db.BuyerList = BuyerList
 
 
 Auction.init(sequelize)
@@ -60,7 +62,7 @@ ItemImg.init(sequelize)
 Item.init(sequelize)
 LikeList.init(sequelize)
 NftImg.init(sequelize)
-Order.init(sequelize)
+Orders.init(sequelize)
 OrderDetail.init(sequelize)
 Seller.init(sequelize)
 ShipInfo.init(sequelize)
@@ -69,6 +71,7 @@ User.init(sequelize)
 Category.init(sequelize)
 ItemInfo.init(sequelize)
 AuctionHistory.init(sequelize)
+BuyerList.init(sequelize)
 
 
 
