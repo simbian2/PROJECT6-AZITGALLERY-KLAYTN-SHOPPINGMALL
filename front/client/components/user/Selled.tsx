@@ -101,6 +101,7 @@ const Selled = () => {
         setDeliveryNum(e.target.value)
     }
 
+    // @ 나중에 item id 도 보내줘야함
     const deliveryInfo = {
         selectDeliveryCompany,
         deliveryNum
