@@ -10,7 +10,6 @@ const DirectDeal = require('./direct_deal');
 const ItemDetail = require('./item_detail');
 const ItemImg = require('./item_img');
 const ItemInfo = require('./item_info');
-const Item = require('./item');
 const LikeList = require('./like_list');
 const NftImg = require('./nft_img');
 const OrderDetail = require('./order_detail');
@@ -40,7 +39,7 @@ db.Auction = Auction
 db.DirectDeal = DirectDeal
 db.ItemDetail = ItemDetail
 db.ItemImg = ItemImg
-db.Item = Item
+//db.Item = Item
 db.LikeList = LikeList
 db.NftImg = NftImg
 db.OrderDetail = OrderDetail
@@ -59,7 +58,7 @@ Auction.init(sequelize)
 DirectDeal.init(sequelize)
 ItemDetail.init(sequelize)
 ItemImg.init(sequelize)
-Item.init(sequelize)
+//Item.init(sequelize)
 LikeList.init(sequelize)
 NftImg.init(sequelize)
 Orders.init(sequelize)

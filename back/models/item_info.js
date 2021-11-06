@@ -5,11 +5,17 @@ const { STRING } = require('sequelize')
 // 추후 상품id 추가할 것
 module.exports = class ItemInfo extends Sequelize.Model{
     static init(sequelize){
-        return super.init({ 
-            item_info_idx:{
-                type:Sequelize.INTEGER,
+        return super.init({
+            creator:{
+                type:Sequelize.INTEGER(30),
                 allowNull:false,
-                primaryKey:true
+                comment:'useridx',
+            },
+            item_id:{
+                type:Sequelize.INTEGER,
+            },
+            item_code:{
+                type:Sequelize.STRING(100),
             },
             description:{
                 type:Sequelize.TEXT,
@@ -19,7 +25,7 @@ module.exports = class ItemInfo extends Sequelize.Model{
             },
             registered_at:{
                 type:Sequelize.DATE,
-                defaultValue:Sequelize.NOW
+                defaultValue:sequelize.literal('now()'),
             },
             sell_type:{
                 type:Sequelize.BOOLEAN,
@@ -37,10 +43,11 @@ module.exports = class ItemInfo extends Sequelize.Model{
         })
     }
     static associate(db){
-        db.ItemInfo.belongsTo(db.Item,{foreignKey:'item_info_idx',targetKey:'item_id'}),
-        db.ItemInfo.hasMany(db.ItemImg,{foreignKey:'item_info_idx',sourceKey:'item_info_idx'}),
-        db.ItemInfo.hasMany(db.DirectDeal,{foreignKey:'direct_deal_idx',sourceKey:'item_info_idx'}),
-        db.ItemInfo.hasMany(db.ItemDetail,{foreignKey:'item_info_idx',sourceKey:'item_info_idx'}),
-        db.ItemInfo.hasMany(db.Auction,{foreignKey:'auction_idx',sourceKey:'item_info_idx'})
+        db.ItemInfo.belongsTo(db.User,{foreignKey:'creator',targetKey:'user_idx'}),
+        db.ItemInfo.belongsTo(db.Category,{foreignKey:'item_id',targetKey:'id'}),
+        db.ItemInfo.hasMany(db.ItemImg,{foreignKey:'item_id',sourceKey:'item_id'}),
+        db.ItemInfo.hasMany(db.DirectDeal,{foreignKey:'direct_deal_idx',sourceKey:'item_id'}),
+        db.ItemInfo.hasMany(db.ItemDetail,{foreignKey:'item_info_idx',sourceKey:'item_id'}),
+        db.ItemInfo.hasMany(db.Auction,{foreignKey:'auction_idx',sourceKey:'item_id'})
     }
 }

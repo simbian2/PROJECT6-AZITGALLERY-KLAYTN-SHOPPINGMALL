@@ -27,7 +27,7 @@ module.exports = class Auction extends Sequelize.Model{
         })
     }
     static associate(db){
-        db.Auction.belongsTo(db.ItemInfo,{foreignKey:'auction_idx',targetKey:'item_info_idx'})
+        db.Auction.belongsTo(db.ItemInfo,{foreignKey:'auction_idx',targetKey:'item_id'})
         db.Auction.hasMany(db.AuctionHistory,{foreignKey:'auc_history_idx',sourceKey:'auction_idx'})
     }
 }

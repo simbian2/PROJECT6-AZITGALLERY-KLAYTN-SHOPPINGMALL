@@ -6,7 +6,8 @@ module.exports = class Category extends Sequelize.Model{
         return super.init({
             main_category_code:{
                 type:Sequelize.INTEGER,
-                comment:'01 02 03 04 05'
+                comment:'01 02 03 04 05',
+                unique:true
             },
             // item_classification:{
             //     type:Sequelize.STRING(30),
@@ -27,9 +28,10 @@ module.exports = class Category extends Sequelize.Model{
         })
     }
     static associate(db){
-        db.Category.hasMany(db.Item,{foreignKey:'item_id',sourceKey:'id'}),
+        db.Category.hasMany(db.ItemInfo,{foreignKey:'item_id',sourceKey:'id'}),
         db.Category.hasMany(db.SubCategory,{foreignKey:'main_category_idx',sourceKey:'id'})
 
 
     }
 }
+
