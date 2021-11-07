@@ -14,13 +14,14 @@ module.exports = class Orders extends Sequelize.Model{
                 type:Sequelize.STRING(30),
             },
             buyer:{
-                type:Sequelize.STRING(30),
+                type:Sequelize.INTEGER,
             },
             receiver:{
                 type:Sequelize.STRING(30),
             },
             receiver_address:{
                 type:Sequelize.STRING(50),
+
             },
             receiver_contact:{
                 type:Sequelize.INTEGER,
@@ -50,6 +51,8 @@ module.exports = class Orders extends Sequelize.Model{
         })
     }
     static associate(db){
-        db.Orders.hasMany(db.OrderDetail,{foreignKey:'order_detail_id',sourceKey:'order_num'})
+        db.Orders.hasMany(db.OrderDetail,{foreignKey:'order_num',sourceKey:'order_num'}),
+        db.Orders.belongsTo(db.User,{foreignKey:'user_idx',targetKey:'user_idx'}),
+        db.Orders.hasMany(db.ShipInfo,{foreignKey:'order_num',sourceKey:'order_num'})
     }
 }
