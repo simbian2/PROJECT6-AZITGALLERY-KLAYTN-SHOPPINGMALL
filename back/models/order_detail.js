@@ -29,6 +29,7 @@ module.exports = class OrderDetail extends Sequelize.Model{
             },
             order_detail_num:{
                 type:Sequelize.INTEGER,
+
             }
         },{
             sequelize,

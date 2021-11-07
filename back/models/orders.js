@@ -20,7 +20,8 @@ module.exports = class Orders extends Sequelize.Model{
                 type:Sequelize.STRING(30),
             },
             receiver_address:{
-                type:Sequelize.TEXT,
+                type:Sequelize.STRING(50),
+
             },
             receiver_contact:{
                 type:Sequelize.INTEGER,
@@ -34,9 +35,10 @@ module.exports = class Orders extends Sequelize.Model{
                 comment:'true -> 전체 배송완료시'
             },
             memo:{
-                type:Sequelize.TEXT,
+                type:Sequelize.STRING(50),
                 comment:'배송품 수령지 등에 대한 정보 '
             }
+
         },{
             sequelize,
             timestamps:false,
