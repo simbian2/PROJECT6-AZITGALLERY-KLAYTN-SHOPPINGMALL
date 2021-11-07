@@ -28,7 +28,7 @@ module.exports = class Category extends Sequelize.Model{
         })
     }
     static associate(db){
-        db.Category.hasMany(db.ItemInfo,{foreignKey:'item_id',sourceKey:'id'}),
+        db.Category.hasMany(db.ItemInfo,{foreignKey:'category_id',sourceKey:'id'}),
         db.Category.hasMany(db.SubCategory,{foreignKey:'main_category_idx',sourceKey:'id'})
 
 

@@ -14,14 +14,15 @@ module.exports = class Auction extends Sequelize.Model{
                 type:Sequelize.BOOLEAN,
             },
             start_date:{
-                type:Sequelize.DATE,    
+                type:Sequelize.DATE,
+                defaultValue:sequelize.literal('now()') 
             },  
         },{
             sequelize,
-            timestamps:true,
+            timestamps:false,
             modelName:'Auction',
             tableName:'auction',
-            paranoid:true,
+            paranoid:false,
             charset:'utf8',
             collate:'utf8_general_ci'
         })

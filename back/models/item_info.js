@@ -13,6 +13,8 @@ module.exports = class ItemInfo extends Sequelize.Model{
             },
             item_id:{
                 type:Sequelize.INTEGER,
+                primaryKey:true,
+                autoIncrement:true
             },
             item_code:{
                 type:Sequelize.STRING(100),
@@ -44,7 +46,7 @@ module.exports = class ItemInfo extends Sequelize.Model{
     }
     static associate(db){
         db.ItemInfo.belongsTo(db.User,{foreignKey:'creator',targetKey:'user_idx'}),
-        db.ItemInfo.belongsTo(db.Category,{foreignKey:'item_id',targetKey:'id'}),
+        db.ItemInfo.belongsTo(db.Category,{foreignKey:'category_id',targetKey:'id'}),
         db.ItemInfo.hasMany(db.ItemImg,{foreignKey:'item_id',sourceKey:'item_id'}),
         db.ItemInfo.hasMany(db.DirectDeal,{foreignKey:'direct_deal_idx',sourceKey:'item_id'}),
         db.ItemInfo.hasMany(db.ItemDetail,{foreignKey:'item_info_idx',sourceKey:'item_id'}),

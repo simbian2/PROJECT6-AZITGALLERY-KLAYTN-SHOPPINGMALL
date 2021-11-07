@@ -4,7 +4,13 @@ const moment = require('moment')
 // 추후 상품id 추가할 것
 module.exports = class ItemDetail extends Sequelize.Model{
     static init(sequelize){
-        return super.init({ 
+        return super.init({
+            nft_idx:{
+                type:Sequelize.INTEGER,
+                allowNull:false,
+                autoIncrement:true,
+                primaryKey:true
+            },
             item_info_idx:{
                 type:Sequelize.INTEGER,
                 allowNull:false,
@@ -13,7 +19,6 @@ module.exports = class ItemDetail extends Sequelize.Model{
             item_detail_idx:{
                 type:Sequelize.INTEGER,
                 allowNull:false,
-                primaryKey:true
             },
             size:{
                 type:Sequelize.STRING(30),
@@ -24,13 +29,15 @@ module.exports = class ItemDetail extends Sequelize.Model{
             nft:{
                 type:Sequelize.STRING(255),
                 allowNull:false,
+                unique:true
             },
             qty:{
                 type:Sequelize.INTEGER,
             },
             item_code:{
                 type:Sequelize.STRING(100),
-                comment:'item_info에서 받은 item_code + size와 color별 index'
+                comment:'item_info에서 받은 item_code + size와 color별 index',
+                unique:true
             },
             product_status:{
                 type:Sequelize.STRING,
@@ -48,6 +55,6 @@ module.exports = class ItemDetail extends Sequelize.Model{
     }
     static associate(db){
         db.ItemDetail.belongsTo(db.ItemInfo,{foreignKey:'item_info_idx',targetKey:'item_id'})
-        db.ItemDetail.hasMany(db.NftImg,{foreignKey:'nft_img_idx',sourceKey:'item_detail_idx'})
+        db.ItemDetail.hasMany(db.NftImg,{foreignKey:'nft_img_idx',sourceKey:'nft_idx'})
     }
 }
