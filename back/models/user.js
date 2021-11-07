@@ -49,6 +49,7 @@ module.exports = class User extends Sequelize.Model{
     static associate(db){
         db.User.hasMany(db.ItemInfo,{foreignKey:'creator',sorceKey:'user_idx'}),
         db.User.hasOne(db.Seller,{foreignKey:'user_idx',sourceKey:'user_idx'}),
-        db.User.hasMany(db.LikeList,{foreignKey:'user_idx',sourceKey:'user_idx'})
+        db.User.hasMany(db.LikeList,{foreignKey:'user_idx',sourceKey:'user_idx'}),
+        db.User.hasMany(db.Orders,{foreignKey:'user_idx',sourceKey:'user_idx'})
     }
 }

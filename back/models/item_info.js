@@ -18,12 +18,16 @@ module.exports = class ItemInfo extends Sequelize.Model{
             },
             item_code:{
                 type:Sequelize.STRING(100),
+                allowNull:false,
+                unique:true
             },
             description:{
                 type:Sequelize.TEXT,
+                allowNull:false
             },
             title:{
                 type:Sequelize.STRING,
+                allowNull:false                
             },
             registered_at:{
                 type:Sequelize.DATE,
@@ -33,6 +37,12 @@ module.exports = class ItemInfo extends Sequelize.Model{
                 type:Sequelize.BOOLEAN,
                 comment:'false->즉판 true=>경매'
             },
+            item_hits:{
+                type:Sequelize.INTEGER(5),
+                comment:'해당 상품 조회수',
+                allowNull:false,
+                defaultValue:0,
+            }
         },{
             sequelize,
             timestamps:false,
@@ -50,6 +60,7 @@ module.exports = class ItemInfo extends Sequelize.Model{
         db.ItemInfo.hasMany(db.ItemImg,{foreignKey:'item_id',sourceKey:'item_id'}),
         db.ItemInfo.hasMany(db.DirectDeal,{foreignKey:'direct_deal_idx',sourceKey:'item_id'}),
         db.ItemInfo.hasMany(db.ItemDetail,{foreignKey:'item_info_idx',sourceKey:'item_id'}),
-        db.ItemInfo.hasMany(db.Auction,{foreignKey:'auction_idx',sourceKey:'item_id'})
+        db.ItemInfo.hasMany(db.Auction,{foreignKey:'auction_idx',sourceKey:'item_id'}),
+        db.ItemInfo.hasMany(db.OrderDetail,{foreignKey:'item_id',sourceKey:'item_id'})
     }
 }

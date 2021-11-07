@@ -14,7 +14,6 @@ module.exports = class ItemDetail extends Sequelize.Model{
             item_info_idx:{
                 type:Sequelize.INTEGER,
                 allowNull:false,
-                //primaryKey:true
             },
             item_detail_idx:{
                 type:Sequelize.INTEGER,
@@ -22,9 +21,11 @@ module.exports = class ItemDetail extends Sequelize.Model{
             },
             size:{
                 type:Sequelize.STRING(30),
+                defaultValue:'one size'
             },
             color:{
                 type:Sequelize.STRING(30),
+                defaultValue:'one color'
             },
             nft:{
                 type:Sequelize.STRING(255),
@@ -33,10 +34,11 @@ module.exports = class ItemDetail extends Sequelize.Model{
             },
             qty:{
                 type:Sequelize.INTEGER,
+                defaultValue:0
             },
             item_code:{
                 type:Sequelize.STRING(100),
-                comment:'item_info에서 받은 item_code + size와 color별 index',
+                comment:'item_info에서 받은 item_code + size와 color별 index를 덧붙임',
                 unique:true
             },
             product_status:{

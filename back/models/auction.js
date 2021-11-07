@@ -5,17 +5,21 @@ module.exports = class Auction extends Sequelize.Model{
         return super.init({
             auction_idx:{
                 type:Sequelize.INTEGER,
+                allowNull:false
             },
             end_date:{
                 type:Sequelize.DATE,
-
+                allowNull:false,
+                defaultValue:sequelize.literal('now()')
             },
             if_extended:{
                 type:Sequelize.BOOLEAN,
+                defaultValue:sequelize.literal('now()'),
+                defaultValue:false
             },
             start_date:{
                 type:Sequelize.DATE,
-                defaultValue:sequelize.literal('now()') 
+                defaultValue:sequelize.literal('now()')
             },  
         },{
             sequelize,

@@ -37,19 +37,20 @@ module.exports = class Orders extends Sequelize.Model{
                 type:Sequelize.TEXT,
                 comment:'배송품 수령지 등에 대한 정보 '
             }
-
         },{
             sequelize,
             timestamps:false,
             underscored:false,
             paranoid:false,
             modelName:'Orders',
-            tableName:'order',
+            tableName:'orders',
             charset:'utf8',
             collate:'utf8_general_ci'
         })
     }
     static associate(db){
-        db.Orders.hasMany(db.OrderDetail,{foreignKey:'order_detail_id',sourceKey:'order_num'})
+        db.Orders.hasMany(db.OrderDetail,{foreignKey:'order_num',sourceKey:'order_num'}),
+        db.Orders.belongsTo(db.User,{foreignKey:'user_idx',targetKey:'user_idx'}),
+        db.Orders.hasMany(db.ShipInfo,{foreignKey:'order_num',sourceKey:'order_num'})
     }
 }

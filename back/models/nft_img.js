@@ -8,7 +8,7 @@ module.exports = class NftImg extends Sequelize.Model{
             nft_img_idx:{
                 type:Sequelize.INTEGER,
             },
-            nft_img:{
+            nft_img_link:{
                 type:Sequelize.TEXT,
             }
         },{
