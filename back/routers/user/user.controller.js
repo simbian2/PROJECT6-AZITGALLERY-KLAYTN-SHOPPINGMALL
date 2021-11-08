@@ -184,6 +184,17 @@ let selleradmin_wait = async (req,res) => {
 
 }
 
+let user_info = async (req,res) => {
+
+    let key = Object.keys(req.body)
+    let keyObject = JSON.parse(key)
+    console.log(keyObject,'user_info')
+    let result = await User.findAll({where:{kaikas_address:'address4'}})
+    res.json(result[0])
+
+
+}
+
 module.exports = {
     seller_admin,
     // adduser,
@@ -193,5 +204,6 @@ module.exports = {
     userlist_get,
     selleradmin_access,
     selleradmin_deny,
-    selleradmin_wait
+    selleradmin_wait,
+    user_info
 }
