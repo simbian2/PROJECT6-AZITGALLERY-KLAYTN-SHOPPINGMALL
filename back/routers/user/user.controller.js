@@ -35,8 +35,6 @@ let seller_admin = async (req,res) => {
         }
         transporter.close();
     })
-
-
 }
 
 
