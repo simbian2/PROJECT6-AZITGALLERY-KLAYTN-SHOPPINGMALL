@@ -18,7 +18,6 @@ const User = () => {
 
     useEffect(()=>{
         dispatch(UserInfo_REQUEST(user.UserAddress))
-        
     },[])
     
     
